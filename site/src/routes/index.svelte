@@ -20,7 +20,7 @@
   };
 </script>
 
-<MetaTags
+<!-- <MetaTags
   title={meta.title}
   description={meta.description}
   canonical={meta.url}
@@ -43,13 +43,12 @@
     image: meta.image.url,
     imageAlt: meta.image.alt,
   }}
-/>
+/> -->
 
-<PostList>
+<!-- <PostList>
   {#each posts as post}
     <PostItem {post} />
   {/each}
-</PostList>
-
-<style>
-</style>
+</PostList> -->
+<!-- <style>
+</style> -->

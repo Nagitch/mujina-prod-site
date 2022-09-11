@@ -10,4 +10,4 @@ services:
     volumes:
       - ./site:/usr/src/site
     # command: >
-    #   bash -c "yarn install && yarn run dev"
+    #   bash -c "yarn install && yarn dev"

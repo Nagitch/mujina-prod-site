@@ -2,7 +2,7 @@
   "name": "sveltekit-blog-template",
   "version": "0.0.1",
   "scripts": {
-    "dev": "npm run md-to-json & svelte-kit dev",
+    "dev": "npm run md-to-json & svelte-kit dev --host",
     "build": "npm run md-to-json & svelte-kit build",
     "package": "svelte-kit package",
     "preview": "svelte-kit preview",
@@ -30,6 +30,7 @@
   "dependencies": {
     "fecha": "^4.2.1",
     "highlight.js": "^11.4.0",
-    "svelte-meta-tags": "^2.3.4"
+    "svelte-meta-tags": "^2.3.4",
+    "svelte": "^3.44.0"
   }
 }
