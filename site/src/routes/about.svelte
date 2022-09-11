@@ -1,13 +1,10 @@
-<script lang="ts">
-  export let posts;
+<script>
+  import { MetaTags } from "svelte-meta-tags";
   import { envVariables } from "$lib/envVariables";
   import { blogMetaData } from "$lib/blogMetaData";
-  import { MetaTags } from "svelte-meta-tags";
-  import PostList from "$lib/components/PostList.svelte";
-  import PostItem from "$lib/components/Post.svelte";
 
   const meta = {
-    title: `Home | ${blogMetaData.blogTitle}`,
+    title: `About | ${blogMetaData.blogTitle}`,
     description: blogMetaData.description,
     url: envVariables.basePath,
     siteName: blogMetaData.blogTitle,
@@ -44,12 +41,7 @@
     imageAlt: meta.image.alt,
   }}
 />
-
-<PostList>
-  {#each posts as post}
-    <PostItem {post} />
-  {/each}
-</PostList>
-
-<style>
-</style>
+<div class="about-container">
+  <h1>About</h1>
+  <p>Tell People about you!!</p>
+</div>
