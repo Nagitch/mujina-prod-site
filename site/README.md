@@ -4,8 +4,9 @@ This starter contains everything you need to get up and running with [SvelteKit]
 
 ## Features
 
+- 🎉 **Fully up-to-date with SvelteKit 1.0!**
 - ⚡️ **Super fast static site generation with hydration**. Every route is compiled down to static HTML and routed with (optional) JavaScript, thanks to the SvelteKit static adapter (pre-installed)
-- 📦 **Zero-config prefetching** for automatic, fast background preloading of all top-level pages
+- 📦 **Zero-config preloading** for automatic, fast background preloading of all top-level pages
 - ✍️ **Markdown support** with a pre-configured blog
 	- 📑 **Pagination** included (_can customize posts per page_)
 	- ✅ **Category pages** included
@@ -36,9 +37,11 @@ Now all you need to do is:
 
 - Update the `src/lib/config.js` file
 - Drop your Markdown posts into `src/lib/posts`
-- Customize the styles in `lib/assets/scss`
+- Optionally, customize the styles in `lib/assets/scss`
 
 GLHF! Details below. 👇
+
+(_Feel free to [open an issue](https://github.com/josh-collinsworth/sveltekit-blog-starter/issues/new) if you come across one._)
 
 
 ## Customization
