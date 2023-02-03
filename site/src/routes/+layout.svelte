@@ -1,56 +1,40 @@
-<!-- This is the global layout file; it "wraps" every page on the site. (Or more accurately: is the parent component to every page component on the site.) -->
-<script>
-	import '$lib/assets/scss/global.scss'
-	import Header from '$lib/components/Header.svelte'
-	import Footer from '$lib/components/Footer.svelte'
-	import { currentPage, isMenuOpen } from '$lib/assets/js/store'
-	import { navItems } from '$lib/config'
-	import { preloadCode } from '$app/navigation'
-	import { onMount } from 'svelte'
-	import { fade } from 'svelte/transition'
-	export let data
+<script lang="ts">
+  import type { LayoutData } from './$types'
+  import { onMount } from 'svelte'
+  import { browser, dev } from '$app/environment'
+  import { genTags } from '$lib/utils/posts'
+  import { posts, tags } from '$lib/stores/posts'
+  import { registerSW } from 'virtual:pwa-register'
+  import Head from '$lib/components/head_static.svelte'
+  import Header from '$lib/components/header.svelte'
+  import Transition from '$lib/components/transition.svelte'
+  import 'uno.css'
+  import '../app.pcss'
 
-	const transitionIn = { delay: 150, duration: 150 }
-	const transitionOut = { duration: 100 }
+  export let data: LayoutData
 
-  export const prerender = true
-	
-	/**
-	 * Updates the global store with the current path. (Used for highlighting 
-	 * the current page in the nav, but could be useful for other purposes.)
-	 **/
-	$: currentPage.set(data.path)
-  
-	/**
-	 * This pre-fetches all top-level routes on the site in the background for faster loading.
-	 * https://kit.svelte.dev/docs/modules#$app-navigation-preloaddata
-	 * 
-	 * Any route added in src/lib/config.js will be preloaded automatically. You can add your
-	 * own preloadData() calls here, too.
-	 **/
+  let { res, path } = data
 
-  onMount(() => {
-    const navRoutes = navItems.map(item => item.route)
-    preloadCode(...navRoutes)
-	})
+  $: if (data) path = data.path
+
+  posts.set(res)
+  tags.set(genTags(res))
+  onMount(
+    () =>
+      !dev &&
+      browser &&
+      registerSW({
+        immediate: true,
+        onRegistered: r => r && setInterval(async () => await r.update(), 198964),
+        onRegisterError: error => console.error(error)
+      })
+  )
 </script>
 
+<Head />
 
-<!-- 
-	The below markup is used on every page in the site. The <slot> is where the page's
-	actual contents will show up.
--->
-<div class="layout" class:open={$isMenuOpen}>
-	<Header />
-	{#key data.path}
-		<main
-			id="main"
-			tabindex="-1"
-			in:fade={transitionIn}
-			out:fade={transitionOut}
-		>
-			<slot />
-		</main>
-	{/key}
-	<Footer />
-</div>
+<Header {path} />
+
+<Transition {path}>
+  <slot />
+</Transition>

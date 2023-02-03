@@ -1,138 +1,123 @@
-# SvelteKit static blog starter
+<br />
+<div align="center">
+<a href="https://github.com/importantimport/urara">
+<img src="https://github.com/importantimport/urara/raw/main/urara/hello-world/urara.webp" alt="urara" /></a>
+</div>
+<br />
 
-This starter contains everything you need to get up and running with [SvelteKit](https://kit.svelte.dev/) as a static site generator for your Markdown (and Svelte)-powered blog. [Check out the demo here](https://sveltekit-static-starter.netlify.app/), or view the [GitHub repo here](https://github.com/josh-collinsworth/sveltekit-blog-starter).
+<p align="center">
+<a href="https://fff.js.org"><img src="https://img.shields.io/badge/%F0%9F%8C%9F%20F%20F%20F-0.5-yellow?style=flat" alt="fff" /></a>
+<img src="https://img.shields.io/github/languages/top/importantimport/urara?color=%23ff3e00" alt="Language" />
+<a href="https://github.com/importantimport/urara/blob/main/COPYING"><img src="https://img.shields.io/github/license/importantimport/urara?color=%23fff" alt="License" /></a>
+<img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Fimportantimport%2Furara.svg?type=shield" alt="FOSSA Status" />
+</p>
+<p align="center">
+<a href="https://urara-demo.netlify.app">🚀 Demo</a>
+/
+<a href="https://urara-docs.netlify.app">📝 Documentation</a>
+/
+<a href="https://github.com/importantimport/urara/discussions">💬 Discussions</a>
+</p>
+<p align="center">
+<span>English</span>
+|
+<a href="https://github.com/importantimport/urara/blob/main/README.zh.md">正體中文</a>
+</p>
 
-## Features
+## 🎉 Try it now!
 
-- 🎉 **Fully up-to-date with SvelteKit 1.0!**
-- ⚡️ **Super fast static site generation with hydration**. Every route is compiled down to static HTML and routed with (optional) JavaScript, thanks to the SvelteKit static adapter (pre-installed)
-- 📦 **Zero-config preloading** for automatic, fast background preloading of all top-level pages
-- ✍️ **Markdown support** with a pre-configured blog
-	- 📑 **Pagination** included (_can customize posts per page_)
-	- ✅ **Category pages** included
-	- 💬 **Posts JSON API**
-- 💅 **Sass** pre-installed and -configured
-- 📝 **mdsvex** pre-installed--use Svelte components inside Markdown!
-	- 🔗 **Rehype** plugins are included to generate unique heading IDs, for direct linking
-- 📱 **Responsive and accessible defaults**; includes a "skip to content" link and accessible mobile nav menu
-- 🔄 **Page transitions** (_fancy!_)
-- 🔎 **Basic SEO** for blog posts (_strongly recommend checking that out for yourself, though_)
-- 📰 **RSS feed** set up and ready to go (_though it could also likely benefit from some optimization_); just update `src/lib/config.js`
+### Local
 
-
-## Quick Start
-
-Clone or download [this repo](https://github.com/josh-collinsworth/sveltekit-blog-starter), then install the dependencies and run the dev server:
-
-```
-npx degit https://github.com/josh-collinsworth/sveltekit-blog-starter my-sveltekit-blog
-cd my-sveltekit-blog
-npm install
-npm run dev -- --open
-```
-
-That should get a dev server up and running (assuming you have npm and Node installed already). Any saved changes to components and styles should auto-refresh blazingly fast.
-
-Now all you need to do is:
-
-- Update the `src/lib/config.js` file
-- Drop your Markdown posts into `src/lib/posts`
-- Optionally, customize the styles in `lib/assets/scss`
-
-GLHF! Details below. 👇
-
-(_Feel free to [open an issue](https://github.com/josh-collinsworth/sveltekit-blog-starter/issues/new) if you come across one._)
-
-
-## Customization
-
-Be sure to update `src/lib/config.js` to reflect your site's domain, preferences, etc. This is also where the nav menu can be updated.
-
-**It's very important to update this file with the specific details of your site.** Info from this file is used in your RSS feed and SEO meta tags, so don't launch without updating it.
-
-
-## Adding new posts
-
-Adding new posts is as simple as dropping a new `.md` file into `src/lib/posts`. New posts will automatically show up on the site, be added to the posts API, and any category pages.
-
-A few demo Markdown posts are included, and highlight some of the features of this starter. These demo posts can be updated or removed, but it may be best to use one as a starting point, just for the frontmatter properties.
-
-If you want to use other frontmatter properties in the template (or just modify the layout), make changes in `src/routes/blog/[post]/+page.svelte`.
-
-**Note: posts should have a `date` frontmatter property.** This is how they're sorted by default. There are also other frontmatter properties used to enhance the site experience (like the `coverWidth` and `coverHeight`, which are used in the template to reserve space for the image, minimizing cumulative layout shift).
-
-The starter will still work without `date` properties in your posts, but the sorting won't be right.
-
-Also: while there's no link to it by default, `/blog/category` exists as an archive of all your post categories.
-
-
-### Pagination
-
-Pagination automatically kicks in once you have more posts than the `postsPerPage` option in `src/lib/config.js`. This means you won't see the pagination right away unless you either change `postsPerPage` to a very low number, or add several more Markdown files to the `src/lib/posts` folder.
-
-**Note:** both the normal `/blog` feed _and_ the category feeds at `/category/[category]` are automatically paginated.
-
-
-### RSS
-
-This starter also includes a basic RSS feed. It's very minimal, so you may want to tweak it depending on your XML feed needs, but it _does_ work out of the box.
-
-Update the `config` details in `src/lib/config.js` to get your site's unique info correct. (You could also pull this info in other places, or add to it, to keep things consistent, but that's up to you.)
-	
-
-## Sass
-
-**By default, all CSS in this starter is global.** It's located in `src/lib/assets/scss`, and all compiled into the `global.scss` file (which is then loaded into the global `+layout.svelte` file) automatically.
-
-I didn't use component `<style>` blocks because, while component-based scoped CSS is very nice, it can also be hard to track down and update. Since this is a starter, I felt it was best to keep all the styles together in one place, and let you, the author, decide whether you want to keep them as they are, move to scoped CSS instead, or use a mixture.
-
-
-## Site navigation menus
-
-To add or remove pages from the site's navigation menu (in both the header and footer), edit the `navItems` array in `src/lib/config.js`. Items there will be automatically added to the main menu in the header and footer, and the mobile nav menu. They'll also have proper classes and ARIA attributes to show when they're the current page.
-
-
-## Colors and Fonts
-
-This starter has a default color palette (Credit to [coolors.co](https://coolors.co/palettes/trending)) and fonts, but you can easily override those here:
-
-**Colors:** `src/lib/assets/scss/_vars.scss`
-	
-**Fonts:** `src/app.html` for the links, `_vars.scss` for the font names.
-
-
-## Components
-
-This starter includes only a handful of structural components, for the header, footer, site nav, posts lists (since lists of posts are repeated in several locations), and pagination (plus a couple that are actually just SVG icons).
-
-You're welcome and encouraged to create your own (using them in Markdown is fun!); I just didn't want to push authors too far in any component direction right off the bat.
-
-
-## Static files
-
-Things that should just live in the site root of the finished site (like a `robots.txt` file, favicon, or maybe images) should go in the `static` folder. If you link to them, use the root path (e.g., `/images/my.png`, not `../static/images/my.png`).
-
-(Placeholder images credit [Unsplash](https://unsplash.com); photographer names are in the file names.)
-
-
-## Building and deploying
-
-The build command (from package.json) is simply:
-
-```
-npm run build
+```bash
+npx degit importantimport/urara my-blog && cd my-blog # create a new project in my-blog
+pnpm i # if u don't have pnpm installed, run: npm i -g pnpm
 ```
 
-That should do it on a host like Netlify or Vercel. Or, if you prefer, you can run `npm run build` to generate the static files, then upload those (they'll be generated into a `build` folder).
+### Remote
 
-Use `npm run preview` _after_ a build to preview the built site.
+[![Open in StackBlitz](https://img.shields.io/badge/-Open%20in%20StackBlitz-1374ef?style=for-the-badge&logo=Amp)](https://stackblitz.com/github/importantimport/urara) [![Use this template](https://img.shields.io/badge/-Use%20this%20Template-181717?style=for-the-badge&logo=GitHub)](https://github.com/importantimport/urara/generate) [![Deploy with Vercel](https://img.shields.io/badge/-Deploy%20with%20Vercel-1374ef?style=for-the-badge&logo=Vercel)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fimportantimport%2Furara&env=URARA_SITE_URL&envDescription=Site%20URL.&envLink=https%3A%2F%2Fexample.com&project-name=urara-blog&repository-name=urara-blog) [![Deploy to Netlify](https://img.shields.io/badge/-Deploy%20to%20Netlify-15847d?style=for-the-badge&logo=Netlify&logoColor=white)](https://app.netlify.com/start/deploy?repository=https%3A%2F%2Fgithub.com%2Fimportantimport%2Furara#URARA_SITE_URL=https://example.com&CUSTOM_LOGO=https://github.com/importantimport/urara/raw/main/urara/assets/any@512.png)
 
+## ⚡️ Usage
 
-## Further documentation
+### Developing
 
-I assume at least a little bit of knowledge of SvelteKit and/or similar static site generators here, but be sure to read [the SvelteKit docs](https://kit.svelte.dev/docs) for more info.
+Start a development server:
 
+```bash
+pnpm dev
+```
 
-## Contributing
+### Building
 
-I've tried my best to make sure this starter is up to date with the latest SvelteKit, but I'm sure improvements can be made. Feel free to [visit the repo](https://github.com/josh-collinsworth/sveltekit-blog-starter) and submit a pull request, or [contact me directly](https://joshcollinsworth.com/contact).
+Create a production version of ur blog:
+
+```bash
+pnpm build
+```
+
+u can preview the built app with `pnpm preview`.
+
+### Documentation
+
+For full documentation, visit [urara-docs.netlify.app](https://urara-docs.netlify.app).
+
+### Give this project a star
+
+tyvm! ur ⭐ will give me more motivation to improve this project.
+
+## ✨ Features
+
+- Out of the box **Atom feed** (WebSub), **Sitemap**, **PWA** (Web app manifest & ServiceWorker) support.
+- Present beautiful interface designs and animations with daisyUI, of course.
+- Good [IndieWeb](https://indieweb.org/) Compatibility - Multi-kind posts with [microformats2](https://microformats.org/) markup content, Showcasing [Webmentions](https://indieweb.org/Webmention) via [webmentions.io](https://webmentions.io) API.
+- Don't worry about the article and image directories - just put them under a folder and they'll be [copied automatically at build time](https://github.com/importantimport/urara/blob/main/urara.ts).
+- [Comment Components](https://github.com/importantimport/urara/tree/main/src/lib/components/comments): Webmentions, Giscus, Utterances... u can use more than one.
+
+## 📦️ Pre-packed
+
+### TailwindCSS & PostCSS Plugins
+
+- [daisyUI](https://github.com/saadeghi/daisyui) - The most popular, free and open-source Tailwind CSS component library.
+- [Tailwind CSS Typography](https://github.com/tailwindlabs/tailwindcss-typography) - Beautiful typographic defaults for HTML you don't control.
+- [Autoprefixer](https://github.com/postcss/autoprefixer) - Parse CSS and add vendor prefixes to rules by Can I Use.
+- [CSSNANO](https://github.com/cssnano/cssnano) - A modular minifier, built on top of the PostCSS ecosystem.
+
+### Markdown preprocessor & Syntax highlighter
+
+- [MDsveX](https://github.com/pngwn/MDsveX) - A markdown preprocessor for Svelte.
+- [Shiki Twoslash](https://github.com/shikijs/twoslash) - A beautiful Syntax Highlighter.
+
+### Vite Plugins
+
+- [UnoCSS](https://github.com/unocss/unocss) - The instant on-demand atomic CSS engine.
+- [VitePWA](https://github.com/antfu/vite-plugin-pwa) - Zero-config PWA for Vite.
+
+## 🚀 Sites
+
+- [./kwaa.dev](https://kwaa.dev) - [kwaa/blog](https://github.com/kwaa/blog)
+- [Seviche.cc](https://seviche.cc) - [Sevichecc/Urara-Blog](https://github.com/Sevichecc/Urara-Blog)
+- [Antonio Sarcevic](https://www.sarcevic.dev) - [SarcevicAntonio/SarcevicAntonio](https://github.com/SarcevicAntonio/SarcevicAntonio)
+
+and more...
+
+- [urara-blog - Discussions](https://github.com/importantimport/urara/discussions/2)
+- [urara-blog - Topics](https://github.com/topics/urara-blog)
+
+are u using Urara? add the `urara-blog` topic on ur repo!
+
+## 👥 Contributing
+
+If u're interested in contributing to Urara, pls read [contributing docs](.github/CONTRIBUTING.md) before submitting a pull request.
+
+## 📝 License
+
+This work is free, it comes without any warranty. You can redistribute it and/or modify it under the
+terms of the Do What The Fuck You Want To Public License, Version 2,
+as published by Sam Hocevar. See the [COPYING](https://github.com/importantimport/urara/blob/main/COPYING) file for more details.
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fimportantimport%2Furara.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fimportantimport%2Furara?ref=badge_large)
+
+special thanks / inspired from:
+
+- [@michaeloliverx - Generate Posts List](https://github.com/pngwn/MDsveX/issues/294#issuecomment-907029639)
+- icon made by [Kpouri](https://github.com/kpouri)

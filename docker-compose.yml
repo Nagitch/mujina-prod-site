@@ -10,4 +10,4 @@ services:
     volumes:
       - ./site:/usr/src/site
     command: >
-      bash -c "npm install && npm run dev -- --open"
+      bash -c "npm i -g pnpm && pnpm i && pnpm dev"
