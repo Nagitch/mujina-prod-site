@@ -12,7 +12,7 @@ Welcome to Urara! this article contains some basic operations to help you quickl
 
 ## Developing
 
-Start a development server is:
+Start a development server:
 
 ```bash
 # http://127.0.0.1:5173
