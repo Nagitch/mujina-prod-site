@@ -9,12 +9,12 @@
 
 <footer
   id="footer"
-  class="footer footer-center bg-base-300 text-base-content shadow-inner p-8 {rounded
+  class="footer footer-center bg-base-300 text-base-content shadow-inner p-4 {rounded
     ? 'rounded-box'
     : 'md:rounded-box'} {sticky ? 'sticky bottom-0 z-0 md:static' : ''} {className ?? ''}">
   <div class="prose">
     <p>
-      {#if footerConfig.nav}
+      <!-- {#if footerConfig.nav}
         {#each footerConfig.nav as { text, link }, i}
           <a href={link} rel="noopener noreferrer external" target="_blank">{text}</a>
           {#if i + 1 < footerConfig.nav.length}
@@ -22,7 +22,7 @@
           {/if}
         {/each}
         <br />
-      {/if}
+      {/if} -->
       Copyright © {footerConfig.since && footerConfig.since !== new Date().toJSON().substring(0, 4)
         ? `${footerConfig.since} - ${new Date().toJSON().substring(0, 4)}`
         : new Date().toJSON().substring(0, 4)}

@@ -9,9 +9,9 @@ export const site: SiteConfig = {
   description: 'Mujina Production - Nagitch\'s carrer blanding site',
   author: {
     avatar: '/assets/maskable@512.png',
-    name: 'John Doe',
-    status: '🐺',
-    bio: 'lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+    name: 'Nagitch',
+    status: '🫠',
+    bio: '個人制作の計画を練りつつ、会社員とフリーランサーを兼業しているプログラマーです。<br />知らないうちに私の書いたコードが北極に保存されてました。。🐻‍❄️'
   },
   themeColor: '#3D4451'
 }
