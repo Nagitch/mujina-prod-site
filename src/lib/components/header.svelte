@@ -70,42 +70,40 @@
             <span class="i-heroicons-outline-search" />
           </button>
         {/if}
-        {#if false}
-          <div id="change-theme" class="dropdown dropdown-end">
-            <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-            <!-- reference: https://github.com/saadeghi/daisyui/issues/1285 -->
-            <div tabindex="0" class="btn btn-square btn-ghost">
-              <span class="i-heroicons-outline-color-swatch" />
-            </div>
-            <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-            <!-- reference: https://github.com/saadeghi/daisyui/issues/1285 -->
-            <ul
-              tabindex="0"
-              class="flex flex-nowrap shadow-2xl menu dropdown-content bg-base-100 text-base-content rounded-box w-52 p-2 gap-2 overflow-y-auto max-h-[21.5rem]"
-              class:hidden={!pin}>
-              {#each theme as { name, text }}
-                <button
-                  data-theme={name}
-                  on:click={() => {
-                    currentTheme = name
-                    localStorage.setItem('theme', name)
-                  }}
-                  class:border-2={currentTheme === name}
-                  class:border-primary={currentTheme === name}
-                  class="btn btn-ghost w-full hover:bg-primary group rounded-lg flex bg-base-100 p-2 transition-all">
-                  <p class="flex-1 text-left text-base-content group-hover:text-primary-content transition-color">
-                    {text ?? name}
-                  </p>
-                  <div class="grid grid-cols-4 gap-0.5 m-auto">
-                    {#each ['bg-primary', 'bg-secondary', 'bg-accent', 'bg-neutral'] as bg}
-                      <div class={`${bg} w-1 h-4 rounded-btn`} />
-                    {/each}
-                  </div>
-                </button>
-              {/each}
-            </ul>
+        <div id="change-theme" class="dropdown dropdown-end">
+          <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+          <!-- reference: https://github.com/saadeghi/daisyui/issues/1285 -->
+          <div tabindex="0" class="btn btn-square btn-ghost">
+            <span class="i-heroicons-outline-color-swatch" />
           </div>
-        {/if}
+          <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+          <!-- reference: https://github.com/saadeghi/daisyui/issues/1285 -->
+          <ul
+            tabindex="0"
+            class="flex flex-nowrap shadow-2xl menu dropdown-content bg-base-100 text-base-content rounded-box w-52 p-2 gap-2 overflow-y-auto max-h-[21.5rem]"
+            class:hidden={!pin}>
+            {#each theme as { name, text }}
+              <button
+                data-theme={name}
+                on:click={() => {
+                  currentTheme = name
+                  localStorage.setItem('theme', name)
+                }}
+                class:border-2={currentTheme === name}
+                class:border-primary={currentTheme === name}
+                class="btn btn-ghost w-full hover:bg-primary group rounded-lg flex bg-base-100 p-2 transition-all">
+                <p class="flex-1 text-left text-base-content group-hover:text-primary-content transition-color">
+                  {text ?? name}
+                </p>
+                <div class="grid grid-cols-4 gap-0.5 m-auto">
+                  {#each ['bg-primary', 'bg-secondary', 'bg-accent', 'bg-neutral'] as bg}
+                    <div class={`${bg} w-1 h-4 rounded-btn`} />
+                  {/each}
+                </div>
+              </button>
+            {/each}
+          </ul>
+        </div>
       </div>
     </div>
   {:else}

@@ -3,8 +3,8 @@
   import { site } from '$lib/config/site'
   export let post: Urara.Post
   export let preview: boolean = false
-  const stringPublished = new Date(post.published ?? post.created).toISOString().split('T')[0]
-  const stringUpdated = new Date(post.updated ?? post.published ?? post.created).toISOString().split('T')[0]
+  const stringPublished = new Date(post.published ?? post.created).toLocaleString(date.locales, date.options)
+  const stringUpdated = new Date(post.updated ?? post.published ?? post.created).toLocaleString(date.locales, date.options)
   const jsonPublished = new Date(post.published ?? post.created).toJSON()
   const jsonUpdated = new Date(post.updated ?? post.published ?? post.created).toJSON()
 </script>
