@@ -71,14 +71,6 @@ export const header: HeaderConfig = {
       text: 'Contact',
       link: '/hello-world'
     },
-    // {
-    //   text: 'Get Started',
-    //   link: '/hello-world'
-    // },
-    // {
-    //   text: 'Elements',
-    //   link: '/hello-world/elements'
-    // }
   ]
 }
 
