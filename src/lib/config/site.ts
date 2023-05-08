@@ -8,6 +8,9 @@ export const site: SiteConfig = {
   subtitle: 'Mujina Production by Nagitch',
   lang: 'ja-JP',
   description: 'Mujina Production - Nagitch\'s carrer blanding site',
+  header: {
+    logo: '/assets/any@192.png'
+  },
   author: {
     avatar: '/assets/maskable@512.png',
     name: 'Nagitch',
