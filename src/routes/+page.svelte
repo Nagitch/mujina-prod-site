@@ -41,33 +41,7 @@
 <Head />
 
 <div class="flex flex-col flex-nowrap justify-center xl:flex-row xl:flex-wrap h-feed">
-  <div
-    in:fly={{ x: 25, duration: 300, delay: 500 }}
-    out:fly={{ x: 25, duration: 300 }}
-    class="flex-1 w-full max-w-screen-md order-first mx-auto xl:mr-0 xl:ml-8 xl:max-w-md">
-    <Profile />
-  </div>
-  <div
-    in:fly={{ x: -25, duration: 300, delay: 500 }}
-    out:fly={{ x: -25, duration: 300 }}
-    class="flex-1 w-full max-w-screen-md xl:order-last mx-auto xl:ml-0 xl:mr-8 xl:max-w-md">
-    {#if allTags && Object.keys(allTags).length > 0}
-      <div
-        class="flex xl:flex-wrap gap-2 overflow-x-auto xl:overflow-x-hidden overflow-y-hidden max-h-24 my-auto xl:max-h-fit max-w-fit xl:max-w-full pl-8 md:px-0 xl:pl-8 xl:pt-8">
-        {#each allTags as tag}
-          <button
-            id={tag}
-            on:click={() => (tags.includes(tag) ? (tags = tags.filter(tagName => tagName != tag)) : (tags = [...tags, tag]))}
-            class:!btn-secondary={tags.includes(tag)}
-            class:shadow-lg={tags.includes(tag)}
-            class="btn btn-sm btn-ghost normal-case border-dotted border-base-content/20 border-2 mt-4 mb-8 xl:m-0">
-            #{tag}
-          </button>
-        {/each}
-      </div>
-    {/if}
-  </div>
-  <div class="flex-none w-full max-w-screen-md mx-auto xl:mx-0">
+  <div class="flex-none w-full max-w-screen-xl mx-auto xl:mx-0">
     {#key posts}
       <!-- {:else} is not used because there is a problem with the transition -->
       {#if loaded && posts.length === 0}
@@ -93,14 +67,20 @@
         itemprop="mainEntityOfPage"
         itemscope
         itemtype="https://schema.org/Blog">
-        <h1 class="text-3xl">制作物</h1>
-        <div class="card-body bg-base-100 rounded-none md:rounded-box md:shadow-xl overflow-hidden z-10">
-          <div class="md:rounded-box">
-            <h2>Header2</h2>
-            もちもち あああ
+        <div class="card w-192 bg-base-100 shadow-xl">
+          <!-- <figure><img src="/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" /></figure> -->
+          <div class="card-body">
+            <h2 class="card-title">狢制作について</h2>
+            <p>
+              <strong>「狢制作」</strong>
+              (Mujina Production) は
+              <strong>Nagitch</strong>
+              のプライベートブランド（屋号・サークル等の活動）名です。
+            </p>
           </div>
         </div>
-        <h1 class="text-3xl">ブログ</h1>
+        <div class="divider mt-0 mb-8 hidden lg:flex" />
+        <h1 class="text-2xl font-bold ml-6">最新のブログ</h1>
         {#each posts as post, index}
           {@const year = new Date(post.published ?? post.created).getFullYear()}
           {#if !years.includes(year)}
@@ -114,7 +94,7 @@
           <div
             in:fly={{ x: index % 2 ? 100 : -100, duration: 300, delay: 500 }}
             out:fly={{ x: index % 2 ? -100 : 100, duration: 300 }}
-            class="rounded-box transition-all duration-500 ease-in-out hover:z-30 hover:shadow-lg md:shadow-xl md:hover:shadow-2xl md:hover:-translate-y-0.5">
+            class="max-w-screen-lg mx-20 transition-all duration-500 ease-in-out hover:z-30 hover:shadow-xl md:shadow-sm md:hover:shadow-xl md:hover:-translate-y-0.5">
             <Post {post} preview={true} loading={index < 5 ? 'eager' : 'lazy'} decoding={index < 5 ? 'auto' : 'async'} />
           </div>
         {/each}

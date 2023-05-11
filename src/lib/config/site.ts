@@ -4,7 +4,7 @@ export const site: SiteConfig = {
   protocol: import.meta.env.URARA_SITE_PROTOCOL ?? import.meta.env.DEV ? 'http://' : 'https://',
   // domain: import.meta.env.a ?? 'urara-demo.netlify.app',
   domain: import.meta.env.a ?? 'localhost:5173',
-  title: '狢制作',
+  title: '狢制作 by Nagitch',
   subtitle: 'Mujina Production by Nagitch',
   lang: 'ja-JP',
   description: 'Mujina Production - Nagitch\'s carrer blanding site',

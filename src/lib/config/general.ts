@@ -60,8 +60,8 @@ export const header: HeaderConfig = {
       link: '/'
     },
     {
-      text: 'Works',
-      link: '/works'
+      text: 'Portfolio',
+      link: '/portfolio'
     },
     {
       text: 'Blog',
