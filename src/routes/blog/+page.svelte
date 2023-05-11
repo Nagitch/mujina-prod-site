@@ -93,14 +93,6 @@
         itemprop="mainEntityOfPage"
         itemscope
         itemtype="https://schema.org/Blog">
-        <h1 class="text-3xl">制作物</h1>
-        <div class="card-body bg-base-100 rounded-none md:rounded-box md:shadow-xl overflow-hidden z-10">
-          <div class="md:rounded-box">
-            <h2>Header2</h2>
-            もちもち あああ
-          </div>
-        </div>
-        <h1 class="text-3xl">ブログ</h1>
         {#each posts as post, index}
           {@const year = new Date(post.published ?? post.created).getFullYear()}
           {#if !years.includes(year)}
