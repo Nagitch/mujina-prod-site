@@ -70,12 +70,23 @@
         <div class="card w-192 bg-base-100 shadow-xl">
           <!-- <figure><img src="/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" /></figure> -->
           <div class="card-body">
+            <div class="mx-auto my-10">
+              <iframe
+                width="854"
+                height="480"
+                src="https://www.youtube.com/embed/sdbYqEbr4-E"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen />
+            </div>
             <h2 class="card-title">狢制作について</h2>
             <p>
               <strong>「狢制作」</strong>
               (Mujina Production) は
               <strong>Nagitch</strong>
-              のプライベートブランド（屋号・サークル等の活動）名です。
+              の個人事業・制作活動のブランド名です。
+              <a href="/portfolio"><span class="underline decoration-solid">ポートフォリオはこちら</span></a>
             </p>
           </div>
         </div>
