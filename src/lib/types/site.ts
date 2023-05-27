@@ -15,6 +15,9 @@ export type SiteConfig = {
   description?: string
   /** site keywords. `<meta name="keywords" content={site.keywords}>` */
   keywords?: string[]
+  header?: {
+    logo?: string
+  }
   author: Omit<FFFAuthor, 'url'> & {
     status?: string
     bio?: string
