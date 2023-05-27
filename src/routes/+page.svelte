@@ -9,7 +9,6 @@
   import Head from '$lib/components/head.svelte'
   import Footer from '$lib/components/footer.svelte'
   import Post from '$lib/components/post_card.svelte'
-  import Profile from '$lib/components/index_profile.svelte'
 
   let allPosts: Urara.Post[]
   let allTags: string[]
@@ -70,10 +69,10 @@
         <div class="card w-192 bg-base-100 shadow-xl">
           <!-- <figure><img src="/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" /></figure> -->
           <div class="card-body">
-            <div class="mx-auto my-10">
+            <div class="conatiner aspect-video my-10 pd-10">
               <iframe
-                width="854"
-                height="480"
+                width="100%"
+                height="100%"
                 src="https://www.youtube.com/embed/sdbYqEbr4-E"
                 title="YouTube video player"
                 frameborder="0"
