@@ -66,29 +66,26 @@
         itemprop="mainEntityOfPage"
         itemscope
         itemtype="https://schema.org/Blog">
-        <div class="card w-192 bg-base-100 shadow-xl">
-          <!-- <figure><img src="/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" /></figure> -->
-          <div class="card-body">
-            <div class="conatiner aspect-video my-10 pd-10">
-              <iframe
-                width="100%"
-                height="100%"
-                src="https://www.youtube.com/embed/sdbYqEbr4-E"
-                title="YouTube video player"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen />
-            </div>
-            <h2 class="card-title">狢制作について</h2>
-            <p>
-              <strong>「狢制作」</strong>
-              (Mujina Production) は
-              <strong>Nagitch</strong>
-              の個人事業・制作活動のブランド名です。
-              <a href="/portfolio"><span class="underline decoration-solid">ポートフォリオはこちら</span></a>
-            </p>
-          </div>
+        <h1 class="mx-auto font-normal md:font-medium text-2xl">Mujina Production</h1>
+        <div class="divider my-1 mp-1" />
+        <div class="conatiner aspect-video my-5 pd-15">
+          <iframe
+            width="100%"
+            height="100%"
+            src="https://www.youtube.com/embed/sdbYqEbr4-E?autoplay=1&mute=1&loop=1&playlist=sdbYqEbr4-E&disablekb=1"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen />
         </div>
+        <h2 class="font-medium text-xl leading-4">狢制作について</h2>
+        <p>
+          <strong>「狢制作」</strong>
+          (Mujina Production) は
+          <strong>Nagitch</strong>
+          の個人事業・制作活動のブランド名です。
+          <a href="/portfolio"><span class="underline decoration-solid">ポートフォリオはこちら</span></a>
+        </p>
         <div class="divider mt-0 mb-8 hidden lg:flex" />
         <h1 class="text-2xl font-bold ml-6">最新のブログ</h1>
         {#each posts as post, index}
