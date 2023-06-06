@@ -1,7 +1,10 @@
 ---
-title: ホームページ・ブログを開設しました
+title: 'ホームページ・ブログを開設しました'
 created: 2023-06-15
-tags: ['announcements', 'misc']
+updated: 2023-06-15
+tags:
+  - 'Announcements'
+  - 'Misc'
 ---
 
 「狢制作」開業 3 年目にしてホームページ・ブログを開設しました。
