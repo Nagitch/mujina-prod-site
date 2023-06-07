@@ -67,7 +67,6 @@
         itemscope
         itemtype="https://schema.org/Blog">
         <h1 class="mx-auto font-normal md:font-medium text-2xl">Mujina Production</h1>
-        <div class="divider my-1 mp-1" />
         <div class="conatiner aspect-video my-5 pd-15">
           <iframe
             width="100%"
