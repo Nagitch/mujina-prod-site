@@ -39,6 +39,9 @@
 
 <Head />
 
+<!-- <div
+  class="flex flex-col flex-nowrap justify-center xl:flex-row xl:flex-wrap h-feed
+    bg-[url('/assets/bg-header.png')] bg-contain bg-scroll bg-no-repeat bg-scroll bg-top"> -->
 <div class="flex flex-col flex-nowrap justify-center xl:flex-row xl:flex-wrap h-feed">
   <div class="flex-none w-full max-w-screen-xl mx-auto xl:mx-0">
     {#key posts}
