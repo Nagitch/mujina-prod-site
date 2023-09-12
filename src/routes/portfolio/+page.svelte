@@ -47,10 +47,6 @@
       itemscope
       itemtype="https://schema.org/Blog">
       <h1 class="mx-auto font-normal md:font-medium text-2xl">ポートフォリオ Portfolio</h1>
-      <h2 class="ml-4 font-medium text-xl leading-3">ビジネスパートナー・お仕事等の募集について</h2>
-      <div class="ml-6 my-2">
-        <p class="indent-4">現在は私的な営業ネットワーク以外からはお仕事を募集しておりません。ご了承ください。</p>
-      </div>
       <h2 class="ml-4 font-medium text-xl leading-3">略歴</h2>
       <div class="ml-6">
         <p class="indent-4">
@@ -81,23 +77,23 @@
           </thead>
           <tbody>
             <tr>
-              <td class="p-2 border border-slate-600">2021/11 - 2021/12</td>
-              <td class="p-2 border border-slate-600">下記案件の関連Webサービスの管理画面開発</td>
-              <td class="p-2 border border-slate-600">
-                キーボードのタイピングを学ぶための Web サービス（リリース済み）について、学校や生徒を管理する機能の追加開発。
-                管理画面について、フロントエンドを叩き台作成から担当。
-              </td>
-              <td class="p-2 border border-slate-600">JavaScript React NextJS</td>
-            </tr>
-            <tr>
               <td class="p-2 border border-slate-600">2021/4 - 2023/08</td>
               <td class="p-2 border border-slate-600">プログラミング教育向けゲーム形式アプリのコンテンツ作成</td>
               <td class="p-2 border border-slate-600">
                 ゲーム形式でプログラミングを学習で きるアプリケーションの開発。 すでにリリース済みで、新たに学習する
                 単元ごとのステージ（コンテンツ）作成 が主業務。ステージ内容の企画提案、ステージに必要な機能実装
-                、まれに、ステージに配置するモデルの作成(Blender)。※上記案件に当たっている間は休止。
+                、まれに、ステージに配置するモデルの作成(Blender)。※下記案件に当たっている間は休止。
               </td>
               <td class="p-2 border border-slate-600">Unity UniRx C# Blender</td>
+            </tr>
+            <tr>
+              <td class="p-2 border border-slate-600">2021/11 - 2021/12</td>
+              <td class="p-2 border border-slate-600">上記案件の関連Webサービスの管理画面開発</td>
+              <td class="p-2 border border-slate-600">
+                キーボードのタイピングを学ぶための Web サービス（リリース済み）について、学校や生徒を管理する機能の追加開発。
+                管理画面について、フロントエンドを叩き台作成から担当。
+              </td>
+              <td class="p-2 border border-slate-600">JavaScript React NextJS</td>
             </tr>
           </tbody>
         </table>
