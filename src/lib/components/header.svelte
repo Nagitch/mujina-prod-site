@@ -42,7 +42,9 @@
   if (browser)
     currentTheme =
       localStorage.getItem('theme') ??
-      (window.matchMedia('(prefers-color-scheme: dark)').matches ? theme?.[1].name : theme[0].name ?? theme[0].name)
+      (window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? theme.filter(e => e.name === 'night')[0].name // this element must be exists
+        : theme[0].name ?? theme[0].name)
 </script>
 
 <svelte:head>
@@ -62,7 +64,10 @@
         {#if headerConfig.nav}
           <Nav {path} {title} {pin} {scrollY} nav={headerConfig.nav} />
         {/if}
-        <a href="/" class="btn btn-ghost normal-case text-lg">{site.title}</a>
+        <a href="/" class="btn btn-ghost normal-case text-lg">
+          <img class="u-photo rounded-full z-6 w-8 h-8 md:w-7 md:h-7 mx-3 my-2" src={site.header?.logo} alt={site.title} />
+          {site.title}
+        </a>
       </div>
       <div class="navbar-end">
         {#if headerConfig.search}
