@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-  import { fly } from 'svelte/transition'
+  import { fade, fly } from 'svelte/transition'
   import { page } from '$app/stores'
   import { browser } from '$app/environment'
   import { goto } from '$app/navigation'
@@ -39,6 +39,9 @@
 
 <Head />
 
+<!-- <div
+  class="flex flex-col flex-nowrap justify-center xl:flex-row xl:flex-wrap h-feed
+    bg-[url('/assets/bg-header.png')] bg-contain bg-scroll bg-no-repeat bg-scroll bg-top"> -->
 <div class="flex flex-col flex-nowrap justify-center xl:flex-row xl:flex-wrap h-feed">
   <div class="flex-none w-full max-w-screen-xl mx-auto xl:mx-0">
     {#key posts}
@@ -67,7 +70,6 @@
         itemscope
         itemtype="https://schema.org/Blog">
         <h1 class="mx-auto font-normal md:font-medium text-2xl">Mujina Production</h1>
-        <div class="divider my-1 mp-1" />
         <div class="conatiner aspect-video my-5 pd-15">
           <iframe
             width="100%"
@@ -78,17 +80,19 @@
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen />
         </div>
-        <h2 class="font-medium text-xl leading-4">狢制作について</h2>
-        <p>
-          <strong>「狢制作」</strong>
-          (Mujina Production) は
-          <strong>Nagitch</strong>
-          の個人事業・制作活動のブランド名です。
-          <a href="/portfolio"><span class="underline decoration-solid">ポートフォリオはこちら</span></a>
-        </p>
+        <h2 class="ml-4 font-medium text-xl leading-3">狢制作について</h2>
+        <div class="ml-6 my-4">
+          <p>
+            <strong>「狢制作」</strong>
+            (Mujina Production) は
+            <strong>Nagitch</strong>
+            の個人事業・制作活動のブランド名です。
+            <a href="/portfolio"><span class="underline decoration-solid">ポートフォリオはこちら</span></a>
+          </p>
+        </div>
         <div class="divider mt-0 mb-8 hidden lg:flex" />
-        <h1 class="text-2xl font-bold ml-6">最新のブログ</h1>
-        {#each posts as post, index}
+        <h1 class="text-xl font-bold ml-6">最新のブログ</h1>
+        {#each posts.slice(0, 3) as post, index}
           {@const year = new Date(post.published ?? post.created).getFullYear()}
           {#if !years.includes(year)}
             <div
