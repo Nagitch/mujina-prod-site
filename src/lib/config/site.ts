@@ -14,7 +14,7 @@ export const site: SiteConfig = {
   author: {
     avatar: '/assets/maskable@512.png',
     name: 'Nagitch',
-    status: '🫠',
+    status: '🙂',
     bio: 'ちびちびと個人制作しつつ、会社員とフリーランサーを兼業しているプログラマーです🐺<br><strong>狢制作 (Mujina Production)</strong> は屋号、ブランド名、サークル名 etc... を兼ねたものです。'
   },
   themeColor: '#091540'
