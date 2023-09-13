@@ -39,10 +39,10 @@
 
 <Head />
 
-<!-- <div
+<div
   class="flex flex-col flex-nowrap justify-center xl:flex-row xl:flex-wrap h-feed
-    bg-[url('/assets/bg-header.png')] bg-contain bg-scroll bg-no-repeat bg-scroll bg-top"> -->
-<div class="flex flex-col flex-nowrap justify-center xl:flex-row xl:flex-wrap h-feed">
+    bg-[url('/assets/bg-header.png')] bg-contain bg-scroll bg-no-repeat bg-top">
+  <!-- <div class="flex flex-col flex-nowrap justify-center xl:flex-row xl:flex-wrap h-feed"> -->
   <div class="flex-none w-full max-w-screen-xl mx-auto xl:mx-0">
     {#key posts}
       <!-- {:else} is not used because there is a problem with the transition -->
@@ -69,7 +69,39 @@
         itemprop="mainEntityOfPage"
         itemscope
         itemtype="https://schema.org/Blog">
-        <h1 class="mx-auto font-normal md:font-medium text-2xl">Mujina Production</h1>
+        <div class="mx-auto p-3 bg-slate-900/[.65] rounded-md backdrop-blur">
+          <h1 class="mx-auto font-normal md:font-medium text-2xl">
+            Mujina Production
+            <span class="text-base font-normal">by Nagitch</span>
+          </h1>
+        </div>
+        <div class="flex flex-row justify-center justify-items-center items-center">
+          <div class="basis-10 md:basis-20 m-3 md:m-6 rounded-full backdrop-blur bg-slate-100/[.7]">
+            <a href="https://github.com/Nagitch" target="_blank">
+              <img src={'/assets/social-logos/github-icon-1.svg'} alt="GitHub" />
+            </a>
+          </div>
+          <div class="basis-10 md:basis-20 m-3 md:m-6 rounded-2xl backdrop-blur">
+            <a href="https://twitter.com/NagitchDevelop" target="_blank">
+              <img src={'/assets/social-logos/twitter-logo-blue.svg'} alt="Twitter / X" />
+            </a>
+          </div>
+          <div class="basis-16 md:basis-32 m-3 md:m-6 rounded-2xl backdrop-blur">
+            <a href="https://vrchat.com/home/user/usr_8292a43a-914e-4dc0-8c40-51809e1af76b" target="_blank">
+              <img src={'/assets/social-logos/VRC_Logo_TrademarkWhite.png'} alt="VRChat" />
+            </a>
+          </div>
+          <div class="basis-10 md:basis-24 m-3 md:m-6 rounded-2xl backdrop-blur">
+            <a href="https://soundcloud.com/nagitch" target="_blank">
+              <img src={'/assets/social-logos/soundcloud.svg'} alt="SoundCloud" />
+            </a>
+          </div>
+          <div class="basis-10 md:basis-20 m-3 md:m-6 rounded-2xl backdrop-blur">
+            <a href="https://mujina-prod.booth.pm/" target="_blank">
+              <img src={'/assets/social-logos/booth-logo_icon_r.svg'} alt="Booth" />
+            </a>
+          </div>
+        </div>
         <div class="conatiner aspect-video my-5 pd-15">
           <iframe
             width="100%"
@@ -80,13 +112,13 @@
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen />
         </div>
-        <h2 class="ml-4 font-medium text-xl leading-3">狢制作について</h2>
         <div class="ml-6 my-4">
           <p>
             <strong>「狢制作」</strong>
             (Mujina Production) は
             <strong>Nagitch</strong>
             の個人事業・制作活動のブランド名です。
+            <br />
             <a href="/portfolio"><span class="underline decoration-solid">ポートフォリオはこちら</span></a>
           </p>
         </div>
