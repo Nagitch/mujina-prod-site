@@ -81,5 +81,8 @@
     "overrides": {
       "vite>rollup": "^3.10.0"
     }
+  },
+  "dependencies": {
+    "sharp": "^0.32.5"
   }
 }
