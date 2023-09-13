@@ -2,12 +2,12 @@ import type { SiteConfig } from '$lib/types/site'
 
 export const site: SiteConfig = {
   protocol: import.meta.env.URARA_SITE_PROTOCOL ?? import.meta.env.DEV ? 'http://' : 'https://',
-  // domain: import.meta.env.a ?? 'urara-demo.netlify.app',
-  domain: import.meta.env.a ?? 'localhost:5173',
+  domain: import.meta.env.a ?? 'mujina-prod.com',
+  // domain: import.meta.env.a ?? 'localhost:5173',
   title: '狢制作 by Nagitch',
   subtitle: 'Mujina Production by Nagitch',
   lang: 'ja-JP',
-  description: 'Mujina Production - Nagitch\'s carrer blanding site',
+  description: "Mujina Production - Nagitch's carrer blanding site",
   header: {
     logo: '/assets/any@192.png'
   },
