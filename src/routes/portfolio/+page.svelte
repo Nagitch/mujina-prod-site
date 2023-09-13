@@ -47,8 +47,8 @@
       itemscope
       itemtype="https://schema.org/Blog">
       <h1 class="mx-auto font-normal md:font-medium text-2xl">ポートフォリオ Portfolio</h1>
-      <h2 class="ml-4 font-medium text-xl leading-3">略歴</h2>
-      <div class="ml-6">
+      <h2 class="ml-4 font-medium text-base md:text-xl leading-8 md:leading-3">略歴</h2>
+      <div class="mx-6 my-4">
         <p class="indent-4">
           システムエンジニア・プログラマー経験約10年以上。組み込み(マイコン)、デスクトップアプリケーション、業務系Web、エンタメ(ゲーム、メタバースプラットフォーム)の領域でそれぞれ現場経験あり。
           多様かつ多数の案件に参入し一定の成果と評価を得てきた実績があります。
@@ -56,6 +56,7 @@
         <p class="indent-4">
           直近数年間では業務系Webまたはエンタメ系案件の参加が多いです。
           バックエンド・フロントエンド両方とも、システムのたたき台から設計・実装した経験あり。
+          <br />
           十分な裁量がある現場において、要件を最短かつ合理的に満たすような動き方を得意とします。
         </p>
         <p class="indent-4">
@@ -63,9 +64,9 @@
         </p>
       </div>
 
-      <h2 class="ml-4 font-medium text-xl leading-3">経歴・案件一覧</h2>
-      <h3 class="ml-4 font-medium text-ml leading-3">副業 2021/4 - 現在</h3>
-      <div class="ml-6">
+      <h2 class="ml-4 font-medium text-base md:text-xl leading-8 md:leading-3">経歴・案件一覧</h2>
+      <h3 class="ml-4 font-medium text-base md:text-ml leading-8 md:leading-3">副業 2021/4 - 現在</h3>
+      <div class="ml-6 my-4">
         <table class="border-collapse border border-slate-500">
           <thead>
             <tr>
@@ -98,7 +99,7 @@
           </tbody>
         </table>
       </div>
-      <h3 class="ml-4 font-medium text-ml leading-3">システム開発会社C 2017/7 - 現在</h3>
+      <h3 class="ml-4 font-medium text-base md:text-ml leading-8 md:leading-3">システム開発会社C 2017/7 - 現在</h3>
       <div class="ml-6">
         <table class="border-collapse border border-slate-500">
           <thead>
@@ -199,7 +200,7 @@
           </tbody>
         </table>
       </div>
-      <h3 class="ml-4 font-medium text-ml leading-3">システム開発会社B 2015/05 - 2017/06</h3>
+      <h3 class="ml-4 font-medium text-base md:text-ml leading-8 md:leading-3">システム開発会社B 2015/05 - 2017/06</h3>
       <div class="ml-6">
         <table class="border-collapse border border-slate-500">
           <thead>
@@ -227,7 +228,7 @@
           </tbody>
         </table>
       </div>
-      <h3 class="ml-4 font-medium text-ml leading-3">システム開発会社A 2012/04 - 2015/04</h3>
+      <h3 class="ml-4 font-medium text-base md:text-ml leading-8 md:leading-3">システム開発会社A 2012/04 - 2015/04</h3>
       <div class="ml-6">
         <table class="border-collapse border border-slate-500">
           <thead>
