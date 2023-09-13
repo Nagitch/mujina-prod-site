@@ -112,7 +112,27 @@
           </thead>
           <tbody>
             <tr>
-              <td class="p-2 border border-slate-600">2020/11 - 2021/7</td>
+              <td class="p-2 border border-slate-600">2023/03 - 現在</td>
+              <td class="p-2 border border-slate-600">VR(メタバース)プラットフォームのバックエンドサーバー開発</td>
+              <td class="p-2 border border-slate-600">
+                顧客企業の現場での作業(SES)。
+                可能な限り多数の同時接続数が求められるBtoCサービス。たたき台をリリースしたタイミングから参加。
+                積み残しの要件対応、パフォーマンス改善・解析ツール開発の対応あり。
+              </td>
+              <td class="p-2 border border-slate-600">Unity C# UniRx UniTask</td>
+            </tr>
+            <tr>
+              <td class="p-2 border border-slate-600">2022/08 - 2023/02</td>
+              <td class="p-2 border border-slate-600">VR/AR作品共有プラットフォームのモバイルアプリ部分の開発</td>
+              <td class="p-2 border border-slate-600">
+                顧客企業の現場での作業(SES)。フロントエンド(Unity)のアプリ開発。
+                たたき台がすでにある状態から参加し、改善要件の担当として業務を実施。
+                シェーダープログラミングによるモーフィングアニメーション描画の対応あり。
+              </td>
+              <td class="p-2 border border-slate-600">Unity C# UniRx UniTask</td>
+            </tr>
+            <tr>
+              <td class="p-2 border border-slate-600">2020/11 - 2022/7</td>
               <td class="p-2 border border-slate-600">大手業務系 Web システム R&D, リプレイス</td>
               <td class="p-2 border border-slate-600">
                 顧客企業の現場での作業(SES)。 複数の案件に随時対応。
