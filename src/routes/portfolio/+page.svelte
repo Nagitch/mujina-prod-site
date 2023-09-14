@@ -81,9 +81,9 @@
               <td class="p-2 border border-slate-600">2021/4 - 2023/08</td>
               <td class="p-2 border border-slate-600">プログラミング教育向けゲーム形式アプリのコンテンツ作成</td>
               <td class="p-2 border border-slate-600">
-                ゲーム形式でプログラミングを学習で きるアプリケーションの開発。 すでにリリース済みで、新たに学習する
-                単元ごとのステージ（コンテンツ）作成 が主業務。ステージ内容の企画提案、ステージに必要な機能実装
-                、まれに、ステージに配置するモデルの作成(Blender)。※下記案件に当たっている間は休止。
+                ゲーム形式でプログラミングを学習できるアプリケーションの開発。
+                すでにリリース済みで、新たに学習する単元ごとのステージ（コンテンツ）作成
+                が主業務。ステージ内容の企画提案、ステージに必要な機能実装、まれに、ステージに配置するモデルの作成(Blender)。※下記案件に当たっている間は休止。
               </td>
               <td class="p-2 border border-slate-600">Unity UniRx C# Blender</td>
             </tr>
@@ -91,7 +91,7 @@
               <td class="p-2 border border-slate-600">2021/11 - 2021/12</td>
               <td class="p-2 border border-slate-600">上記案件の関連Webサービスの管理画面開発</td>
               <td class="p-2 border border-slate-600">
-                キーボードのタイピングを学ぶための Web サービス（リリース済み）について、学校や生徒を管理する機能の追加開発。
+                キーボードのタイピングを学ぶためのWebサービス（リリース済み）について、学校や生徒を管理する機能の追加開発。
                 管理画面について、フロントエンドを叩き台作成から担当。
               </td>
               <td class="p-2 border border-slate-600">JavaScript React NextJS</td>
@@ -119,7 +119,7 @@
                 可能な限り多数の同時接続数が求められるBtoCサービス。たたき台をリリースしたタイミングから参加。
                 積み残しの要件対応、パフォーマンス改善・解析ツール開発の対応あり。
               </td>
-              <td class="p-2 border border-slate-600">Unity C# UniRx UniTask</td>
+              <td class="p-2 border border-slate-600">C# ASP.NET Protobuf リアルタイム通信 時系列DB</td>
             </tr>
             <tr>
               <td class="p-2 border border-slate-600">2022/08 - 2023/02</td>
@@ -135,11 +135,11 @@
               <td class="p-2 border border-slate-600">2020/11 - 2022/7</td>
               <td class="p-2 border border-slate-600">大手業務系 Web システム R&D, リプレイス</td>
               <td class="p-2 border border-slate-600">
-                顧客企業の現場での作業(SES)。 複数の案件に随時対応。
+                顧客企業の現場での作業(SES)。複数の案件に随時対応。
                 <ul class="list-disc ml-4">
                   <li>k8sバックエンドのサーバー負荷モニタリングシステム構築(NuxtJS, C3js)</li>
                   <li>
-                    位置情報追跡による配送情報管理ア プリのバックエンド(Azure Functions, Event Hub)設計、ライブラリ検討、実装
+                    位置情報追跡による配送情報管理アプリのバックエンド(Azure Functions, Event Hub)設計、ライブラリ検討、実装
                   </li>
                   <li>オートロックマンション向け置き配対応システム開発(デジタルキーによる解錠)。API、管理サーバー開発</li>
                   <li>Docker による開発環境構築</li>
@@ -151,7 +151,7 @@
               <td class="p-2 border border-slate-600">2020/06 - 2020/10</td>
               <td class="p-2 border border-slate-600">大規模IPスマホゲームプロトタイプ制作</td>
               <td class="p-2 border border-slate-600">
-                顧客企業の現場での作業(SES)。 大規模 IP のスマホゲーム案件。本番開 発前のプロトタイプ制作。Unity での作業。
+                顧客企業の現場での作業(SES)。大規模IPのスマホゲーム案件。本番開発前のプロトタイプ制作。Unity での作業。
                 フレンド連携にまつわるバックエンド （環境の叩き台構築～）、フロントエン ドを主に担当。他、随時の要件対応。
               </td>
               <td class="p-2 border border-slate-600">Unity UniRx UniTask Chinemachine Firebase</td>
@@ -204,7 +204,7 @@
               <td class="p-2 border border-slate-600">2018/09 - 2018/10</td>
               <td class="p-2 border border-slate-600">中古建機 オークションシステム</td>
               <td class="p-2 border border-slate-600">
-                顧客企業の現場での作業(SES)。 中古建機（重機など）の売買システム ・ワイヤーフレームを元にした画面実装
+                顧客企業の現場での作業(SES)。 中古建機（重機など）の売買システム・ワイヤーフレームを元にした画面実装
               </td>
               <td class="p-2 border border-slate-600">PHP Laravel Docker SQL JavaScript</td>
             </tr>
@@ -212,8 +212,7 @@
               <td class="p-2 border border-slate-600">2017/07 - 2018/08</td>
               <td class="p-2 border border-slate-600">医療系Webシステム開発(カルテ管理等)</td>
               <td class="p-2 border border-slate-600">
-                顧客企業の現場での作業(SES)。 医療系Webシステムの開発業務 ・バックエンドの設計と実装
-                ・フロントエンドの設計と実装
+                顧客企業の現場での作業(SES)。医療系Webシステムの開発業務・バックエンドの設計と実装 ・フロントエンドの設計と実装
               </td>
               <td class="p-2 border border-slate-600">PHP ZendFramework JavaScript</td>
             </tr>
