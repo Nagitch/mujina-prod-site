@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>https://mujina-prod.com/</id>
+  <title><![CDATA[狢制作 by Nagitch]]></title>
+  <subtitle><![CDATA[Mujina Production by Nagitch]]></subtitle>
+  <icon>https://mujina-prod.com/favicon.png</icon>
+  <link href="https://mujina-prod.com" />
+  <link href="https://mujina-prod.com/atom.xml" rel="self" type="application/atom+xml" />
+  <updated>2023-09-17T14:03:16.059Z</updated>
+  <author>
+    <name><![CDATA[Nagitch]]></name>
+  </author>
+  <category term="Announcements" scheme="https://mujina-prod.com/?tags=Announcements" />
+  <category term="Misc" scheme="https://mujina-prod.com/?tags=Misc" />
+  <entry>
+    <title type="html"><![CDATA[ホームページ・ブログを開設しました]]></title>
+    <link href="https://mujina-prod.com/blog/announcement-site-opening" />
+    <id>https://mujina-prod.com/blog/announcement-site-opening</id>
+    <published>2023-09-14T00:00:00.000Z</published>
+    <updated>2023-09-14T00:00:00.000Z</updated>
+    <content type="html">
+      <![CDATA[<p>ホームページ・ブログを開設しました。<br>「狢制作」 (Mujina Production) は Nagitch の個人事業・制作活動のブランド名です。</p><p>ブログでは多様で有益な情報をお届けしたいと考えています。</p><p>生暖かかく活動を見守っていただけば幸いです。よろしくお願いいたします。</p>]]>
+    </content>
+    <category term="Announcements" scheme="https://mujina-prod.com/?tags=Announcements" />
+    <category term="Misc" scheme="https://mujina-prod.com/?tags=Misc" />
+  </entry>
+</feed>
