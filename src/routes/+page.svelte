@@ -91,14 +91,14 @@
               <img src={'/assets/social-logos/VRC_Logo_TrademarkWhite.png'} alt="VRChat" />
             </a>
           </div>
-          <div class="basis-10 md:basis-24 m-3 md:m-6 rounded-2xl backdrop-blur">
-            <a href="https://soundcloud.com/nagitch" target="_blank">
-              <img src={'/assets/social-logos/soundcloud.svg'} alt="SoundCloud" />
-            </a>
-          </div>
           <div class="basis-10 md:basis-20 m-3 md:m-6 rounded-2xl backdrop-blur">
             <a href="https://mujina-prod.booth.pm/" target="_blank">
               <img src={'/assets/social-logos/booth-logo_icon_r.svg'} alt="Booth" />
+            </a>
+          </div>
+          <div class="basis-10 md:basis-24 m-3 md:m-6 rounded-2xl backdrop-blur">
+            <a href="https://soundcloud.com/nagitch" target="_blank">
+              <img src={'/assets/social-logos/soundcloud.svg'} alt="SoundCloud" />
             </a>
           </div>
         </div>
