@@ -45,7 +45,7 @@ tags:
 
 ## SvelteKit / SvelteJS
 
-はじめは GatsbyJS(Next SSG) がいいところかなーと思ったのですが、どうせなら新出の SvelteKit に挑戦してみようと思いました。  
+はじめは GatsbyJS(Next SSG) がいいところかなーと思ったのですが、どうせなら新出の SvelteKit を使ってみようと思いました。  
 またちょうど最近 [SvelteKit 1.0.0 がリリース](https://svelte.jp/blog/announcing-sveltekit-1.0) されたので、これを機に使ってみようという発想です。  
 使用感としては、ステートフルな思想は変わらず純粋に React(Next) / Vue(Nuxt) の問題を解決した代替という印象で、React/Vue の知識はそのまま活かせますし、個人的には使えるところで積極的に使いたいと思ってます。
 
@@ -79,7 +79,8 @@ tags:
 
 ## Vite
 
-Urara テンプレートが Vite を使っていたので自動的に使ってるだけですが、ブログの Markdown -> HTML 変換をかませていたりしてもホットリロードが即座に反映されるので、快適に作業できました。
+Urara テンプレートが Vite を使っていたので自動的に使ってるだけですが、ブログの Markdown -> HTML 変換をかませていたりしてもホットリロードが即座に反映されるので、快適に作業できました。  
+ちなみに作業環境としては WSL2 Ubuntu + VSCode (Remote Development) です。 (Docker は使ってない)
 
 ## Vercel
 
