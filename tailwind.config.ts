@@ -10,7 +10,7 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        'bg-header': "url('/assets/bg-header.png')"
+        'bg-header': "url('/assets/bg-header.webp')"
       }
     }
   },
