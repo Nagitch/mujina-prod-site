@@ -41,7 +41,7 @@
 
 <div
   class="flex flex-col flex-nowrap justify-center xl:flex-row xl:flex-wrap h-feed
-    bg-[url('/assets/bg-header.png')] bg-contain bg-scroll bg-no-repeat bg-top">
+    bg-[url('/assets/bg-header.webp')] bg-contain bg-scroll bg-no-repeat bg-top">
   <!-- <div class="flex flex-col flex-nowrap justify-center xl:flex-row xl:flex-wrap h-feed"> -->
   <div class="flex-none w-full max-w-screen-xl mx-auto xl:mx-0">
     {#key posts}
@@ -88,7 +88,7 @@
           </div>
           <div class="basis-16 md:basis-32 m-3 md:m-6 rounded-2xl backdrop-blur">
             <a href="https://vrchat.com/home/user/usr_8292a43a-914e-4dc0-8c40-51809e1af76b" target="_blank">
-              <img src={'/assets/social-logos/VRC_Logo_TrademarkWhite.png'} alt="VRChat" />
+              <img src={'/assets/social-logos/VRC_Logo_TrademarkWhite.webp'} alt="VRChat" />
             </a>
           </div>
           <div class="basis-10 md:basis-20 m-3 md:m-6 rounded-2xl backdrop-blur">
