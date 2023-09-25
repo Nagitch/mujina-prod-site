@@ -17,6 +17,12 @@ tags:
 
 ## EEXIST エラー でこける
 
+参考: [Node.js create folder or use existing](https://stackoverflow.com/questions/13696148/node-js-create-folder-or-use-existing)
+
+## GitHub Pages (gh-pages ブランチ) のデプロイを抑止する
+
+https://github.com/Nagitch/mujina-prod-site/pull/14/files
+
 ---
 
 ## 更新履歴
