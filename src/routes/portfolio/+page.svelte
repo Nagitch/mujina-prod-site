@@ -64,6 +64,18 @@
         </p>
       </div>
 
+      <h2 class="ml-4 font-medium text-base md:text-xl leading-8 md:leading-3">個人制作一覧</h2>
+      <div class="mx-6 my-4">
+        <p class="indent-4">
+          <a href="/">
+            <span class="border-b-2 border-slate-200 hover:bg-slate-800 transition-all">
+              トップページのビデオを参照してください。
+            </span>
+          </a>
+          （詳細な一覧は作成中）
+        </p>
+      </div>
+
       <h2 class="ml-4 font-medium text-base md:text-xl leading-8 md:leading-3">経歴・案件一覧</h2>
       <h3 class="ml-4 font-medium text-base md:text-ml leading-8 md:leading-3">副業 2021/4 - 現在</h3>
       <div class="ml-6 my-4">
