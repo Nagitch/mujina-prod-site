@@ -11,6 +11,11 @@
   import 'uno.css'
   import '../app.pcss'
 
+  // Import the Analytics package, and the SvelteKit dev variable.
+  import { inject } from '@vercel/analytics'
+  // Inject the Analytics functionality
+  inject({ mode: dev ? 'development' : 'production' })
+
   export let data: LayoutData
 
   let { res, path } = data
