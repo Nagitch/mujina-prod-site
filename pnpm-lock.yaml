@@ -4,6 +4,9 @@ overrides:
   vite>rollup: ^3.10.0
 
 dependencies:
+  '@vercel/analytics':
+    specifier: ^1.0.2
+    version: 1.0.2
   sharp:
     specifier: ^0.31.3
     version: 0.31.3
@@ -2555,6 +2558,10 @@ packages:
     transitivePeerDependencies:
       - rollup
     dev: true
+
+  /@vercel/analytics@1.0.2:
+    resolution: {integrity: sha512-BZFxVrv24VbNNl5xMxqUojQIegEeXMI6rX3rg1uVLYUEXsuKNBSAEQf4BWEcjQDp/8aYJOj6m8V4PUA3x/cxgg==}
+    dev: false
 
   /@vercel/nft@0.22.6:
     resolution: {integrity: sha512-gTsFnnT4mGxodr4AUlW3/urY+8JKKB452LwF3m477RFUJTAaDmcz2JqFuInzvdybYIeyIv1sSONEJxsxnbQ5JQ==}
