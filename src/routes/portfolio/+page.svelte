@@ -48,7 +48,7 @@
       itemtype="https://schema.org/Blog">
       <h1 class="mx-auto font-normal md:font-medium text-2xl">ポートフォリオ Portfolio</h1>
       <h2 class="ml-4 font-medium text-base md:text-xl leading-8 md:leading-3">略歴</h2>
-      <div class="mx-6 my-4">
+      <div class="mx-6 my-2">
         <p class="indent-4">
           システムエンジニア・プログラマー経験約10年以上。組み込み(マイコン)、デスクトップアプリケーション、業務系Web、エンタメ(ゲーム、メタバースプラットフォーム)の領域でそれぞれ現場経験あり。
           多様かつ多数の案件に参入し一定の成果と評価を得てきた実績があります。
@@ -64,8 +64,57 @@
         </p>
       </div>
 
+      <h2 class="ml-4 font-medium text-base md:text-xl leading-8 md:leading-3">スキルセット</h2>
+      <h3 class="ml-4 font-medium text-base md:text-ml leading-8 md:leading-3">業務系Web</h3>
+      <div class="mx-6">
+        <ul class="list-disc ml-4">
+          <li>PHP, バックエンドフレームワーク</li>
+          <ul class="list-disc ml-4">
+            <li>Laravel</li>
+            <li>Zend Framework</li>
+          </ul>
+          <li>NodeJS</li>
+          <li>JavaScript, フロントエンド</li>
+          <ul class="list-disc ml-4">
+            <li>TypeScript</li>
+            <li>React</li>
+            <li>Next</li>
+            <li>CSS</li>
+          </ul>
+          <li>DBMS, インフラ等</li>
+          <ul class="list-disc ml-4">
+            <li>SQL (Postgres, MySQL)</li>
+            <li>Firebase</li>
+            <li>AWS</li>
+            <li>Nginx</li>
+          </ul>
+        </ul>
+      </div>
+      <h3 class="ml-4 font-medium text-base md:text-ml leading-8 md:leading-3">ゲーム・エンタメ系</h3>
+      <div class="mx-6">
+        <ul class="list-disc ml-4">
+          <li>Unity (Unity C#)</li>
+          <ul class="list-disc ml-4">
+            <li>UniRx</li>
+            <li>UniTask</li>
+          </ul>
+          <li>C#, ASP.NET</li>
+          <li>リアルタイム通信, Protobuf</li>
+          <li>メトリクス解析 Prometheus, Grafana, 時系列DB</li>
+        </ul>
+      </div>
+      <h3 class="ml-4 font-medium text-base md:text-ml leading-8 md:leading-3">組み込み</h3>
+      <div class="mx-6">
+        <ul class="list-disc ml-4">
+          <li>組み込み（マイコン）C</li>
+          <li>アセンブラ</li>
+          <li>RTOS</li>
+          <li>ThreadX</li>
+        </ul>
+      </div>
+
       <h2 class="ml-4 font-medium text-base md:text-xl leading-8 md:leading-3">個人制作一覧</h2>
-      <div class="mx-6 my-4">
+      <div class="mx-6 my-2">
         <p class="indent-4">
           <a href="/">
             <span class="border-b-2 border-slate-200 hover:bg-slate-800 transition-all">
