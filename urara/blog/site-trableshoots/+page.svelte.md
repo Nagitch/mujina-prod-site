@@ -1,7 +1,7 @@
 ---
 title: '[Vercel][SvelteKit] デプロイに関するトラブルシューティング'
-created: 2023-09-23
-updated: 2023-09-23
+created: 2023-10-01
+updated: 2023-10-01
 tags:
   - '技術'
   - 'プログラミング'
@@ -13,19 +13,19 @@ tags:
 
 ## favicon が反映されない・とれない
 
-=favicon が localhost を参照してしまう
+favicon が localhost を参照してしまう、という問題だった。(アプリのコンフィグの問題)
+ブラウザのデバッガで特定できる。
 
-## EEXIST エラー でこける
+## EEXIST エラー でこける (file already exists)
 
 ```
 [urara] error EEXIST: file already exists, mkdir 'src/routes/blog'
 ```
 
-```js
-fs.mkdir(path)
-```
+このようなエラーでコケる場合は、`fs.mkdir` で `recursive` オプションを指定する。 `mkdir -p` と同じ動きとなるため。
 
 ```js
+// fs.mkdir(path)
 fs.mkdir(path, { recursive: true })
 ```
 
@@ -33,10 +33,12 @@ fs.mkdir(path, { recursive: true })
 
 ## GitHub Pages (gh-pages ブランチ) のデプロイを抑止する
 
-https://github.com/Nagitch/mujina-prod-site/pull/14/files
+GitHub Pages (Actions) の設定で main に push すると gh-pages ブランチに勝手にマージされてしまうことにより Vercel もデプロイしてしまう。というのが原因だったのでそれを抑止する。
+
+[対策例: https://github.com/Nagitch/mujina-prod-site/pull/14/files](https://github.com/Nagitch/mujina-prod-site/pull/14/files)
 
 ---
 
 ## 更新履歴
 
-- 2021-09-23: 初稿
+- 2023-10-01: 初稿
