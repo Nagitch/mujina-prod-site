@@ -44,7 +44,7 @@
       localStorage.getItem('theme') ??
       (window.matchMedia('(prefers-color-scheme: dark)').matches
         ? theme.filter(e => e.name === 'night')[0].name // this element must be exists
-        : theme[0].name ?? theme[0].name)
+        : theme.filter(e => e.name === 'aqua')[0].name ?? theme[0].name)
 </script>
 
 <svelte:head>
