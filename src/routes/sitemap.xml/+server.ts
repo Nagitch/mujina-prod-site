@@ -15,16 +15,10 @@ const render = (): string =>
       <loc>${site.protocol + site.domain}</loc>
     </url>
     <url>
-      <loc>https://mujina-prod.com/portfolio</loc>
-      <loc>https://mujina-prod.com/blog</loc>
-      <loc>https://mujina-prod.com/blog/announcement-site-opening</loc>
-      <loc>https://mujina-prod.com/blog/site-technical-background</loc>
-      <loc>https://mujina-prod.com/blog/site-trableshoots</loc>
-      <loc>https://www.mujina-prod.com/portfolio</loc>
-      <loc>https://www.mujina-prod.com/blog</loc>
-      <loc>https://www.mujina-prod.com/blog/announcement-site-opening</loc>
-      <loc>https://www.mujina-prod.com/blog/site-technical-background</loc>
-      <loc>https://www.mujina-prod.com/blog/site-trableshoots</loc>
+      <loc>${site.protocol + site.domain}/blog</loc>
+    </url>
+    <url>
+      <loc>${site.protocol + site.domain}/portfolio</loc>
     </url>
     ${genPosts()
       .map(
