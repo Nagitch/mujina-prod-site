@@ -15,16 +15,16 @@ const render = (): string =>
       <loc>${site.protocol + site.domain}</loc>
     </url>
     <url>
-      <loc>${site.protocol + site.domain}/blog</loc>
+      <loc>${site.protocol + site.domain}/blog/</loc>
     </url>
     <url>
-      <loc>${site.protocol + site.domain}/portfolio</loc>
+      <loc>${site.protocol + site.domain}/portfolio/</loc>
     </url>
     ${genPosts()
       .map(
         post => `
         <url>
-            <loc>${site.protocol + site.domain + post.path}</loc>
+            <loc>${site.protocol + site.domain + post.path}/</loc>
             <lastmod>${new Date(post.updated ?? post.published ?? post.created).toISOString()}</lastmod>
             <priority>0.5</priority>
         </url>`
