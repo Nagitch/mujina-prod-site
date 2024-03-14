@@ -12,19 +12,19 @@ const render = (): string =>
     xmlns:image="https://www.google.com/schemas/sitemap-image/1.1"
     xmlns:video="https://www.google.com/schemas/sitemap-video/1.1">
     <url>
-      <loc>${site.protocol + "www" + site.domain}</loc>
+      <loc>${site.protocol + "www." + site.domain}</loc>
     </url>
     <url>
-      <loc>${site.protocol + "www" + site.domain}/blog/</loc>
+      <loc>${site.protocol + "www." + site.domain}/blog/</loc>
     </url>
     <url>
-      <loc>${site.protocol + "www" + site.domain}/portfolio/</loc>
+      <loc>${site.protocol + "www." + site.domain}/portfolio/</loc>
     </url>
     ${genPosts()
       .map(
         post => `
         <url>
-            <loc>${site.protocol + "www" + site.domain + post.path}/</loc>
+            <loc>${site.protocol + "www." + site.domain + post.path}/</loc>
             <lastmod>${new Date(post.updated ?? post.published ?? post.created).toISOString()}</lastmod>
             <priority>0.5</priority>
         </url>`
