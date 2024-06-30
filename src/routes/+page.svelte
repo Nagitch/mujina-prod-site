@@ -9,6 +9,7 @@
   import Head from '$lib/components/head.svelte'
   import Footer from '$lib/components/footer.svelte'
   import Post from '$lib/components/post_card.svelte'
+  import { VFX } from '@vfx-js/core'
 
   let allPosts: Urara.Post[]
   let allTags: string[]
@@ -33,6 +34,12 @@
     if (browser) {
       if ($page.url.searchParams.get('tags')) tags = $page.url.searchParams.get('tags')?.split(',') ?? []
       loaded = true
+
+      const siteLandPageTitleDisplay = document.querySelector('#site-land-page-title-display')
+      if (siteLandPageTitleDisplay instanceof HTMLElement) {
+        const vfx = new VFX()
+        vfx.add(siteLandPageTitleDisplay, { shader: 'rgbShift', overflow: 100 })
+      }
     }
   })
 </script>
@@ -69,10 +76,11 @@
         itemprop="mainEntityOfPage"
         itemscope
         itemtype="https://schema.org/Blog">
-        <div class="mx-auto p-3 bg-slate-900/[.65] rounded-md backdrop-blur">
-          <h1 class="mx-auto font-normal md:font-medium text-2xl">
-            Mujina Production
-            <span class="text-base font-normal">by Nagitch</span>
+        <div id="site-land-page-title-display" class="mx-auto p-3 rounded-md">
+          <h1 class="mx-auto">
+            <span class="md:font-medium font-extrabold md:text-7xl text-2xl">Mujina Production</span>
+            <br />
+            <div class="text-right"><span class="text-base font-normal text-base">by Nagitch</span></div>
           </h1>
         </div>
         <div class="flex flex-row justify-center justify-items-center items-center">
