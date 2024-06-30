@@ -57,5 +57,10 @@ export default defineConfig({
         globIgnores: ['**/sw*', '**/workbox-*']
       }
     })
-  ]
+  ],
+  // TODO: must be removed after
+  // avoiding vfx-js issue with vite https://github.com/fand/react-vfx/issues/72
+  ssr: {
+    noExternal: ['@vfx-js/core']
+  }
 })
