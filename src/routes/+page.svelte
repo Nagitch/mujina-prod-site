@@ -145,7 +145,7 @@
           <div
             in:fly={{ x: index % 2 ? 100 : -100, duration: 300, delay: 500 }}
             out:fly={{ x: index % 2 ? -100 : 100, duration: 300 }}
-            class="max-w-screen-lg mx-20 transition-all duration-500 ease-in-out hover:z-30 hover:shadow-xl md:shadow-sm md:hover:shadow-xl md:hover:-translate-y-0.5">
+            class="max-w-screen-lg md:mx-20 transition-all duration-500 ease-in-out hover:z-30 hover:shadow-xl md:shadow-sm md:hover:shadow-xl md:hover:-translate-y-0.5">
             <Post {post} preview={true} loading={index < 5 ? 'eager' : 'lazy'} decoding={index < 5 ? 'auto' : 'async'} />
           </div>
         {/each}
