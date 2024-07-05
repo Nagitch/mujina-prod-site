@@ -120,7 +120,7 @@
         
             <section >
                 <ul>
-<li>一般的なWebサービスではデファクトスタンダードが存在する<br>-&gt; ElasticSearchやPrometheus + Grafana</li>
+<li>一般的なWebサービスではデファクトスタンダードが存在する<br>-&gt; <a href="https://www.elastic.co/jp/elasticsearch">ElasticSearch</a> や<a href="https://prometheus.io/">Prometheus</a> + <a href="https://grafana.com/ja/">Grafana</a></li>
 <li>リアルタイムサーバーでは何を採用すべきか？</li>
 <li><strong>「デファクトはないっすね」</strong>
 <ul>
@@ -202,27 +202,36 @@
     <section>
         <section >
             <h2>Push型 / Pull型について</h2>
-<ul>
-<li><strong>Push型</strong> : サーバー側がデータを送信する
-<ul>
-<li>メトリクスサービスのAPIをアプリが叩く</li>
-</ul>
-</li>
-<li><strong>Pull型</strong> : メトリクスサービス側がアプリサーバーのデータを取得しに行く</li>
-</ul>
+
+            </section>
+        
+            <section >
+                <h2>Push型: InfluxDBの例</h2>
+<p><strong>Push型</strong> : サーバー側がデータを送信する</p>
+<p><img src="assets/database-type-push.png" alt="grafana dashboard demo"></p>
 
             </section>
         
             <section >
                 <h2>Pull型: Prometheusの例</h2>
 <ul>
-<li>アプリ側に <strong>Prometheus Exporter</strong> プラグインをインストール
+<li class="fs2rem"><strong>Pull型</strong> : メトリクスサービス側がアプリサーバーのデータを取得しに行く</li>
+<li class="fs2rem">アプリ側に <strong>Prometheus Exporter</strong> プラグインをインストール
 <ul>
-<li><code>/metrics</code> HTTPエンドポイントが用意される</li>
+<li class="fs2rem"><code>/metrics</code> エンドポイントが生える</li>
 </ul>
 </li>
-<li>Prometheusサーバーが定期的(15s間隔とか)に <code>/metrics</code> にアクセスし、メトリクスを取得</li>
-<li><strong>Prometheusでは、データのタイムスタンプ=アクセス時刻となる</strong></li>
+<li class="fs2rem">Prometheusサーバーが定期的(15s間隔とか)に <code>/metrics</code> にアクセスし、メトリクスを取得</li>
+</ul>
+<p><img src="assets/database-type-pull.png" alt="grafana dashboard demo"></p>
+
+            </section>
+        
+            <section >
+                <p><strong>Prometheusではデータのタイムスタンプ<br>= アクセス時刻となる</strong></p>
+<ul>
+<li>アプリケーションサーバー自身のタイムスタンプをデータとして残せない</li>
+<li>関数の実行時間など、msecオーダーの解析にはデータの見せ方に工夫が必要</li>
 </ul>
 
             </section>
@@ -234,8 +243,8 @@
 
 
     
+    <section>
         <section >
-            
             <h2>Grafanaについて</h2>
 <ul>
 <li>データ可視化ツールとしてはデファクト</li>
@@ -246,6 +255,16 @@
 </ul>
 
             </section>
+        
+            <section >
+                <h2>Grafanaのデモ</h2>
+<p>Sandboxがあるよ
+<a href="https://play.grafana.org/">https://play.grafana.org/</a></p>
+
+            </section>
+        
+
+    </section>
     
 
 
