@@ -31,17 +31,15 @@
   }
 
   onMount(() => {
-    if (!browser) {
-      return
-    }
+    if (browser) {
+      if ($page.url.searchParams.get('tags')) tags = $page.url.searchParams.get('tags')?.split(',') ?? []
+      loaded = true
 
-    if ($page.url.searchParams.get('tags')) tags = $page.url.searchParams.get('tags')?.split(',') ?? []
-    loaded = true
-
-    const siteLandPageTitleDisplay = document.querySelector('#site-land-page-title-display')
-    if (siteLandPageTitleDisplay instanceof HTMLElement) {
-      const vfx = new VFX()
-      vfx.add(siteLandPageTitleDisplay, { shader: 'rgbShift', overflow: 100 })
+      const siteLandPageTitleDisplay = document.querySelector('#site-land-page-title-display')
+      if (siteLandPageTitleDisplay instanceof HTMLElement) {
+        const vfx = new VFX()
+        vfx.add(siteLandPageTitleDisplay, { shader: 'rgbShift', overflow: 100 })
+      }
     }
   })
 </script>
