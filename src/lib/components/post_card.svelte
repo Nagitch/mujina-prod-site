@@ -112,7 +112,7 @@
       <div class="divider mt-4 mb-0" />
       <div>
         {#each post.tags as tag}
-          <a href="/?tags={tag}" class="btn btn-sm btn-ghost normal-case mt-2 mr-2 p-category">
+          <a href="/blog/?tags={tag}" class="btn btn-sm btn-ghost normal-case mt-2 mr-2 p-category">
             #{tag}
           </a>
         {/each}

@@ -31,15 +31,17 @@
   }
 
   onMount(() => {
-    if (browser) {
-      if ($page.url.searchParams.get('tags')) tags = $page.url.searchParams.get('tags')?.split(',') ?? []
-      loaded = true
+    if (!browser) {
+      return
+    }
 
-      const siteLandPageTitleDisplay = document.querySelector('#site-land-page-title-display')
-      if (siteLandPageTitleDisplay instanceof HTMLElement) {
-        const vfx = new VFX()
-        vfx.add(siteLandPageTitleDisplay, { shader: 'rgbShift', overflow: 100 })
-      }
+    if ($page.url.searchParams.get('tags')) tags = $page.url.searchParams.get('tags')?.split(',') ?? []
+    loaded = true
+
+    const siteLandPageTitleDisplay = document.querySelector('#site-land-page-title-display')
+    if (siteLandPageTitleDisplay instanceof HTMLElement) {
+      const vfx = new VFX()
+      vfx.add(siteLandPageTitleDisplay, { shader: 'rgbShift', overflow: 100 })
     }
   })
 </script>
@@ -80,7 +82,7 @@
           <h1 class="mx-auto">
             <span class="md:font-medium font-extrabold md:text-7xl text-2xl">Mujina Production</span>
             <br />
-            <div class="text-right"><span class="text-base font-normal text-base">by Nagitch</span></div>
+            <div class="text-right"><span class="font-normal md:text-4xl text-base">by Nagitch</span></div>
           </h1>
         </div>
         <div class="flex flex-row justify-center justify-items-center items-center">
@@ -125,9 +127,16 @@
             <strong>「狢制作」</strong>
             (Mujina Production) は
             <strong>Nagitch</strong>
-            の個人事業・制作活動のブランド名です。
+            の制作・個人事業名義です。
             <br />
-            <a href="/portfolio"><span class="underline decoration-solid">ポートフォリオはこちら</span></a>
+            <a href="/portfolio">
+              <div class="underline">
+                <span
+                  class="md:text-2xl text-base bg-[length:100%_0%] bg-[position:0_88%] decoration-4 decoration-transparent group-hover:decoration-primary hover:bg-[length:100%_100%] hover:text-primary-content bg-gradient-to-t from-primary to-primary bg-no-repeat transition-all ease-in-out duration-300 underline">
+                  📝ポートフォリオはこちら
+                </span>
+              </div>
+            </a>
           </p>
         </div>
         <div class="divider mt-0 mb-8 hidden lg:flex" />
