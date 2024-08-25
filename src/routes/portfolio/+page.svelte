@@ -128,7 +128,7 @@
       <h2 class="ml-4 font-medium text-base md:text-xl leading-8 md:leading-3">経歴・案件一覧</h2>
       <h3 class="ml-4 font-medium text-base md:text-ml leading-8 md:leading-3">副業 2021/4 - 現在</h3>
       <div class="ml-6 my-4">
-        <table class="border-collapse border border-slate-500">
+        <table class="table-auto border-collapse border border-slate-500">
           <thead>
             <tr>
               <th class="p-2 border border-slate-600">期間</th>
@@ -138,6 +138,14 @@
             </tr>
           </thead>
           <tbody>
+            <tr>
+              <td class="p-2 border border-slate-600">2023/12 - 2024/3</td>
+              <td class="p-2 border border-slate-600">アニメーションコンテンツ向け楽曲制作</td>
+              <td class="p-2 border border-slate-600">
+                個人制作のアニメーションクリエイター向けに、指定されたテーマに従って楽曲を制作。2曲を納品。
+              </td>
+              <td class="p-2 border border-slate-600">Ableton Live 作曲 MIDI</td>
+            </tr>
             <tr>
               <td class="p-2 border border-slate-600">2021/4 - 2023/08</td>
               <td class="p-2 border border-slate-600">プログラミング教育向けゲーム形式アプリのコンテンツ作成</td>
@@ -156,6 +164,14 @@
                 管理画面について、フロントエンドを叩き台作成から担当。
               </td>
               <td class="p-2 border border-slate-600">JavaScript React NextJS</td>
+            </tr>
+            <tr>
+              <td class="p-2 border border-slate-600">2022/9 - 2022/12</td>
+              <td class="p-2 border border-slate-600">上記案件のユーザー向けお知らせ（ニュース）機能開発</td>
+              <td class="p-2 border border-slate-600">
+                アプリ内でのお知らせ機能の追加開発。お知らせの一覧表示、詳細表示、お知らせの新規作成、編集、削除などの機能を実装。
+              </td>
+              <td class="p-2 border border-slate-600">Unity JavaScript Django</td>
             </tr>
           </tbody>
         </table>
