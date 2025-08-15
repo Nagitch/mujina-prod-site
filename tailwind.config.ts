@@ -2,11 +2,9 @@ import type { Config } from 'tailwindcss'
 
 import typography from '@tailwindcss/typography'
 import daisyui from 'daisyui'
+import daisyuiThemes from 'daisyui/src/theming/themes.js'
 
 import { theme } from './src/lib/config/general'
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const daisyuiThemes = require('daisyui/src/colors/themes')
 
 const themeNames = theme.map(({ name }) => name).filter(name => name !== 'cmyk')
 
