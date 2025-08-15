@@ -2,7 +2,7 @@ import type { Config } from 'tailwindcss'
 
 import typography from '@tailwindcss/typography'
 import daisyui from 'daisyui'
-import daisyuiThemes from 'daisyui/src/theming/themes.js'
+import daisyuiThemes from 'daisyui/src/colors/themes.js'
 
 import { theme } from './src/lib/config/general'
 
