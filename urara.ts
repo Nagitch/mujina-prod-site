@@ -76,7 +76,7 @@ const mkDir = (
 ) => {
   dest.forEach(path =>
     fs
-      .mkdir(path, { recursive: true })
+      .mkdir(path)
       .then(() => log('green', 'make dir', path))
       .catch(error),
   )

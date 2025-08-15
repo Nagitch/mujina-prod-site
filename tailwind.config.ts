@@ -2,25 +2,12 @@ import type { Config } from 'tailwindcss'
 
 import typography from '@tailwindcss/typography'
 import daisyui from 'daisyui'
-import daisyuiThemes from 'daisyui/src/colors/themes.js'
 
 import { theme } from './src/lib/config/general'
 
-const themeNames = theme.map(({ name }) => name).filter(name => name !== 'cmyk')
-
 export default {
   content: ['./src/**/*.{html,md,js,svelte,ts}'],
-  daisyui: {
-    themes: [
-      {
-        cmyk: {
-          ...daisyuiThemes['[data-theme=cmyk]'],
-          primary: '#00AEEF'
-        }
-      },
-      ...themeNames
-    ]
-  },
+  daisyui: { themes: theme.map(({ name }) => name) },
   plugins: [typography, daisyui],
   theme: {
     extend: {
@@ -38,9 +25,6 @@ export default {
             },
           },
         },
-      },
-      backgroundImage: {
-        'bg-header': "url('/assets/bg-header.webp')",
       },
     },
   },
