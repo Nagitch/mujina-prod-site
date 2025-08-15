@@ -5,9 +5,24 @@ import daisyui from 'daisyui'
 
 import { theme } from './src/lib/config/general'
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const daisyuiThemes = require('daisyui/src/colors/themes')
+
+const themeNames = theme.map(({ name }) => name).filter(name => name !== 'cmyk')
+
 export default {
   content: ['./src/**/*.{html,md,js,svelte,ts}'],
-  daisyui: { themes: theme.map(({ name }) => name) },
+  daisyui: {
+    themes: [
+      {
+        cmyk: {
+          ...daisyuiThemes['[data-theme=cmyk]'],
+          primary: '#00AEEF'
+        }
+      },
+      ...themeNames
+    ]
+  },
   plugins: [typography, daisyui],
   theme: {
     extend: {
