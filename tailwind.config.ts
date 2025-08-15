@@ -26,6 +26,9 @@ export default {
           },
         },
       },
+      backgroundImage: {
+        'bg-header': "url('/assets/bg-header.webp')",
+      },
     },
   },
 } satisfies Config
