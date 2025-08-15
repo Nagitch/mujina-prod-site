@@ -189,6 +189,24 @@
           </thead>
           <tbody>
             <tr>
+              <td class="p-2 border border-slate-600">2025/05 - 現在</td>
+              <td class="p-2 border border-slate-600">建機メンテナンスアプリケーション刷新</td>
+              <td class="p-2 border border-slate-600">
+                既存の建機メンテナンスアプリケーションの刷新。Windowsアプリケーション。.NET MAUI、xUnitを利用。
+                Web等と比較するとニッチな技術や要件をキャッチアップすることが求められる案件。
+              </td>
+              <td class="p-2 border border-slate-600">C#, MAUI, xUnit, SQLite</td>
+            </tr>
+            <tr>
+              <td class="p-2 border border-slate-600">2024/11 - 2025/3</td>
+              <td class="p-2 border border-slate-600">遊技機メーカー向けシステム開発支援</td>
+              <td class="p-2 border border-slate-600">
+                パチンコ・パチスロ連携アプリの遊技機履歴等表示機能の別アプリ化。
+                バックエンド全般を担当。特有の業務プロセスと仕様理解が求められる案件。
+              </td>
+              <td class="p-2 border border-slate-600">JavaScript, TypeScript, Node.js, NextJS</td>
+            </tr>
+            <tr>
               <td class="p-2 border border-slate-600">2023/03 - 現在</td>
               <td class="p-2 border border-slate-600">VR(メタバース)プラットフォームのバックエンドサーバー開発</td>
               <td class="p-2 border border-slate-600">
