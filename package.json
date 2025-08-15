@@ -79,12 +79,14 @@
   },
   "pnpm": {
     "overrides": {
-      "vite>rollup": "^3.10.0"
-    }
+      "vite>rollup": "^3.10.0",
+      "sharp": "^0.34.3"
+    },
+    "allowedBuildScripts": ["sharp"]
   },
   "dependencies": {
     "@vercel/analytics": "^1.0.2",
     "@vfx-js/core": "^0.2.0",
-    "sharp": "^0.31.3"
+    "sharp": "^0.34.3"
   }
 }
