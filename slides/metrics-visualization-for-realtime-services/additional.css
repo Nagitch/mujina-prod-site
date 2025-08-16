@@ -1,0 +1,52 @@
+/* overrides */
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+    text-transform: none;
+}
+
+/* additional */
+
+.fs1rem {
+    font-size: 1rem;
+}
+
+.fs1p5rem {
+    font-size: 1.5rem;
+}
+
+.fs2rem {
+    font-size: 2rem;
+}
+
+.fs3rem {
+    font-size: 3rem;
+}
+
+.fs4rem {
+    font-size: 4rem;
+}
+
+.ls-none {
+    list-style: none;
+}
+
+.flex {
+    display: flex;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}

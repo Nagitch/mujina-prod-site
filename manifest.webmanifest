@@ -1,39 +1,39 @@
 {
-  "name": "狢制作 by Nagitch",
-  "short_name": "狢制作 by Nagitch",
-  "lang": "ja-JP",
-  "description": "Mujina Production - Nagitch's carrer blanding site",
-  "id": "https://mujina-prod.com/",
-  "start_url": "/",
-  "scope": "/",
-  "display": "standalone",
-  "orientation": "portrait",
   "background_color": "#091540",
-  "theme_color": "#091540",
+  "description": "Mujina Production - Nagitch's carrer blanding site",
+  "display": "standalone",
   "icons": [
     {
+      "sizes": "192x192",
       "src": "https://mujina-prod.com/assets/any@192.png",
-      "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "https://mujina-prod.com/assets/any@512.png",
       "sizes": "512x512",
+      "src": "https://mujina-prod.com/assets/any@512.png",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "https://mujina-prod.com/assets/maskable@192.png",
       "sizes": "192x192",
+      "src": "https://mujina-prod.com/assets/maskable@192.png",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "https://mujina-prod.com/assets/maskable@512.png",
       "sizes": "512x512",
+      "src": "https://mujina-prod.com/assets/maskable@512.png",
       "type": "image/png",
       "purpose": "maskable"
     }
-  ]
+  ],
+  "id": "https://mujina-prod.com/",
+  "lang": "ja-JP",
+  "name": "狢制作",
+  "orientation": "portrait",
+  "scope": "/",
+  "short_name": "狢制作",
+  "start_url": "/",
+  "theme_color": "#091540"
 }
