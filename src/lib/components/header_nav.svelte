@@ -7,15 +7,15 @@
 </script>
 
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+<!-- svelte-ignore a11y-label-has-associated-control -->
 <!-- reference: https://github.com/saadeghi/daisyui/issues/1285 -->
 <div class='dropdown lg:hidden'>
-  <label class='btn btn-square btn-ghost' for='navbar-dropdown' tabindex='0'>
+  <label class='btn btn-square btn-ghost' tabindex='0'>
     <span class='i-heroicons-outline-menu-alt-1' />
   </label>
   <ul
     class='menu menu-compact dropdown-content bg-base-100 text-base-content shadow-lg rounded-box min-w-max max-w-52 p-2'
     class:hidden={!pin}
-    id='navbar-dropdown'
     tabindex='0'>
     {#each nav as { children, link, text }}
       {#if link && !children}
