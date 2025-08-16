@@ -7,12 +7,11 @@
 </script>
 
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-<!-- svelte-ignore a11y-label-has-associated-control -->
 <!-- reference: https://github.com/saadeghi/daisyui/issues/1285 -->
 <div class='dropdown lg:hidden'>
-  <label class='btn btn-square btn-ghost' tabindex='0'>
+  <button class='btn btn-square btn-ghost'>
     <span class='i-heroicons-outline-menu-alt-1' />
-  </label>
+  </button>
   <ul
     class='menu menu-compact dropdown-content bg-base-100 text-base-content shadow-lg rounded-box min-w-max max-w-52 p-2'
     class:hidden={!pin}
