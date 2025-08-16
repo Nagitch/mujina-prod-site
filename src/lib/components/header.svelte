@@ -79,7 +79,8 @@
             <span class='i-heroicons-outline-search' />
           </button>
         {/if}
-        <div class='dropdown dropdown-end' id='change-theme'>
+        <!-- hide theme changer -->
+        <div class='hidden dropdown dropdown-end' id='change-theme'>
           <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
           <!-- reference: https://github.com/saadeghi/daisyui/issues/1285 -->
           <div class='btn btn-square btn-ghost' tabindex='0'>

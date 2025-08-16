@@ -75,6 +75,20 @@
   }
 
   onMount(() => load())
+
+  // format a date-like string as YYYY-MM-DD (zero-padded)
+  function formatYMD(d?: string): string {
+    if (!d) return ''
+    const dt = new Date(d)
+    if (Number.isNaN(dt.getTime())) {
+      // fallback: try to slice (if it's ISO-like)
+      return d.slice(0, 10)
+    }
+    const y = dt.getFullYear()
+    const m = String(dt.getMonth() + 1).padStart(2, '0')
+    const day = String(dt.getDate()).padStart(2, '0')
+    return `${y}-${m}-${day}`
+  }
 </script>
 
 <div class='flex flex-col gap-8'>
@@ -144,8 +158,8 @@
                 this post on
                 <span
                   class='tooltip tooltip-bottom xl:tooltip-right{tooltipColor}'
-                  data-tip={new Date(mention.published ?? mention['wm-received']).toLocaleString()}>
-                  {mention.published ? mention.published.slice(0, 10) : mention['wm-received'].slice(0, 10)}
+                  data-tip={formatYMD(mention.published ?? mention['wm-received'])}>
+                  {formatYMD(mention.published ?? mention['wm-received'])}
                 </span>
               </p>
             </div>

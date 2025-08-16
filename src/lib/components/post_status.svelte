@@ -4,10 +4,13 @@
 
   export let post: Urara.Post
   export let preview: boolean = false
-  const stringPublished = new Date(post.published ?? post.created).toLocaleString(date.locales, date.options)
-  const stringUpdated = new Date(post.updated ?? post.published ?? post.created).toLocaleString(date.locales, date.options)
-  const jsonPublished = new Date(post.published ?? post.created).toJSON()
-  const jsonUpdated = new Date(post.updated ?? post.published ?? post.created).toJSON()
+  const publishedDate = new Date(post.published ?? post.created)
+  const updatedDate = new Date(post.updated ?? post.published ?? post.created)
+  // human readable: `2024-08-24` (year-month-day, zero-padded month/day)
+  const stringPublished = `${publishedDate.getFullYear()}-${String(publishedDate.getMonth() + 1).padStart(2, '0')}-${String(publishedDate.getDate()).padStart(2, '0')}`
+  const stringUpdated = `${updatedDate.getFullYear()}-${String(updatedDate.getMonth() + 1).padStart(2, '0')}-${String(updatedDate.getDate()).padStart(2, '0')}`
+  const jsonPublished = publishedDate.toJSON()
+  const jsonUpdated = updatedDate.toJSON()
 </script>
 
 <div class='flex font-semibold gap-1.5' class:md:mb-4={!preview && post.type !== 'article'}>
