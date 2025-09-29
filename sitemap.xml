@@ -9,7 +9,22 @@
     <url>
       <loc>https://mujina-prod.com</loc>
     </url>
-    
+        <url>
+            <loc>https://mujina-prod.com/</loc>
+            <priority>0.7</priority>
+        </url>
+        <url>
+            <loc>https://mujina-prod.com/blog</loc>
+            <priority>0.7</priority>
+        </url>
+        <url>
+            <loc>https://mujina-prod.com/portfolio</loc>
+            <priority>0.7</priority>
+        </url>
+        <url>
+            <loc>https://mujina-prod.com/slides/metrics-visualization-for-realtime-services</loc>
+            <priority>0.7</priority>
+        </url>
         <url>
             <loc>https://mujina-prod.com/blog/gitlab-host-docker-macmini</loc>
             <lastmod>2024-08-04T00:00:00.000Z</lastmod>
