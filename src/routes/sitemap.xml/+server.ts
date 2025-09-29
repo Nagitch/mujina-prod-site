@@ -5,8 +5,6 @@ import type { RequestHandler } from './$types'
 
 const pageRoutes = Object.keys(import.meta.glob('/src/routes/**/+page.svelte', { eager: true }))
   .map(path => path.replace('/src/routes', '').replace(/\/\+page\.svelte$/, '') || '/')
-  .filter(route => route !== '/')
-
 const slideRoutes = Object.keys(import.meta.glob('/urara/slides/**/index.html', { eager: true }))
   .map(path => path.replace('/urara', '').replace(/\/index\.html$/, ''))
 
