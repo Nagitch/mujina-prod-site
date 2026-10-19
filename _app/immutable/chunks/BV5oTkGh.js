@@ -1,0 +1,1 @@
+function i(e){return e.title?"article":e.image?"photo":e.audio?"audio":e.video?"video":e.bookmark_of?"bookmark":e.like_of?"like":e.repost_of?"repost":e.in_reply_to?"reply":"note"}const r=e=>[...new Set(e.reduce((o,t)=>t.tags?[...o,...t.tags]:o,[""]).slice(1))];export{r as g,i as t};
