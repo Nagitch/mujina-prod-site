@@ -1,3 +1,58 @@
+# MUJINA personal site
+
+Status: active
+
+Personal homepage, portfolio and blog at https://www.mujina-prod.com, based on
+Urara. The independent repository is `Nagitch/mujina-prod-site`; the workbench
+only pins its commit as a submodule.
+
+## Development and verification
+
+Use Node **24.x** (`nvm install && nvm use`) and **pnpm 9.10.0**, declared in
+`package.json`. Install that exact pnpm version if Corepack is unavailable.
+
+```sh
+pnpm install --frozen-lockfile
+pnpm dev
+```
+
+Author Markdown, images and slides under `urara/`; authored Svelte routes remain
+under `src/routes/`. Generated files are recorded in `.urara-generated.json`.
+Cleanup removes only those files and refuses to overwrite or remove unowned or
+locally modified output. Do not commit the manifest or generated directories.
+If an old checkout has generated files without a manifest, use a fresh checkout
+or inspect and remove only those generated files before building.
+
+```sh
+pnpm tsc
+pnpm test
+pnpm urara:build
+pnpm check
+pnpm clean
+pnpm lint
+pnpm verify:build
+pnpm preview
+```
+
+The regression suite covers cleanup ownership and watch shutdown. Build
+verification runs two complete builds, checks all tracked file contents, and
+checks core endpoints and every published post's generated route, then builds
+Vercel output and verifies its Node 24 function runtime. PR and main
+CI run the same commands. `pnpm build` logs the actual Node version.
+
+## Deployment
+
+Vercel project `mujina-prod-site` uses this child repository directly, with Node
+24.x selected both in the project and `engines.node`. Its root is this repository
+root, not the parent workbench. Verify the preview for the exact PR commit before
+merging and inspect the resulting production deployment and core routes.
+
+The existing GitHub Pages publisher is retained with an explicit Node 24 input
+and a pinned reusable workflow. Deployment consolidation, dependency upgrades,
+SEO and PWA improvements are tracked separately in the maintenance issues.
+
+## Upstream Urara documentation and attribution
+
 <br />
 <div align="center">
 <a href="https://github.com/importantimport/urara">

@@ -5,7 +5,7 @@
 </script>
 
 <div
-  class='alert flex-col shadow-inner my-4'
+  class='flex-col shadow-inner my-4 alert'
   class:alert-error={status === 'error'}
   class:alert-info={status === 'info'}
   class:alert-success={status === 'success'}

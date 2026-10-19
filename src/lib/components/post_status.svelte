@@ -1,5 +1,4 @@
 <script lang='ts'>
-  import { date } from '$lib/config/general'
   import { site } from '$lib/config/site'
 
   export let post: Urara.Post
@@ -15,7 +14,7 @@
 
 <div class='flex font-semibold gap-1.5' class:md:mb-4={!preview && post.type !== 'article'}>
   <a
-    class='opacity-75 hover:opacity-100 hover:text-primary duration-500 ease-in-out p-author h-card'
+    class='opacity-75 duration-500 ease-in-out h-card hover:opacity-100 hover:text-primary p-author'
     class:hidden={preview}
     href={site.protocol + site.domain}
     rel='author'>
@@ -24,13 +23,13 @@
   <span class='opacity-50' class:hidden={preview}>/</span>
   <a class='u-url u-uid swap group/time' href={post.path}>
     <time
-      class='group-hover/time:opacity-0 font-semibold opacity-75 duration-500 ease-in-out mr-auto dt-published'
+      class='font-semibold opacity-75 duration-500 ease-in-out mr-auto group-hover/time:opacity-0 dt-published'
       datetime={jsonPublished}
       itemprop='datePublished'>
       {stringPublished}
     </time>
     <time
-      class='opacity-0 group-hover/time:opacity-100 font-semibold text-primary duration-500 ease-in-out mr-auto dt-updated'
+      class='font-semibold duration-500 ease-in-out mr-auto opacity-0 group-hover/time:opacity-100 text-primary dt-updated'
       datetime={jsonUpdated}
       itemprop='dateModified'>
       {stringUpdated}

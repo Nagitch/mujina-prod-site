@@ -3,6 +3,7 @@ import adapterNode from '@sveltejs/adapter-node'
 import adapterStatic from '@sveltejs/adapter-static'
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 import { mdsvex } from 'mdsvex'
+import process from 'node:process'
 
 import mdsvexConfig from './mdsvex.config.js'
 

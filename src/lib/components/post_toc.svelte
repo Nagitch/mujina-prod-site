@@ -3,7 +3,7 @@
 </script>
 
 <script lang='ts'>
-  import { onDestroy, onMount } from 'svelte'
+  import { onMount } from 'svelte'
 
   export let toc: Urara.Post.Toc[]
 
@@ -27,16 +27,11 @@
         headingsObserver.observe(element),
       )
       articleObserver.observe(document.getElementsByTagName('main')[0])
+      return () => {
+        headingsObserver.disconnect()
+        articleObserver.disconnect()
+      }
     }
-  })
-
-  onDestroy(() => {
-    // @ts-ignore: Cannot find name 'headingsObserver'
-    if (typeof headingsObserver !== 'undefined')
-      headingsObserver.disconnect()
-    // @ts-ignore: Cannot find name 'articleObserver'
-    if (typeof articleObserver !== 'undefined')
-      articleObserver.disconnect()
   })
 
   $: if (intersecting.length > 0)
@@ -61,10 +56,8 @@
     <ul dir='ltr' id='toc-list-root'>
       {#each toc as { depth, slug, title }}
         <li class='flex flex-col' id={`toc-item-${slug}`}>
-          <!-- svelte-ignore a11y-click-events-have-key-events -->
-          <span
-            class="cursor-pointer border-l-4 border-transparent transition-all hover:border-primary hover:bg-base-content hover:bg-opacity-10 active:bg-primary active:text-primary-content active:font-bold pr-4{depth
-            <= 2
+          <button
+            class="transition-all border-transparent cursor-pointer border-l-4 hover:border-primary hover:bg-base-content hover:bg-opacity-10 active:bg-primary active:text-primary-content active:font-bold pr-4{depth <= 2
               ? 'py-3'
               : 'py-2'}"
             class:pl-4={depth <= 2}
@@ -75,10 +68,10 @@
             dir='ltr'
             id={`toc-link-${slug}`}
             on:click={() =>
-              // @ts-ignore Object is possibly 'null'. ts(2531)
-              document.getElementById(slug).scrollIntoView({ behavior: 'smooth' })}>
+              slug && document.getElementById(slug)?.scrollIntoView({ behavior: 'smooth' })}
+            type='button'>
             {title}
-          </span>
+          </button>
         </li>
       {/each}
     </ul>

@@ -44,6 +44,10 @@ export const typeOfPost = (
 /**
  * Generate Posts List
  * @param options - An optional configuration object
+ * @param options.filterUnlisted - Hide unlisted posts
+ * @param options.modules - Compiled Markdown modules
+ * @param options.postHtml - Include rendered HTML
+ * @param options.postLimit - Limit the number of posts
  * @returns - posts list
  */
 export const genPosts: GenPostsFunction = ({

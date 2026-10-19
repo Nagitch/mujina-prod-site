@@ -2,14 +2,14 @@
   import { footer as footerConfig } from '$lib/config/general'
   import { site } from '$lib/config/site'
 
-  let className: string | undefined
+  let className: string = ''
   export { className as class }
   export let sticky: boolean = false
   export let rounded: boolean = false
 </script>
 
 <footer
-  class="footer footer-center bg-base-300 text-base-content shadow-inner p-8 {rounded
+  class="bg-base-300 text-base-content shadow-inner footer footer-center p-8{rounded
     ? 'rounded-box'
     : 'md:rounded-box'} {sticky ? 'sticky bottom-0 z-0 md:static' : ''} {className ?? ''}"
   id='footer'>
@@ -40,6 +40,8 @@
       </a>
       {#if footerConfig.html}
         <br />
+        <!-- Trusted HTML authored in the repository footer configuration. -->
+        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
         {@html footerConfig.html}
       {/if}
     </p>

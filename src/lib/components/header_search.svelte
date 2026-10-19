@@ -8,7 +8,7 @@
   class='flex-1'
   method='get'>
   <input
-    class='input input-ghost input-bordered xl:bg-base-100 xl:text-base-content transition-all w-full h-12'
+    class='transition-all w-full input input-ghost input-bordered xl:bg-base-100 xl:text-base-content h-12'
     name='q'
     type='text' />
   <input

@@ -23,7 +23,7 @@ tags:
 
 ## 結果
 
-テストコードおよび結果はこちらのリポジトリにあります。  
+テストコードおよび結果はこちらのリポジトリにあります。
 [Benchmark Rust Rhai](https://github.com/Nagitch/benchmark-rust-rhai)
 
 フィボナッチ数列を n 回計算するという単純な処理を行い、その時間を計測しました。

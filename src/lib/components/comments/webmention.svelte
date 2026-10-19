@@ -7,12 +7,6 @@
   export let config: WebmentionConfig
   export let post: Urara.Post
 
-  interface WebmentionFeed {
-    children: WebmentionEntry[]
-    name: 'Webmentions'
-    type: 'feed'
-  }
-
   interface WebmentionEntry {
     'author'?: {
       name?: string
@@ -32,6 +26,12 @@
     'wm-received': string
     'wm-source': string
     'wm-target': string
+  }
+
+  interface WebmentionFeed {
+    children: WebmentionEntry[]
+    name: 'Webmentions'
+    type: 'feed'
   }
 
   let [page, loaded, end, mentions, sortDirUp]: [number, boolean, boolean, WebmentionEntry[], boolean] = [
@@ -78,7 +78,8 @@
 
   // format a date-like string as YYYY-MM-DD (zero-padded)
   function formatYMD(d?: string): string {
-    if (!d) return ''
+    if (!d)
+      return ''
     const dt = new Date(d)
     if (Number.isNaN(dt.getTime())) {
       // fallback: try to slice (if it's ISO-like)
@@ -93,7 +94,7 @@
 
 <div class='flex flex-col gap-8'>
   <div class='flex'>
-    <p class='flex-1 m-auto italic opacity-50'>
+    <p class='flex-1 m-auto opacity-50 italic'>
       {`sort-by=${config?.sortBy ?? 'created'}&sort-dir=${sortDirUp ? 'up' : 'down'}`}
     </p>
     <button
@@ -119,13 +120,12 @@
         'repost-of': ['🔄 reposted', 'border-accent/50', 'text-accent', 'tooltip-accent'],
         'rsvp': [
           `📅 RSVPed ${
-            mention.rsvp
-            && {
-                interested: '💡',
-                maybe: '💭',
-                no: '❌',
-                yes: '✅',
-              }[mention.rsvp]
+            mention.rsvp && {
+              interested: '💡',
+              maybe: '💭',
+              no: '❌',
+              yes: '✅',
+            }[mention.rsvp]
           }`,
           'border-warning/50',
           'text-warning',
@@ -138,12 +138,12 @@
             {#if mention?.author?.photo}
               <img
                 alt={mention.author?.name ?? new URL(mention.url).host}
-                class='w-12 h-12 flex-none rounded-btn'
+                class='h-12 flex-none rounded-btn w-12'
                 decoding='async'
                 loading='lazy'
                 src={mention.author.photo} />
             {/if}
-            <div class='flex-1 px-4 py-2 m-auto'>
+            <div class='flex-1 px-4 m-auto py-2'>
               <p>
                 {#if mention?.author?.url}
                   <a class='font-semibold{textColor} hover:underline' href={mention.author.url}>
@@ -165,8 +165,8 @@
             </div>
           </div>
           {#if mention.content}
-            <div class='prose max-w-none break-words mt-4'>
-              <p>{@html mention.content?.html ?? mention.content?.text}</p>
+            <div class='prose mt-4 max-w-none break-words'>
+              <p>{mention.content.text ?? 'View the original mention for its content.'}</p>
             </div>
           {/if}
         </div>
@@ -192,10 +192,10 @@
   {#if config?.form === true}
     <form action='https://webmention.io/{config.username}/webmention' id='webmention-form' method='post'>
       <input name='target' type='hidden' value={site.protocol + site.domain + post.path} />
-      <div class='label gap-4'>
+      <div class='gap-4 label'>
         <span class='label-text'>send webmentions here:</span>
         {#if config?.commentParade === true}
-          <span class='label-text-alt text-right'>
+          <span class='text-right label-text-alt'>
             or <a
               class='hover:!text-primary'
               href='https://quill.p3k.io/?dontask=1&me=https://commentpara.de/&reply={encodeURI(
@@ -209,7 +209,7 @@
       <div class='flex gap-2'>
         <div class='flex-1'>
           <input
-            class='input input-bordered focus:input-primary w-full'
+            class='input input-bordered w-full focus:input-primary'
             id='reply-url'
             name='source'
             placeholder='https://example.com/my-post'

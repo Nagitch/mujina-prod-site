@@ -6,8 +6,8 @@
   import { posts, tags } from '$lib/stores/posts'
   import { genTags } from '$lib/utils/posts'
   import { onMount } from 'svelte'
-  import { registerSW } from 'virtual:pwa-register'
   import 'uno.css'
+  import { registerSW } from 'virtual:pwa-register'
 
   import type { LayoutData } from './$types'
 
@@ -22,16 +22,21 @@
 
   posts.set(res)
   tags.set(genTags(res))
-  onMount(
-    () =>
-      !dev
-        && browser
-      && registerSW({
-          immediate: true,
-          onRegistered: r => r && setInterval(async () => await r.update(), 198964),
-          onRegisterError: error => console.error(error),
-        }),
-  )
+  onMount(() => {
+    let updateTimer: ReturnType<typeof setInterval> | undefined
+    if (!dev && browser) {
+      registerSW({
+        immediate: true,
+        onRegistered: (registration) => {
+          if (registration)
+            updateTimer = setInterval(() => registration.update().catch(console.error), 198964)
+        },
+        onRegisterError: error => console.error(error),
+      })
+    }
+    return () => clearInterval(updateTimer)
+  })
+
 </script>
 
 <Head />

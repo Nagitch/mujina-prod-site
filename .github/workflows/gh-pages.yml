@@ -7,8 +7,9 @@ on:
 
 jobs:
   deploy:
-    uses: importantimport/.github/.github/workflows/pnpm-gh-pages.yml@main
+    uses: importantimport/.github/.github/workflows/pnpm-gh-pages.yml@3a1a1dd675c56b63dd356d22e3ffb4cd9d5ca59f
     permissions:
       contents: write
     with:
+      node-version: '24'
       publish_dir: build
