@@ -57,7 +57,7 @@
       {#each toc as { depth, slug, title }}
         <li class='flex flex-col' id={`toc-item-${slug}`}>
           <button
-            class="transition-all border-transparent cursor-pointer border-l-4 hover:border-primary hover:bg-base-content hover:bg-opacity-10 active:bg-primary active:text-primary-content active:font-bold pr-4{depth <= 2
+            class="transition-all border-transparent cursor-pointer border-l-4 hover:border-primary hover:bg-base-content hover:bg-opacity-10 active:bg-primary active:text-primary-content active:font-bold pr-4 {depth <= 2
               ? 'py-3'
               : 'py-2'}"
             class:pl-4={depth <= 2}

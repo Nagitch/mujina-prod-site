@@ -113,7 +113,7 @@
       {/if}
     </main>
     {#if !preview && post.tags}
-      <div class='divider mt-4 mb-0' />
+      <div class='divider mt-4 mb-0'></div>
       <div>
         {#each post.tags as tag}
           <a class='btn btn-ghost normal-case mr-2 btn-sm mt-2 p-category' href='/?tags={tag}'>

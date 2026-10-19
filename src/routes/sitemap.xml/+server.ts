@@ -1,14 +1,14 @@
-import { site } from '$lib/config/site'
-import { genPosts } from '$lib/utils/posts'
-
 import type { RequestHandler } from './$types'
+import { site } from '$lib/config/site'
+
+import { genPosts } from '$lib/server/posts'
 
 const pageRoutes = Object.keys(import.meta.glob('/src/routes/**/+page.svelte', { eager: true }))
   .map(path => path.replace('/src/routes', '').replace(/\/\+page\.svelte$/, '') || '/')
 const slideRoutes = Object.keys(import.meta.glob('/urara/slides/**/index.html', { eager: true }))
   .map(path => path.replace('/urara', '').replace(/\/index\.html$/, ''))
 
-const render = (): string => {
+function render(): string {
   const postEntries = genPosts()
     .map(
       post => `

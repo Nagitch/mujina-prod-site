@@ -17,7 +17,7 @@
 
   storedTitle.set('')
 
-  $: storedPosts.subscribe(storedPosts => (allPosts = storedPosts.filter(post => !post.flags?.includes('unlisted'))))
+  $: allPosts = $storedPosts.filter(post => !post.flags?.includes('unlisted'))
 
   $: if (posts.length > 1)
     years = [new Date(posts[0].published ?? posts[0].created).getFullYear()]
@@ -63,7 +63,7 @@
               {/each}]
             </h2>
             <button class='btn btn-secondary' on:click={() => (tags = [])}>
-              <span class='mr-2 i-heroicons-outline-trash' />
+              <span class='mr-2 i-heroicons-outline-trash'></span>
               tags = []
             </button>
           </div>
@@ -116,7 +116,7 @@
             height='100%'
             src='https://www.youtube.com/embed/sdbYqEbr4-E?autoplay=1&mute=1&loop=1&playlist=sdbYqEbr4-E&disablekb=1'
             title='YouTube video player'
-            width='100%' />
+            width='100%'></iframe>
         </div>
         <div class='ml-6 my-4'>
           <p>
@@ -126,16 +126,16 @@
             の制作・個人事業名義です。
             <br />
             <a href='/portfolio'>
-              <div class='underline'>
+              <span class='underline'>
                 <span
                   class='text-base bg-no-repeat underline md:text-2xl bg-[length:100%_0%] bg-[position:0_88%] decoration-4 decoration-transparent group-hover:decoration-primary hover:bg-[length:100%_100%] hover:text-primary-content bg-gradient-to-t from-primary to-primary transition-all ease-in-out duration-300'>
                   📝ポートフォリオはこちら
                 </span>
-              </div>
+              </span>
             </a>
           </p>
         </div>
-        <div class='divider mt-0 mb-8 hidden lg:flex' />
+        <div class='divider mt-0 mb-8 hidden lg:flex'></div>
         <h1 class='ml-6 text-xl font-bold'>最新のブログ</h1>
         {#each posts.slice(0, 3) as post, index}
           {@const year = new Date(post.published ?? post.created).getFullYear()}
@@ -160,7 +160,7 @@
         class:hidden={!loaded}
         in:fly={{ delay: 500, duration: 300, x: posts.length + (1 % 2) ? 100 : -100 }}
         out:fly={{ duration: 300, x: posts.length + (1 % 2) ? -100 : 100 }}>
-        <div class='divider mt-0 mb-8 hidden lg:flex' />
+        <div class='divider mt-0 mb-8 hidden lg:flex'></div>
         <Footer />
       </div>
     {/key}

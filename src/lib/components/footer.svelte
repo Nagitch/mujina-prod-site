@@ -9,7 +9,7 @@
 </script>
 
 <footer
-  class="bg-base-300 text-base-content shadow-inner footer footer-center p-8{rounded
+  class="bg-base-300 text-base-content shadow-inner footer footer-center p-8 {rounded
     ? 'rounded-box'
     : 'md:rounded-box'} {sticky ? 'sticky bottom-0 z-0 md:static' : ''} {className ?? ''}"
   id='footer'>

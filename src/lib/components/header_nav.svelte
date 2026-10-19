@@ -10,7 +10,7 @@
 <!-- reference: https://github.com/saadeghi/daisyui/issues/1285 -->
 <div class='dropdown lg:hidden'>
   <label class='btn btn-ghost btn-square' for='navbar-dropdown' tabindex='0'>
-    <span class='i-heroicons-outline-menu-alt-1' />
+    <span class='i-heroicons-outline-menu-alt-1'></span>
   </label>
   <ul
     class='bg-base-100 text-base-content menu dropdown-content rounded-box p-2 menu-compact shadow-lg min-w-max max-w-52'
@@ -26,7 +26,7 @@
         <li tabindex='0'>
           <span class='gap-1 justify-between max-w-[13rem]' class:font-bold={children.some(({ link }) => link === path)}>
             {text}
-            <span class='mr-2 i-heroicons-solid-chevron-right' />
+            <span class='mr-2 i-heroicons-solid-chevron-right'></span>
           </span>
           <ul class='bg-base-100 text-base-content shadow-lg p-2'>
             {#each children as { link, text }}
@@ -57,7 +57,7 @@
         <li>
           <span class='!rounded-btn gap-1' class:font-bold={children.some(({ link }) => link === path)}>
             {text}
-            <span class='-mr-1 i-heroicons-solid-chevron-down' />
+            <span class='-mr-1 i-heroicons-solid-chevron-down'></span>
           </span>
           <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
           <ul class='menu rounded-box bg-base-100 text-base-content shadow-lg p-2' tabindex='0'>

@@ -18,9 +18,9 @@
 
   storedTitle.set('')
 
-  $: storedPosts.subscribe(storedPosts => (allPosts = storedPosts.filter(post => !post.flags?.includes('unlisted'))))
+  $: allPosts = $storedPosts.filter(post => !post.flags?.includes('unlisted'))
 
-  $: storedTags.subscribe(storedTags => (allTags = storedTags as string[]))
+  $: allTags = $storedTags
 
   $: if (posts.length > 1)
     years = [new Date(posts[0].published ?? posts[0].created).getFullYear()]
@@ -84,7 +84,7 @@
               {/each}]
             </h2>
             <button class='btn btn-secondary' on:click={() => (tags = [])}>
-              <span class='i-heroicons-outline-trash mr-2' />
+              <span class='i-heroicons-outline-trash mr-2'></span>
               tags = []
             </button>
           </div>
@@ -118,7 +118,7 @@
         class:hidden={!loaded}
         in:fly={{ delay: 500, duration: 300, x: posts.length + (1 % 2) ? 100 : -100 }}
         out:fly={{ duration: 300, x: posts.length + (1 % 2) ? -100 : 100 }}>
-        <div class='divider mt-0 mb-8 hidden lg:flex' />
+        <div class='divider mt-0 mb-8 hidden lg:flex'></div>
         <Footer />
       </div>
     {/key}

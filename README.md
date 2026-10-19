@@ -51,6 +51,9 @@ The existing GitHub Pages publisher is retained with an explicit Node 24 input
 and a pinned reusable workflow. Deployment consolidation, dependency upgrades,
 SEO and PWA improvements are tracked separately in the maintenance issues.
 
+See [dependency maintenance](docs/dependency-maintenance.md) for the updated
+framework groups, compatibility decisions, remaining audit findings and checks.
+
 ## Upstream Urara documentation and attribution
 
 <br />

@@ -1,4 +1,5 @@
 <script lang='ts'>
+  import type { LayoutData } from './$types'
   import { browser, dev } from '$app/environment'
   import Head from '$lib/components/head_static.svelte'
   import Header from '$lib/components/header.svelte'
@@ -6,10 +7,9 @@
   import { posts, tags } from '$lib/stores/posts'
   import { genTags } from '$lib/utils/posts'
   import { onMount } from 'svelte'
-  import 'uno.css'
   import { registerSW } from 'virtual:pwa-register'
 
-  import type { LayoutData } from './$types'
+  import 'uno.css'
 
   import '../app.pcss'
 

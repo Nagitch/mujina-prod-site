@@ -8,6 +8,7 @@
 <script lang='ts'>
   import Container from '$lib/components/post_container.svelte'
   import { typeOfPost } from '$lib/utils/posts'
+  import { setContext } from 'svelte'
   // auto-generated
   export let path
   export let slug
@@ -24,6 +25,8 @@
   export let image
   export let in_reply_to
   // post
+  setContext('uraraPostPath', path)
+
   const fm = { created, flags, image, in_reply_to, path, published, slug, summary, tags, title, toc, updated }
   const post = { type: typeOfPost(fm), ...fm }
 </script>
