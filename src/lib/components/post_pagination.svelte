@@ -20,7 +20,7 @@
         </figure>
       {/if}
       <div class='card-body'>
-        <span class='mr-auto opacity-50 group-hover:opacity-100 i-heroicons-outline-chevron-left' />
+        <span class='mr-auto opacity-50 group-hover:opacity-100 i-heroicons-outline-chevron-left'></span>
         <a
           class='card-title mb-0 mr-auto bg-[length:100%_0%] bg-[position:0_88%] underline decoration-transparent group-hover:decoration-primary hover:bg-[length:100%_100%] hover:text-primary-content bg-gradient-to-t from-primary to-primary bg-no-repeat transition-all ease-in-out duration-300 text-left block decoration-3'
           href={prev.path}
@@ -30,7 +30,7 @@
       </div>
     </div>
     {#if next && !next.image && !prev.image}
-      <div class='divider mx-4 flex-0 md:divider-horizontal md:mx-0 md:my-4' />
+      <div class='divider mx-4 flex-0 md:divider-horizontal md:mx-0 md:my-4'></div>
     {/if}
   {/if}
   {#if next}
@@ -53,7 +53,7 @@
           rel='next'>
           {next.title ?? next.summary ?? next.path.slice(1)}
         </a>
-        <span class='opacity-50 group-hover:opacity-100 ml-auto i-heroicons-outline-chevron-right' />
+        <span class='opacity-50 group-hover:opacity-100 ml-auto i-heroicons-outline-chevron-right'></span>
       </div>
     </div>
   {/if}

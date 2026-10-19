@@ -1,14 +1,14 @@
-import adapterAuto from '@sveltejs/adapter-auto'
+import process from 'node:process'
 import adapterNode from '@sveltejs/adapter-node'
 import adapterStatic from '@sveltejs/adapter-static'
+import adapterVercel from '@sveltejs/adapter-vercel'
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 import { mdsvex } from 'mdsvex'
-import process from 'node:process'
 
 import mdsvexConfig from './mdsvex.config.js'
 
 const adapter = {
-  auto: adapterAuto(),
+  vercel: adapterVercel(),
   node: adapterNode(),
   static: adapterStatic({
     assets: 'build',
@@ -25,8 +25,8 @@ export default {
       process.env.ADAPTER
         // @ts-expect-error adapter types
         ? adapter[process.env.ADAPTER.toLowerCase()]
-        : Object.keys(process.env).some(key => ['NETLIFY', 'VERCEL'].includes(key))
-          ? adapter.auto
+        : process.env.VERCEL
+          ? adapter.vercel
           : adapter.static,
     csp: {
       directives: {

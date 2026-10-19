@@ -67,9 +67,9 @@ declare global {
          * @remarks auto-generated or set manually
          */
         updated: string
-      } &
-      Omit<FFFBase, 'flags'> &
-      Pick<FFFMedia, 'alt'> & Pick<FFFMention, 'in_reply_to'>
+      }
+      & Omit<FFFBase, 'flags'>
+      & Pick<FFFMedia, 'alt'> & Pick<FFFMention, 'in_reply_to'>
       interface Toc {
         children?: Toc[]
         depth: number
@@ -77,15 +77,7 @@ declare global {
         title?: string
       }
       interface Module {
-        default: {
-          render: () => {
-            css: {
-              code: string
-            }
-            head: string
-            html: string
-          }
-        }
+        default: import('svelte').Component
         metadata: Frontmatter
       }
     }

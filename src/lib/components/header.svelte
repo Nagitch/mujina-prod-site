@@ -41,11 +41,8 @@
   }
 
   if (browser) {
-    currentTheme
-      = localStorage.getItem('theme')
-      ?? (window.matchMedia('(prefers-color-scheme: dark)').matches
-        ? theme.filter(e => e.name === 'night')[0].name // this element must be exists
-        : theme[0].name ?? theme[0].name)
+    const preferredTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'night' : theme[0].name
+    currentTheme = localStorage.getItem('theme') ?? theme.find(item => item.name === preferredTheme)?.name ?? theme[0].name
   }
 </script>
 
@@ -56,7 +53,7 @@
 <svelte:window bind:scrollY />
 
 <header
-  class="w-full transition-all duration-500 ease-in-out border-transparent fixed z-50 border-b-2 max-h-[4.125rem]{scrollY > 32 && 'backdrop-blur !border-base-content/10 bg-base-100/30 md:bg-base-200/30'}"
+  class="w-full transition-all duration-500 ease-in-out border-transparent fixed z-50 border-b-2 max-h-[4.125rem] {scrollY > 32 && 'backdrop-blur !border-base-content/10 bg-base-100/30 md:bg-base-200/30'}"
   class:-translate-y-32={!pin && scrollY > 0}
   id='header'>
   {#if !search}
@@ -75,7 +72,7 @@
       <div class='navbar-end'>
         {#if headerConfig.search}
           <button aria-label='search' class='btn btn-ghost btn-square' on:click={() => (search = !search)} tabindex='0'>
-            <span class='i-heroicons-outline-search' />
+            <span class='i-heroicons-outline-search'></span>
           </button>
         {/if}
         <!-- hide theme changer -->
@@ -83,7 +80,7 @@
           <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
           <!-- reference: https://github.com/saadeghi/daisyui/issues/1285 -->
           <div class='btn btn-square btn-ghost' tabindex='0'>
-            <span class='i-heroicons-outline-color-swatch' />
+            <span class='i-heroicons-outline-color-swatch'></span>
           </div>
           <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
           <!-- reference: https://github.com/saadeghi/daisyui/issues/1285 -->
@@ -106,7 +103,7 @@
                 </p>
                 <div class='grid grid-cols-4 gap-0.5 m-auto'>
                   {#each ['bg-primary', 'bg-secondary', 'bg-accent', 'bg-neutral'] as bg}
-                    <div class={`${bg} w-1 h-4 rounded-btn`} />
+                    <div class={`${bg} w-1 h-4 rounded-btn`}></div>
                   {/each}
                 </div>
               </button>
@@ -118,8 +115,8 @@
   {:else}
     <div class='navbar' in:fly={{ delay: 300, duration: 300, x: 50 }} out:fly={{ duration: 300, x: 50 }}>
       <Search />
-      <button class='btn btn-square btn-ghost' on:click={() => (search = !search)} tabindex='0'>
-        <span class='i-heroicons-outline-x' />
+      <button aria-label='Close search' class='btn btn-square btn-ghost' on:click={() => (search = !search)} tabindex='0'>
+        <span class='i-heroicons-outline-x'></span>
       </button>
     </div>
   {/if}
@@ -127,7 +124,7 @@
 
 <button
   aria-label='scroll to top'
-  class="fixed grid group btn backdrop-blur z-50 duration-500 ease-in-out btn-circle btn-lg border-none bottom-6 right-6{percent > 95
+  class="fixed grid group btn backdrop-blur z-50 duration-500 ease-in-out btn-circle btn-lg border-none bottom-6 right-6 {percent > 95
     ? 'btn-accent shadow-lg'
     : 'btn-ghost bg-base-100/30 md:bg-base-200/30'}"
   class:opacity-100={scrollY}
@@ -137,10 +134,10 @@
   <!-- https://daisyui.com/blog/how-to-update-daisyui-4/#3-all--focus-colors-are-removed -->
   <div
     class='transition-all duration-500 ease-in-out radial-progress text-accent group-hover:text-[color-mix(in_oklab,oklch(var(--a)),black_7%)] col-start-1 row-start-1'
-    style={`--size:4rem; --thickness: 0.25rem; --value:${percent};`} />
+    style={`--size:4rem; --thickness: 0.25rem; --value:${percent};`}></div>
   <div
     class='col-start-1 row-start-1 rounded-full w-full grid duration-500 ease-in-out border-base-content/10 p-4 h-full border-4 group-hover:border-transparent'
     class:border-transparent={percent > 95}>
-    <span class='!w-6 !h-6 i-heroicons-solid-chevron-up' />
+    <span class='!w-6 !h-6 i-heroicons-solid-chevron-up'></span>
   </div>
 </button>

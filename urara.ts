@@ -1,5 +1,5 @@
-import chokidar from 'chokidar'
 import process from 'node:process'
+import chokidar from 'chokidar'
 
 import { ContentFiles } from './scripts/content-files.mjs'
 

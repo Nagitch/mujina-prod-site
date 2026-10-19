@@ -15,7 +15,7 @@
 
   storedTitle.set('')
 
-  $: storedPosts.subscribe(storedPosts => (allPosts = storedPosts.filter(post => !post.flags?.includes('unlisted'))))
+  $: allPosts = $storedPosts.filter(post => !post.flags?.includes('unlisted'))
 
   $: if (tags) {
     posts = !tags ? allPosts : allPosts.filter(post => tags.every(tag => post.tags?.includes(tag)))
@@ -369,7 +369,7 @@
       class:hidden={!loaded}
       in:fly={{ delay: 500, duration: 300, x: posts.length + (1 % 2) ? 100 : -100 }}
       out:fly={{ duration: 300, x: posts.length + (1 % 2) ? -100 : 100 }}>
-      <div class='divider mt-0 mb-8 hidden lg:flex' />
+      <div class='divider mt-0 mb-8 hidden lg:flex'></div>
       <Footer />
     </div>
   </div>

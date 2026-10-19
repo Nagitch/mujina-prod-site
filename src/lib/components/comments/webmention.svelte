@@ -104,9 +104,9 @@
         reset()
       }}>
       {#if sortDirUp === true}
-        <span class='i-heroicons-outline-sort-ascending' />
+        <span class='i-heroicons-outline-sort-ascending'></span>
       {:else}
-        <span class='i-heroicons-outline-sort-descending' />
+        <span class='i-heroicons-outline-sort-descending'></span>
       {/if}
     </button>
   </div>
@@ -146,7 +146,7 @@
             <div class='flex-1 px-4 m-auto py-2'>
               <p>
                 {#if mention?.author?.url}
-                  <a class='font-semibold{textColor} hover:underline' href={mention.author.url}>
+                  <a class='font-semibold {textColor} hover:underline' href={mention.author.url}>
                     {mention.author?.name ?? new URL(mention.url).host}
                   </a>
                 {:else}
@@ -157,7 +157,7 @@
                 </a>
                 this post on
                 <span
-                  class='tooltip tooltip-bottom xl:tooltip-right{tooltipColor}'
+                  class='tooltip tooltip-bottom xl:tooltip-right {tooltipColor}'
                   data-tip={formatYMD(mention.published ?? mention['wm-received'])}>
                   {formatYMD(mention.published ?? mention['wm-received'])}
                 </span>
@@ -187,7 +187,7 @@
       <div class='divider mt-0 -mb-2'>END</div>
     {/if}
   {:else}
-    <button class='btn btn-lg btn-block flex btn-ghost loading' id='webmention-loading' />
+    <button class='btn btn-lg btn-block flex btn-ghost loading' aria-label='Loading comments' id='webmention-loading'></button>
   {/if}
   {#if config?.form === true}
     <form action='https://webmention.io/{config.username}/webmention' id='webmention-form' method='post'>

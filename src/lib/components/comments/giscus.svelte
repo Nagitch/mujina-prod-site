@@ -37,6 +37,6 @@
 </script>
 
 <div id='giscus-container'>
-  <button class='btn btn-lg flex mx-auto my-4 btn-ghost btn-circle loading' id='giscus-loading' />
-  <div class='giscus' id='giscus' />
+  <button class='btn btn-lg flex mx-auto my-4 btn-ghost btn-circle loading' aria-label='Loading comments' id='giscus-loading'></button>
+  <div class='giscus' id='giscus'></div>
 </div>

@@ -1,6 +1,5 @@
 import { sveltekit } from '@sveltejs/kit/vite'
 import { SvelteKitPWA as pwa } from '@vite-pwa/sveltekit'
-// @ts-expect-error ts(7016)
 import LightningCSS from 'postcss-lightningcss'
 import TailwindCSS from 'tailwindcss'
 import unoCSS from 'unocss/vite'
