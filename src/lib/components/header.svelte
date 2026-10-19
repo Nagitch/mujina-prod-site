@@ -42,8 +42,8 @@
 
   if (browser) {
     currentTheme
-      = localStorage.getItem('theme') ??
-      (window.matchMedia('(prefers-color-scheme: dark)').matches
+      = localStorage.getItem('theme')
+      ?? (window.matchMedia('(prefers-color-scheme: dark)').matches
         ? theme.filter(e => e.name === 'night')[0].name // this element must be exists
         : theme[0].name ?? theme[0].name)
   }
@@ -56,8 +56,7 @@
 <svelte:window bind:scrollY />
 
 <header
-  class="fixed z-50 w-full transition-all duration-500 ease-in-out border-b-2 border-transparent max-h-[4.125rem]{scrollY
-    > 32 && 'backdrop-blur !border-base-content/10 bg-base-100/30 md:bg-base-200/30'}"
+  class="w-full transition-all duration-500 ease-in-out border-transparent fixed z-50 border-b-2 max-h-[4.125rem]{scrollY > 32 && 'backdrop-blur !border-base-content/10 bg-base-100/30 md:bg-base-200/30'}"
   class:-translate-y-32={!pin && scrollY > 0}
   id='header'>
   {#if !search}
@@ -68,14 +67,14 @@
         {/if}
         <a class='btn btn-ghost normal-case text-lg' href='/'>
           {#if site.header?.logo}
-            <img class='u-photo rounded-full z-6 w-8 h-8 md:w-7 md:h-7 mx-3 my-2' src={site.header.logo} alt={site.title} />
+            <img alt={site.title} class='rounded-full u-photo w-8 h-8 z-6 md:w-7 md:h-7 mx-3 my-2' src={site.header.logo} />
           {/if}
           {site.title}
         </a>
       </div>
       <div class='navbar-end'>
         {#if headerConfig.search}
-          <button aria-label='search' class='btn btn-square btn-ghost' on:click={() => (search = !search)} tabindex='0'>
+          <button aria-label='search' class='btn btn-ghost btn-square' on:click={() => (search = !search)} tabindex='0'>
             <span class='i-heroicons-outline-search' />
           </button>
         {/if}
@@ -89,12 +88,12 @@
           <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
           <!-- reference: https://github.com/saadeghi/daisyui/issues/1285 -->
           <ul
-            class='flex flex-nowrap shadow-2xl menu dropdown-content bg-base-100 text-base-content rounded-box w-52 p-2 gap-2 overflow-y-auto max-h-[21.5rem]'
+            class='flex flex-nowrap bg-base-100 text-base-content gap-2 menu dropdown-content rounded-box p-2 shadow-2xl w-52 overflow-y-auto max-h-[21.5rem]'
             class:hidden={!pin}
             tabindex='0'>
             {#each theme as { name, text }}
               <button
-                class='btn btn-ghost w-full hover:bg-primary group rounded-lg flex bg-base-100 p-2 transition-all'
+                class='btn btn-ghost w-full flex bg-base-100 p-2 transition-all group hover:bg-primary rounded-lg'
                 class:border-2={currentTheme === name}
                 class:border-primary={currentTheme === name}
                 data-theme={name}
@@ -102,7 +101,7 @@
                   currentTheme = name
                   localStorage.setItem('theme', name)
                 }}>
-                <p class='flex-1 text-left text-base-content group-hover:text-primary-content transition-color'>
+                <p class='text-base-content flex-1 text-left group-hover:text-primary-content transition-color'>
                   {text ?? name}
                 </p>
                 <div class='grid grid-cols-4 gap-0.5 m-auto'>
@@ -128,8 +127,7 @@
 
 <button
   aria-label='scroll to top'
-  class="fixed grid group btn btn-circle btn-lg border-none backdrop-blur bottom-6 right-6 z-50 duration-500 ease-in-out{percent
-  > 95
+  class="fixed grid group btn backdrop-blur z-50 duration-500 ease-in-out btn-circle btn-lg border-none bottom-6 right-6{percent > 95
     ? 'btn-accent shadow-lg'
     : 'btn-ghost bg-base-100/30 md:bg-base-200/30'}"
   class:opacity-100={scrollY}
@@ -138,11 +136,11 @@
   on:click={() => window.scrollTo(0, 0)}>
   <!-- https://daisyui.com/blog/how-to-update-daisyui-4/#3-all--focus-colors-are-removed -->
   <div
-    class='radial-progress text-accent transition-all duration-500 ease-in-out group-hover:text-[color-mix(in_oklab,oklch(var(--a)),black_7%)] col-start-1 row-start-1'
+    class='transition-all duration-500 ease-in-out radial-progress text-accent group-hover:text-[color-mix(in_oklab,oklch(var(--a)),black_7%)] col-start-1 row-start-1'
     style={`--size:4rem; --thickness: 0.25rem; --value:${percent};`} />
   <div
-    class='border-4 border-base-content/10 group-hover:border-transparent col-start-1 row-start-1 rounded-full w-full h-full p-4 grid duration-500 ease-in-out'
+    class='col-start-1 row-start-1 rounded-full w-full grid duration-500 ease-in-out border-base-content/10 p-4 h-full border-4 group-hover:border-transparent'
     class:border-transparent={percent > 95}>
-    <span class='i-heroicons-solid-chevron-up !w-6 !h-6' />
+    <span class='!w-6 !h-6 i-heroicons-solid-chevron-up' />
   </div>
 </button>

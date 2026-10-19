@@ -9,8 +9,8 @@
   "author": "藍+85CD",
   "packageManager": "pnpm@9.10.0",
   "scripts": {
-    "build": "run-s tsc urara:build kit:build clean",
-    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "build": "node --version && run-s tsc urara:build kit:build clean",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
     "clean": "node urara.js clean",
     "dev": "run-s tsc \"dev:parallel {@} \" --",
@@ -21,10 +21,12 @@
     "lint:fix": "eslint --flag unstable_ts_config . --fix",
     "preview": "vite preview",
     "start": "cross-env ADAPTER=node pnpm build && node build",
+    "test": "pnpm tsc && node --test tests/*.test.mjs",
     "tsc": "tsc -p tsconfig.node.json",
     "tsc:watch": "tsc -w -p tsconfig.node.json",
     "urara:build": "node urara.js build",
-    "urara:watch": "node urara.js watch"
+    "urara:watch": "node urara.js watch",
+    "verify:build": "node scripts/verify-build.mjs"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^3.5.1",
@@ -35,8 +37,8 @@
     "@sveltejs/adapter-netlify": "^4.1.0",
     "@sveltejs/adapter-node": "^4.0.1",
     "@sveltejs/adapter-static": "^3.0.1",
-    "@sveltejs/adapter-vercel": "^5.1.0",
-    "@sveltejs/kit": "^2.5.0",
+    "@sveltejs/adapter-vercel": "^6.3.4",
+    "@sveltejs/kit": "^2.70.3",
     "@sveltejs/vite-plugin-svelte": "^3.0.2",
     "@tailwindcss/typography": "^0.5.10",
     "@types/node": "^20.11.17",
@@ -93,5 +95,8 @@
     "@vercel/analytics": "^1.0.2",
     "@vfx-js/core": "^0.2.0",
     "sharp": "^0.34.3"
+  },
+  "engines": {
+    "node": "24.x"
   }
 }

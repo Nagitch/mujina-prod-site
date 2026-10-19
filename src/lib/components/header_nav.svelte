@@ -9,11 +9,11 @@
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 <!-- reference: https://github.com/saadeghi/daisyui/issues/1285 -->
 <div class='dropdown lg:hidden'>
-  <label class='btn btn-square btn-ghost' for='navbar-dropdown' tabindex='0'>
+  <label class='btn btn-ghost btn-square' for='navbar-dropdown' tabindex='0'>
     <span class='i-heroicons-outline-menu-alt-1' />
   </label>
   <ul
-    class='menu menu-compact dropdown-content bg-base-100 text-base-content shadow-lg rounded-box min-w-max max-w-52 p-2'
+    class='bg-base-100 text-base-content menu dropdown-content rounded-box p-2 menu-compact shadow-lg min-w-max max-w-52'
     class:hidden={!pin}
     id='navbar-dropdown'
     tabindex='0'>
@@ -24,9 +24,9 @@
         </li>
       {:else if children}
         <li tabindex='0'>
-          <span class='justify-between gap-1 max-w-[13rem]' class:font-bold={children.some(({ link }) => link === path)}>
+          <span class='gap-1 justify-between max-w-[13rem]' class:font-bold={children.some(({ link }) => link === path)}>
             {text}
-            <span class='i-heroicons-solid-chevron-right mr-2' />
+            <span class='mr-2 i-heroicons-solid-chevron-right' />
           </span>
           <ul class='bg-base-100 text-base-content shadow-lg p-2'>
             {#each children as { link, text }}
@@ -40,14 +40,14 @@
     {/each}
   </ul>
 </div>
-<div class='swap order-last hidden lg:inline-grid' class:swap-active={scrollY > 32 && title}>
+<div class='hidden swap order-last lg:inline-grid' class:swap-active={scrollY > 32 && title}>
   <button
-    class='swap-on btn btn-ghost text-base font-normal normal-case transition-all duration-200'
+    class='btn btn-ghost text-base font-normal normal-case transition-all swap-on duration-200'
     class:hidden={scrollY < 32 || !title}
     on:click={() => window.scrollTo(0, 0)}>
     {title}
   </button>
-  <ul class='swap-off menu menu-horizontal p-0' class:hidden={scrollY > 64 && title}>
+  <ul class='menu swap-off menu-horizontal p-0' class:hidden={scrollY > 64 && title}>
     {#each nav as { children, link, text }}
       {#if link && !children}
         <li>
@@ -57,7 +57,7 @@
         <li>
           <span class='!rounded-btn gap-1' class:font-bold={children.some(({ link }) => link === path)}>
             {text}
-            <span class='i-heroicons-solid-chevron-down -mr-1' />
+            <span class='-mr-1 i-heroicons-solid-chevron-down' />
           </span>
           <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
           <ul class='menu rounded-box bg-base-100 text-base-content shadow-lg p-2' tabindex='0'>

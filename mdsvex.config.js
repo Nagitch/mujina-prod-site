@@ -59,7 +59,7 @@ export default {
       try {
         fence = parseFence(lex([lang, meta].filter(Boolean).join(' ')))
       }
-      catch (error) {
+      catch {
         throw new Error(`Could not parse the codefence for this code sample \n${code}`)
       }
       if (fence?.twoslash === true)
