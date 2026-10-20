@@ -28,4 +28,15 @@ For a browser run, serve a static build on localhost, open home/blog/an article 
 - Baseline (#52) offline inventory: 112 files / 5,185,834 uncompressed bytes. The new inventory is approximately 62 files / 1.5 MiB (exact bytes printed by `verify:build`); slides account for much of the reduction. Client JavaScript: 342,593 → 340,932 uncompressed bytes, with VFX moved to a deferred chunk. These are build payload/storage figures, not measured compressed network transfer or a Lighthouse score.
 - Search is configuration-disabled on this site; its input/close-focus handling is maintained, but no external search submission is claimed.
 - Desktop installation: Brave installed the local PWA and launched it in a separate app window while the server was stopped. The test-only application was subsequently uninstalled, retaining browser data.
-- Other engines and physical mobile devices remain unverified. Reduced-motion emulation and detailed network measurements are recorded separately when performed.
+- Brave reduced-motion emulation: no VFX canvas, scroll behavior auto, and effectively zero CSS transition duration. Restored the browser emulation afterward. A warm-worker network sample measured 61.4 kB transfer / 1,092 kB resources; this is not a cold first-load measurement. A later cold-cache observation is recorded below. Other engines and physical mobile devices remain unverified.
+
+## Supplemental cold-cache observation
+
+Brave DevTools Network, no throttling, HTTP cache disabled: clear only the test preview's Cache Storage/worker for the #52 baseline, then load home; for the updated #61 preview, use its previously unvisited origin. No video interaction was performed. Record the **total** counters (the value after the slash when the Fetch/XHR filter is selected), including worker installation/background requests:
+
+| Preview | Transfer observed | Resources observed |
+| --- | ---: | ---: |
+| #52, before loading/offline changes | 11,047,049 bytes | 16,632,073 bytes |
+| #61, after loading/offline/CSS changes | 1,741,122 bytes | 2,747,176 bytes |
+
+The baseline continued transferring autoplay media and later reached 17,642,954 bytes, whereas the updated capture completed at 9.11 seconds with 109 requests. The new home had no iframe or YouTube script before clicking play. These are individual cold-cache browser observations, not a repeatable benchmark or a claimed percentage improvement: streaming duration, CDN conditions, browser protections and capture timing affect the totals. HTTP-cache disabling was restored afterward. Build inventory tests independently verify that slides are absent from precaching.

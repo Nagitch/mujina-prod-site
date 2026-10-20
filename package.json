@@ -1,13 +1,17 @@
 {
-  "name": "urara",
+  "name": "mujina-prod-site",
   "type": "module",
   "version": "1.0.0",
+  "private": true,
   "packageManager": "pnpm@10.34.7",
-  "author": "藍+85CD",
+  "author": "Nagitch",
+  "contributors": [
+    "藍+85CD (Urara upstream author)"
+  ],
   "license": "WTFPL",
-  "homepage": "https://github.com/importantimport/urara",
-  "repository": "importantimport/urara",
-  "bugs": "https://github.com/importantimport/urara/issues",
+  "homepage": "https://www.mujina-prod.com/",
+  "repository": "github:Nagitch/mujina-prod-site",
+  "bugs": "https://github.com/Nagitch/mujina-prod-site/issues",
   "engines": {
     "node": "24.x"
   },

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { DOMParser } from '@xmldom/xmldom'
-import { absoluteUrl, atomId, canonicalPage, cdata, pagePath, sitemap, xml } from '../src/lib/utils/urls.ts'
+import { absoluteUrl, atomId, blogTagsPath, canonicalPage, cdata, pagePath, sitemap, xml } from '../src/lib/utils/urls.ts'
 
 test('HTML URLs normalize slash and Unicode while navigation preserves query and hash', () => {
   assert.equal(pagePath('/blog?tags=Rust#top'), '/blog/?tags=Rust#top')
@@ -33,4 +33,12 @@ test('XML attributes and CDATA round-trip special characters and closing delimit
   const document = new DOMParser({ onError: level => assert.fail(`XML ${level}`) }).parseFromString(source, 'application/xml')
   assert.equal(document.documentElement.getAttribute('value'), value)
   assert.equal(document.documentElement.textContent, value)
+})
+
+test('blog tag links preserve filters on the blog route and encode tag text', () => {
+  assert.equal(blogTagsPath([]), '/blog/')
+  const url = new URL(blogTagsPath(['Mac Mini', '日本語', 'A&B']), 'https://www.mujina-prod.com')
+  assert.equal(url.pathname, '/blog/')
+  assert.equal(url.searchParams.get('tags'), 'Mac Mini,日本語,A&B')
+  assert(!url.href.includes(' '))
 })

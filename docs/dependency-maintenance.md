@@ -38,3 +38,15 @@ Server-side article rendering uses `svelte/server` in `$lib/server/posts.ts`; br
 ESLint 10 and the Antfu preset retain supported Svelte legacy props and the project's existing module conventions. Unused dependencies and automatic/Netlify adapters were removed. Vercel uses its explicit adapter; static and documented Node output remain supported. Historical Netlify configuration is not an actively supported deployment target. Node 24 and pnpm 10.34.7 remain pinned, with install hooks restricted by `pnpm-workspace.yaml`.
 
 Existing overrides remain deliberate: Sharp selects patched native codecs; `cookie@<0.7.0` selects the compatible 0.7 line (this site has no application authentication handlers); `tsx@<4.20.0` removes the optional path to old esbuild. Remove overrides when upstream constraints supply equivalent fixes. Full dependency audits include build/lint tools; `audit --prod` alone is not evidence that server output is free of advisories.
+
+## GitHub Actions refresh (#59–#61)
+
+Merged separately after rebasing each PR on the latest main and checking fresh
+CI and its exact-commit Vercel preview. `actions/setup-node` 7.1.0 and
+`actions/checkout` 7.0.1 use Node 24; checkout documents runner 2.327.1 or newer,
+satisfied by the successful GitHub-hosted `ubuntu-latest` runs. The updated
+`pnpm/action-setup` v4 commit still runs on Node 20 internally while installing
+the project's pinned pnpm 10.34.7; it does not select the application Node
+version. Full SHA pins, `contents: read`, and `persist-credentials: false` remain
+in place. Final full pnpm audit and GitHub open Dependabot alert inventory both
+reported zero findings on 2026-10-20.
