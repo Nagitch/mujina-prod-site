@@ -6,6 +6,7 @@ import process from 'node:process'
 import sharp from 'sharp'
 import { verifyPublicUrls } from './verify-public-urls.mjs'
 import { verifyPwa } from './verify-pwa.mjs'
+import { verifyStyles } from './verify-styles.mjs'
 
 const tracked = execFileSync('git', ['ls-files', '-z'], { encoding: 'utf8' }).split('\0').filter(Boolean)
 async function fingerprint() {
@@ -28,6 +29,7 @@ for (let i = 0; i < 2; i++) {
   }
   await verifyPublicUrls(posts)
   await verifyPwa(posts)
+  await verifyStyles()
   const feed = JSON.parse(await fs.readFile('build/feed.json', 'utf8'))
   assert.equal(feed.items.length, posts.length, 'Feed lost published posts')
   for (const item of feed.items)

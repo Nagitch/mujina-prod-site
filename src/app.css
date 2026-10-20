@@ -1,0 +1,257 @@
+@import "tailwindcss" source(none);
+@source "./";
+@plugin "@tailwindcss/typography";
+@plugin "daisyui" {
+  themes: cmyk, dracula, valentine, aqua, synthwave, night, lofi, lemonade, cupcake, garden, retro, black;
+  logs: false;
+}
+
+/* Preserve the site's existing palette while allowing explicit theme selection. */
+@plugin "daisyui/theme" {
+  name: "mujinaprod";
+  default: true;
+  prefersdark: true;
+  color-scheme: dark;
+  --color-primary: oklch(0.753513 0.138989 232.66148);
+  --color-primary-content: oklch(0.150703 0.027798 232.66148);
+  --color-secondary: oklch(0.680113 0.158303 276.934902);
+  --color-secondary-content: oklch(0.136023 0.031661 276.934902);
+  --color-accent: oklch(0.723603 0.176218 350.048739);
+  --color-accent-content: oklch(0.144721 0.035244 350.048739);
+  --color-neutral: oklch(0.279495 0.036848 260.030984);
+  --color-neutral-content: oklch(0.855899 0.00737 260.030984);
+  --color-base-100: oklch(0.207682 0.039824 265.754874);
+  --color-base-200: oklch(0.193144 0.037037 265.754874);
+  --color-base-300: oklch(0.178606 0.034249 265.754874);
+  --color-base-content: oklch(0.826218 0.062641 266.270000);
+  --color-info: oklch(0.684553 0.148062 237.25135);
+  --color-info-content: oklch(0 0 0);
+  --color-success: oklch(0.78452 0.132529 181.911977);
+  --color-success-content: oklch(0.156904 0.026506 181.911977);
+  --color-warning: oklch(0.832428 0.139558 82.95003);
+  --color-warning-content: oklch(0.166486 0.027912 82.95003);
+  --color-error: oklch(0.717858 0.170255 13.11834);
+  --color-error-content: oklch(0.143572 0.034051 13.11834);
+  --radius-selector: 1.9rem;
+  --radius-field: 0.5rem;
+  --radius-box: 1rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+@theme inline {
+  --radius-btn: var(--radius-field);
+  --radius-badge: var(--radius-selector);
+  --container-screen-md: 48rem;
+  --container-screen-lg: 64rem;
+  --container-screen-xl: 80rem;
+}
+
+/* global */
+
+html {
+  @apply !bg-base-200 scroll-smooth	overflow-x-hidden overflow-y-scroll;
+}
+
+::selection {
+  @apply bg-primary/20;
+}
+
+/* .urara-prose */
+
+.urara-prose {
+  @apply !max-w-none;
+}
+
+/* .urara-prose heading */
+
+.urara-prose > :is(h1, h2, h3, h4, h5) > a {
+  @apply no-underline font-bold;
+}
+
+.urara-prose > :is(h1, h2, h3, h4, h5) > a::after {
+  @apply pl-2 text-base-200 transition-all content-['#'];
+}
+
+.urara-prose > :is(h1, h2, h3, h4, h5):hover > a::after {
+  @apply text-primary;
+}
+
+/* .urara-prose table */
+
+.urara-prose div > table > thead {
+  @apply border-0;
+}
+
+.urara-prose div > table > thead > tr > th {
+  @apply !relative;
+}
+
+/* .urara-prose a */
+
+.urara-prose :is(p, li) > a {
+  @apply bg-[length:100%_0.2em] hover:bg-[length:100%_100%] bg-[position:0_88%] bg-linear-to-t from-secondary/50 to-secondary/40 bg-no-repeat transition-all ease-in-out !no-underline;
+}
+
+/* .urara-prose misc */
+
+.urara-prose > p img {
+  @apply w-full;
+}
+
+.urara-prose :is(p, li) > code {
+  @apply bg-base-200 px-2;
+}
+
+.urara-prose li > input {
+  @apply checkbox checkbox-xs me-2 -my-0.5;
+}
+
+.urara-prose kbd {
+  @apply kbd;
+}
+
+.urara-prose hr {
+  @apply border-none divider;
+}
+
+/* footer a */
+
+footer a {
+  @apply !no-underline hover:text-primary hover:!underline transition-all;
+}
+
+.spoiler {
+  @apply blur-xs hover:blur-none active:blur-none transition-all select-all;
+}
+
+/* .prose pre */
+
+.prose pre {
+  @apply mockup-code !bg-neutral min-w-0;
+}
+
+.prose pre:not(.shiki) {
+  @apply bg-neutral text-neutral-content;
+}
+
+.prose pre:not(.shiki)::before {
+  @apply sticky -left-5 -ml-5;
+}
+
+/* .urara-prose pre */
+
+@media (max-width: 768px) {
+  .urara-prose > pre {
+    @apply -mx-8 rounded-none;
+  }
+}
+
+.urara-prose > pre {
+  @apply pb-0;
+}
+
+.urara-prose > pre > div.code-container {
+  @apply pb-5 overflow-x-auto;
+}
+
+/* shiki */
+
+pre.shiki {
+  @apply px-5;
+}
+
+pre.shiki::before {
+  @apply sticky;
+}
+
+pre.shiki > div.code-title {
+  @apply absolute -mt-10 ml-20 pt-1.5 pl-1.5 opacity-50;
+}
+
+pre.shiki .language-id {
+  @apply hidden;
+}
+
+pre.shiki > .code-container {
+  @apply overflow-auto;
+}
+
+:is(pre.shiki[text='true'], pre.shiki[svelte='true']) > div.code-container {
+  @apply mx-5;
+}
+
+pre.shiki:not([text='true'], [svelte='true']) > .code-container > code > div.line > span:first-child {
+  @apply pl-5;
+}
+
+pre.shiki:not([text='true'], [svelte='true']) > .code-container > code > div.line > span:last-child {
+  @apply pr-5;
+}
+
+pre.shiki div.dim {
+  @apply opacity-50 transition-opacity;
+}
+
+pre.shiki:hover div.dim {
+  @apply opacity-100;
+}
+
+pre.shiki div.highlight::before {
+  @apply bg-warning/20 absolute content-[''] w-full h-6;
+}
+
+pre.twoslash data-lsp {
+  @apply border-b border-dashed border-transparent transition-all;
+}
+
+pre.twoslash:hover data-lsp {
+  @apply border-neutral-content/30;
+}
+
+pre.twoslash data-lsp:hover::before {
+  /* https://daisyui.com/blog/how-to-update-daisyui-4/#3-all--focus-colors-are-removed */
+  @apply content-[attr(lsp)] absolute rounded translate-y-5 bg-[color-mix(in_oklab,var(--color-neutral),black_7%)] text-neutral-content font-mono whitespace-pre-wrap transition-all px-2 py-1 z-50;
+}
+
+/* Keyboard focus remains visible even when the header normally hides on scroll. */
+:focus-visible { outline: 3px solid currentColor; outline-offset: 4px; }
+#header:focus-within { transform: none; }
+main :is(h2, h3, h4, h5, h6) { scroll-margin-top: 5rem; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Typography retains theme colors and the existing checkbox-list layout. */
+.prose {
+  --tw-prose-body: var(--color-base-content);
+  --tw-prose-headings: var(--color-base-content);
+  --tw-prose-links: var(--color-base-content);
+  --tw-prose-bold: var(--color-base-content);
+  --tw-prose-counters: var(--color-base-content);
+  --tw-prose-bullets: var(--color-base-content);
+  --tw-prose-hr: color-mix(in oklab, var(--color-base-content) 20%, transparent);
+  --tw-prose-quotes: var(--color-base-content);
+  --tw-prose-quote-borders: var(--color-primary);
+  --tw-prose-captions: var(--color-base-content);
+  --tw-prose-code: var(--color-base-content);
+  --tw-prose-pre-code: var(--color-neutral-content);
+  --tw-prose-pre-bg: var(--color-neutral);
+  --tw-prose-th-borders: color-mix(in oklab, var(--color-base-content) 20%, transparent);
+  --tw-prose-td-borders: color-mix(in oklab, var(--color-base-content) 10%, transparent);
+}
+.prose ul > li:has(input[type="checkbox"]) { list-style: none; }
+.prose ul > li:has(input[type="checkbox"]) ul li { padding-left: 30px; }
+.prose ul:has(li):has(input[type="checkbox"]) { padding: 0; }
+/* Match the previous card rhythm; retain readable code/table overflow on mobile. */
+.card-body { padding: 2rem; }
+.prose :is(pre, table) { max-width: 100%; }

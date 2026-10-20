@@ -10,7 +10,7 @@
   class='flex-1'
   method='get'>
   <input
-    class='transition-all w-full input input-ghost input-bordered xl:bg-base-100 xl:text-base-content h-12'
+    class='transition-all w-full input input-ghost xl:bg-base-100 xl:text-base-content h-12'
     id='site-search'
     aria-label='このサイトを検索'
     name='q'

@@ -1,0 +1,65 @@
+[
+  {
+    "selector": "p::before, li::before",
+    "result": [
+      "::before",
+      "p, li"
+    ]
+  },
+  {
+    "selector": "code::before, code::after",
+    "result": [
+      null,
+      "code::before, code::after"
+    ]
+  },
+  {
+    "selector": "ul > li:has(input[type=\"checkbox\"])",
+    "result": [
+      null,
+      "ul > li:has(input[type=\"checkbox\"])"
+    ]
+  },
+  {
+    "selector": "a:is(:hover,:focus)::after",
+    "result": [
+      "::after",
+      "a:is(:hover,:focus)"
+    ]
+  },
+  {
+    "selector": "a[href^=\"https://\"]::before",
+    "result": [
+      "::before",
+      "a[href^=\"https://\"]"
+    ]
+  },
+  {
+    "selector": "table :is(th, td)",
+    "result": [
+      null,
+      "table :is(th, td)"
+    ]
+  },
+  {
+    "selector": "pre code::selection",
+    "result": [
+      "::selection",
+      "pre code"
+    ]
+  },
+  {
+    "selector": "h2::before::marker, h3::before::marker",
+    "result": [
+      "::before::marker",
+      "h2, h3"
+    ]
+  },
+  {
+    "selector": ":where(.prose) :not(:where(.not-prose, .not-prose *))",
+    "result": [
+      null,
+      ":where(.prose) :not(:where(.not-prose, .not-prose *))"
+    ]
+  }
+]
