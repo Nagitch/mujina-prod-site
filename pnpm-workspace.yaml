@@ -1,0 +1,15 @@
+# Product-local pnpm configuration; no sibling packages are included.
+strictDepBuilds: true
+packageManagerStrictVersion: true
+
+overrides:
+  cookie@<0.7.0: ^0.7.2
+  sharp: ^0.35.5
+  tsx@<4.20.0: ^4.20.0
+
+allowBuilds:
+  # Review native install hooks again when these versions change.
+  esbuild@0.28.2: true
+  # Optional macOS watcher ships its binary; its fallback hook is unnecessary.
+  fsevents: false
+  sharp@0.35.5: true

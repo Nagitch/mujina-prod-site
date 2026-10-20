@@ -12,4 +12,14 @@ export default antfu({
   typescript: true,
   unocss: true,
   rules: { 'antfu/no-top-level-await': 'off' }, // Node 24 ESM CLI scripts await filesystem work.
+}, {
+  files: ['pnpm-workspace.yaml'],
+  rules: {
+    // Enforce this product's tested pnpm 10 policy instead of preset defaults.
+    'pnpm/yaml-enforce-settings': ['error', {
+      settings: { strictDepBuilds: true, packageManagerStrictVersion: true },
+      requiredFields: ['allowBuilds'],
+      forbiddenFields: ['dangerouslyAllowAllBuilds', 'onlyBuiltDependencies', 'ignoredBuiltDependencies'],
+    }],
+  },
 })
