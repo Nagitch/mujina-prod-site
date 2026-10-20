@@ -1,5 +1,6 @@
 <script lang='ts'>
   import Image from '$lib/components/prose/img.svelte'
+  import { pagePath } from '$lib/utils/urls'
 
   export let prev: undefined | Urara.Post
   export let next: undefined | Urara.Post
@@ -23,7 +24,7 @@
         <span class='mr-auto opacity-50 group-hover:opacity-100 i-heroicons-outline-chevron-left'></span>
         <a
           class='card-title mb-0 mr-auto bg-[length:100%_0%] bg-[position:0_88%] underline decoration-transparent group-hover:decoration-primary hover:bg-[length:100%_100%] hover:text-primary-content bg-gradient-to-t from-primary to-primary bg-no-repeat transition-all ease-in-out duration-300 text-left block decoration-3'
-          href={prev.path}
+          href={pagePath(prev.path)}
           rel='prev'>
           {prev.title ?? prev.summary ?? prev.path.slice(1)}
         </a>
@@ -49,7 +50,7 @@
       <div class='card-body'>
         <a
           class='card-title block text-right mb-0 bg-[length:100%_0%] bg-[position:0_88%] underline decoration-3 decoration-transparent group-hover:decoration-primary hover:bg-[length:100%_100%] hover:text-primary-content bg-gradient-to-t from-primary to-primary bg-no-repeat transition-all ease-in-out duration-300 ml-auto'
-          href={next.path}
+          href={pagePath(next.path)}
           rel='next'>
           {next.title ?? next.summary ?? next.path.slice(1)}
         </a>

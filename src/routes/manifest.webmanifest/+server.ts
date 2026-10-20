@@ -18,7 +18,7 @@ export const GET: RequestHandler = () =>
             .map(icon => ({ ...icon, purpose: 'any' })),
           ...Object.values(maskable).map(icon => ({ ...icon, purpose: 'maskable' })),
         ],
-        id: `${site.protocol + site.domain}/`,
+        id: '/',
         lang: site.lang,
         name: site.title,
         orientation: 'portrait',

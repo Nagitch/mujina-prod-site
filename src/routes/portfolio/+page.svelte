@@ -32,7 +32,7 @@
   })
 </script>
 
-<Head />
+<Head page={{ title: 'Portfolio', path: '/portfolio/' }} />
 
 <div class='flex flex-col flex-nowrap justify-center xl:flex-row xl:flex-wrap h-feed'>
   <div class='flex-none w-full max-w-screen-xl mx-auto xl:mx-0'>

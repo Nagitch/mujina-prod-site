@@ -100,3 +100,19 @@ The first security-update jobs ran after enablement, but reported
 `security_update_not_possible` for KaTeX and postcss-selector-parser because
 their parent dependency constraints exclude the fixed versions. Those jobs
 confirm execution, not successful remediation; continue handling them in #56.
+
+## Public URLs and discovery (#52)
+
+Public metadata always identifies `https://www.mujina-prod.com`, including in
+preview builds. HTML routes use a trailing slash; feeds, sitemap, manifest and
+assets keep file URLs. The shared URL helpers generate metadata/feed/sitemap
+links; Atom and JSON Feed item IDs retain their existing values so subscribers
+do not receive old articles as new ones. Local icon/manifest URLs remain
+same-origin for preview installation and offline use.
+
+The sitemap lists public pages, listed posts and slide entry points once, with
+the standard HTTP XML namespace and escaped values. `robots.txt` advertises it.
+Generated XML, canonical/OGP URLs, feed IDs and output paths are checked during
+`verify:build`. Search Console property ownership and sitemap submission have
+not been verified through an authenticated account; neither sitemap generation
+nor a successful HTTP response proves indexing or ranking effects.

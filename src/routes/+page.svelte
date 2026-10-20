@@ -125,7 +125,7 @@
             <strong>Nagitch</strong>
             の制作・個人事業名義です。
             <br />
-            <a href='/portfolio'>
+            <a href='/portfolio/'>
               <span class='underline'>
                 <span
                   class='text-base bg-no-repeat underline md:text-2xl bg-[length:100%_0%] bg-[position:0_88%] decoration-4 decoration-transparent group-hover:decoration-primary hover:bg-[length:100%_100%] hover:text-primary-content bg-gradient-to-t from-primary to-primary transition-all ease-in-out duration-300'>

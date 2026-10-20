@@ -40,7 +40,7 @@
   })
 </script>
 
-<Head />
+<Head page={{ title: 'Blog', path: '/blog/' }} />
 
 <div class='flex flex-col flex-nowrap justify-center xl:flex-row xl:flex-wrap h-feed'>
   <div

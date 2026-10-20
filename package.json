@@ -50,6 +50,7 @@
     "@unocss/eslint-plugin": "^66.11.0",
     "@unocss/extractor-svelte": "^66.11.0",
     "@vite-pwa/sveltekit": "^1.1.0",
+    "@xmldom/xmldom": "0.9.12",
     "chokidar": "^5.0.0",
     "cross-env": "^10.1.0",
     "daisyui": "^4.12.24",

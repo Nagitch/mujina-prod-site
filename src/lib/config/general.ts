@@ -60,11 +60,11 @@ export const head: HeadConfig = {}
 export const header: HeaderConfig = {
   nav: [
     {
-      link: '/portfolio',
+      link: '/portfolio/',
       text: 'Portfolio',
     },
     {
-      link: '/blog',
+      link: '/blog/',
       text: 'Blog',
     },
   ],

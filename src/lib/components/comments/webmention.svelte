@@ -1,7 +1,7 @@
 <script lang='ts'>
   import type { WebmentionConfig } from '$lib/types/post'
 
-  import { site } from '$lib/config/site'
+  import { canonicalPage, LEGACY_ORIGIN } from '$lib/utils/urls'
   import { onMount } from 'svelte'
 
   export let config: WebmentionConfig
@@ -48,7 +48,7 @@
         config?.sortBy ?? 'created'
       }&sort-dir=${sortDirUp ? 'up' : 'down'}${
         config?.property && config.property.forEach(wmProperty => `&wm-property=${wmProperty}`)
-      }&target[]=${site.protocol + site.domain + post.path}&target[]=${site.protocol + site.domain + post.path}/`,
+      }&target[]=${encodeURIComponent(canonicalPage(post.path))}&target[]=${encodeURIComponent(`${LEGACY_ORIGIN}${post.path}`)}&target[]=${encodeURIComponent(`${LEGACY_ORIGIN}${post.path}/`)}`,
     )
       .then(res => res.json())
       .then((feed: WebmentionFeed) => {
@@ -191,7 +191,7 @@
   {/if}
   {#if config?.form === true}
     <form action='https://webmention.io/{config.username}/webmention' id='webmention-form' method='post'>
-      <input name='target' type='hidden' value={site.protocol + site.domain + post.path} />
+      <input name='target' type='hidden' value={canonicalPage(post.path)} />
       <div class='gap-4 label'>
         <span class='label-text'>send webmentions here:</span>
         {#if config?.commentParade === true}
@@ -199,7 +199,7 @@
             or <a
               class='hover:!text-primary'
               href='https://quill.p3k.io/?dontask=1&me=https://commentpara.de/&reply={encodeURI(
-                site.protocol + site.domain + post.path,
+                canonicalPage(post.path),
               )}'>
               comment anonymously
             </a>
