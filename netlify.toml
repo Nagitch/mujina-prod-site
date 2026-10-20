@@ -1,9 +1,11 @@
+# Legacy target; Vercel is canonical. Retained pending account-level usage verification.
 [build]
-command = "npx pnpm i --store=node_modules/.pnpm-store && npx pnpm build"
+command = "pnpm install --frozen-lockfile && pnpm build"
 publish = "build"
 
 [build.environment]
 NODE_VERSION = "24"
+PNPM_VERSION = "10.34.7"
 NPM_FLAGS = "--version"
 
 [functions]

@@ -8,7 +8,7 @@ only pins its commit as a submodule.
 
 ## Development and verification
 
-Use Node **24.x** (`nvm install && nvm use`) and **pnpm 9.10.0**, declared in
+Use Node **24.x** (`nvm install && nvm use`) and **pnpm 10.34.7**, declared in
 `package.json`. Install that exact pnpm version if Corepack is unavailable.
 
 ```sh
@@ -24,6 +24,7 @@ If an old checkout has generated files without a manifest, use a fresh checkout
 or inspect and remove only those generated files before building.
 
 ```sh
+pnpm verify:install-policy
 pnpm tsc
 pnpm test
 pnpm urara:build
@@ -47,9 +48,11 @@ Vercel project `mujina-prod-site` uses this child repository directly, with Node
 root, not the parent workbench. Verify the preview for the exact PR commit before
 merging and inspect the resulting production deployment and core routes.
 
-The existing GitHub Pages publisher is retained with an explicit Node 24 input
-and a pinned reusable workflow. Deployment consolidation, dependency upgrades,
-SEO and PWA improvements are tracked separately in the maintenance issues.
+Vercel is the canonical production publisher, from `main` to
+https://www.mujina-prod.com. GitHub Pages is disabled and its unused publisher
+has been removed. See [publishing and supply-chain operations](docs/publishing-security.md)
+for deployment verification, rollback, dependency script approvals, automated
+updates and repository security settings.
 
 See [dependency maintenance](docs/dependency-maintenance.md) for the updated
 framework groups, compatibility decisions, remaining audit findings and checks.

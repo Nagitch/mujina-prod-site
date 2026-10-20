@@ -36,7 +36,8 @@ This is the remediation record for #50, starting from `2eb9bea1`.
   the unused Netlify adapter. Vercel uses its explicit adapter; static output and
   the documented Node adapter remain supported. `netlify.toml` is historical
   configuration, not an actively supported deployment target.
-- Node remains 24.x and pnpm remains 9.10.0. `jiti` 2 is explicitly installed for
+- Node remains 24.x. This refresh used pnpm 9.10.0; #51 subsequently pins
+  pnpm 10.34.7 with an enforced install-script policy. `jiti` 2 is explicitly installed for
   ESLint's TypeScript configuration. The regenerated lockfile is reproducible.
 
 ## Overrides
