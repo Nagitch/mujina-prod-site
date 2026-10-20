@@ -21,6 +21,9 @@ const adapter = {
 export default {
   extensions: ['.svelte', ...(mdsvexConfig.extensions ?? [])],
   kit: {
+    paths: { relative: false },
+    files: { serviceWorker: 'src/sw.ts' },
+    serviceWorker: { register: false },
     adapter:
       process.env.ADAPTER
         // @ts-expect-error adapter types

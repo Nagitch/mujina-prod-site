@@ -6,6 +6,8 @@ import unoCSS from 'unocss/vite'
 import { defineConfig } from 'vite'
 import { imagetools } from 'vite-imagetools'
 
+import { offlineManifest } from './scripts/pwa-manifest'
+
 import tailwindConfig from './tailwind.config'
 import unoConfig from './uno.config'
 
@@ -22,11 +24,17 @@ export default defineConfig({
     sveltekit(),
     pwa({
       manifest: false,
-      registerType: 'autoUpdate',
+      strategies: 'injectManifest',
+      srcDir: 'src',
+      filename: 'sw.ts',
+      injectRegister: false,
+      registerType: 'prompt',
       scope: '/',
-      workbox: {
-        globIgnores: ['**/sw*', '**/workbox-*'],
-        globPatterns: ['posts.json', '**/*.{js,css,html,svg,ico,png,webp,avif}'],
+      kit: { trailingSlash: 'always' },
+      injectManifest: {
+        globPatterns: ['client/**/*.{js,css,html,svg,ico,png,jpg,jpeg,webp,avif,webmanifest}', 'prerendered/**/*.{html,json,webmanifest}'],
+        globIgnores: ['**/slides/**', '**/sw*', '**/workbox-*'],
+        manifestTransforms: [offlineManifest],
       },
     }),
   ],

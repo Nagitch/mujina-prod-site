@@ -16,16 +16,22 @@
       'src': config.src ?? 'https://utteranc.es/client.js',
       'theme': config.theme ?? 'preferred-color-scheme',
     }).forEach(([key, value]) => utterances.setAttribute(key, value))
-    setTimeout(() => {
-      const observer = new MutationObserver(() => {
-        document.getElementById('utterances-loading')!.remove()
-        observer.disconnect()
+    let observer: MutationObserver | undefined
+    const timer = setTimeout(() => {
+      observer = new MutationObserver(() => {
+        document.getElementById('utterances-loading')?.remove()
+        observer?.disconnect()
       })
       observer.observe(document.getElementById('utterances')!, {
         childList: true,
       })
       document.getElementById('utterances-container')!.appendChild(utterances)
     }, 1000)
+    return () => {
+      clearTimeout(timer)
+      observer?.disconnect()
+      utterances.remove()
+    }
   })
 </script>
 

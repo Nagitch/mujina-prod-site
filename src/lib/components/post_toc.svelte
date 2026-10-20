@@ -12,7 +12,7 @@
   let bordered: string[] = []
 
   onMount(() => {
-    if (window.screen.availWidth >= 1280) {
+    if (window.innerWidth >= 1280) {
       const headingsObserver = new IntersectionObserver(
         headings =>
           headings.forEach(heading =>
@@ -38,25 +38,19 @@
     bordered = intersecting
   $: if (intersectingArticle === false)
     bordered = []
-  $: if (bordered) {
-    toc.forEach(heading =>
-      bordered.includes(heading.slug!)
-        ? document.getElementById(`toc-link-${heading.slug}`)?.classList.add('!border-accent')
-        : document.getElementById(`toc-link-${heading.slug}`)?.classList.remove('!border-accent'),
-    )
-  }
+
 </script>
 
 <aside class='sticky top-16 py-8'>
   <nav
-    aria-label='TableOfContent'
-    class='max-h-[calc(100vh-12rem)] overflow-y-hidden hover:overflow-y-auto'
+    aria-label='目次'
+    class='max-h-[calc(100vh-12rem)] overflow-y-auto'
     dir='rtl'
     id='post-toc'>
     <ul dir='ltr' id='toc-list-root'>
       {#each toc as { depth, slug, title }}
         <li class='flex flex-col' id={`toc-item-${slug}`}>
-          <button
+          <a
             class="transition-all border-transparent cursor-pointer border-l-4 hover:border-primary hover:bg-base-content hover:bg-opacity-10 active:bg-primary active:text-primary-content active:font-bold pr-4 {depth <= 2
               ? 'py-3'
               : 'py-2'}"
@@ -67,11 +61,11 @@
             class:pl-20={depth === 6}
             dir='ltr'
             id={`toc-link-${slug}`}
-            on:click={() =>
-              slug && document.getElementById(slug)?.scrollIntoView({ behavior: 'smooth' })}
-            type='button'>
+            class:!border-accent={bordered.includes(slug ?? '')}
+            href={`#${slug}`}>
+
             {title}
-          </button>
+          </a>
         </li>
       {/each}
     </ul>
