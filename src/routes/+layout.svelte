@@ -10,7 +10,7 @@
 
   import 'uno.css'
 
-  import '../app.pcss'
+  import '../app.css'
 
   export let data: LayoutData
 

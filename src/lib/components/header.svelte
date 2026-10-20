@@ -29,7 +29,7 @@
 
   $: if (browser && currentTheme) {
     document.documentElement.setAttribute('data-theme', currentTheme)
-    currentThemeColor = `oklch(${getComputedStyle(document.documentElement).getPropertyValue('--b1').trim()})`
+    currentThemeColor = getComputedStyle(document.documentElement).getPropertyValue('--color-base-100').trim()
   }
 
   $: if (scrollY) {
@@ -63,7 +63,7 @@
 }} />
 
 <header
-  class="w-full transition-all duration-500 ease-in-out border-transparent fixed z-50 border-b-2 max-h-[4.125rem] {scrollY > 32 && 'backdrop-blur !border-base-content/10 bg-base-100/30 md:bg-base-200/30'}"
+  class="w-full transition-all duration-500 ease-in-out border-transparent fixed z-50 border-b-2 max-h-[4.125rem] {scrollY > 32 && 'backdrop-blur-sm !border-base-content/10 bg-base-100/30 md:bg-base-200/30'}"
   class:-translate-y-32={!pin && scrollY > 0}
   id='header'
 >
@@ -117,7 +117,7 @@
 
 <button
   aria-label='scroll to top'
-  class="fixed grid group btn backdrop-blur z-50 duration-500 ease-in-out btn-circle btn-lg border-none bottom-6 right-6 {percent > 95
+  class="fixed grid group btn backdrop-blur-sm z-50 duration-500 ease-in-out btn-circle btn-lg border-none bottom-6 right-6 {percent > 95
     ? 'btn-accent shadow-lg'
     : 'btn-ghost bg-base-100/30 md:bg-base-200/30'}"
   class:opacity-100={scrollY}
@@ -127,7 +127,7 @@
   on:click={() => window.scrollTo(0, 0)}>
   <!-- https://daisyui.com/blog/how-to-update-daisyui-4/#3-all--focus-colors-are-removed -->
   <div
-    class='transition-all duration-500 ease-in-out radial-progress text-accent group-hover:text-[color-mix(in_oklab,oklch(var(--a)),black_7%)] col-start-1 row-start-1'
+    class='transition-all duration-500 ease-in-out radial-progress text-accent group-hover:text-[color-mix(in_oklab,var(--color-accent),black_7%)] col-start-1 row-start-1'
     style={`--size:4rem; --thickness: 0.25rem; --value:${percent};`}></div>
   <div
     class='col-start-1 row-start-1 rounded-full w-full grid duration-500 ease-in-out border-base-content/10 p-4 h-full border-4 group-hover:border-transparent'

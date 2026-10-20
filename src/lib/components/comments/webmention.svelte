@@ -209,7 +209,7 @@
       <div class='flex gap-2'>
         <div class='flex-1'>
           <input
-            class='input input-bordered w-full focus:input-primary'
+            class='input w-full focus:input-primary'
             id='reply-url'
             name='source'
             placeholder='https://example.com/my-post'

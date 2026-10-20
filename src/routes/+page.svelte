@@ -114,27 +114,27 @@
           </h1>
         </div>
         <div class='flex justify-center items-center flex-row justify-items-center'>
-          <div class='basis-10 md:basis-20 m-3 md:m-6 rounded-full backdrop-blur bg-slate-100/[.7]'>
+          <div class='basis-10 md:basis-20 m-3 md:m-6 rounded-full backdrop-blur-sm bg-slate-100/[.7]'>
             <a href='https://github.com/Nagitch' target='_blank'>
               <img alt='GitHub' src='/assets/social-logos/github-icon-1.svg' />
             </a>
           </div>
-          <div class='basis-10 md:basis-20 m-3 md:m-6 backdrop-blur rounded-2xl'>
+          <div class='basis-10 md:basis-20 m-3 md:m-6 backdrop-blur-sm rounded-2xl'>
             <a href='https://twitter.com/NagitchDevelop' target='_blank'>
               <img alt='Twitter / X' src='/assets/social-logos/twitter-logo-blue.svg' />
             </a>
           </div>
-          <div class='m-3 md:m-6 rounded-2xl backdrop-blur basis-16 md:basis-32'>
+          <div class='m-3 md:m-6 rounded-2xl backdrop-blur-sm basis-16 md:basis-32'>
             <a href='https://vrchat.com/home/user/usr_8292a43a-914e-4dc0-8c40-51809e1af76b' target='_blank'>
               <img alt='VRChat' src='/assets/social-logos/VRC_Logo_TrademarkWhite.webp' />
             </a>
           </div>
-          <div class='basis-10 md:basis-20 m-3 md:m-6 rounded-2xl backdrop-blur'>
+          <div class='basis-10 md:basis-20 m-3 md:m-6 rounded-2xl backdrop-blur-sm'>
             <a href='https://mujina-prod.booth.pm/' target='_blank'>
               <img alt='Booth' src='/assets/social-logos/booth-logo_icon_r.svg' />
             </a>
           </div>
-          <div class='basis-10 m-3 md:m-6 rounded-2xl backdrop-blur md:basis-24'>
+          <div class='basis-10 m-3 md:m-6 rounded-2xl backdrop-blur-sm md:basis-24'>
             <a href='https://soundcloud.com/nagitch' target='_blank'>
               <img alt='SoundCloud' src='/assets/social-logos/soundcloud.svg' />
             </a>
@@ -168,7 +168,7 @@
             <a href='/portfolio/'>
               <span class='underline'>
                 <span
-                  class='text-base bg-no-repeat underline md:text-2xl bg-[length:100%_0%] bg-[position:0_88%] decoration-4 decoration-transparent group-hover:decoration-primary hover:bg-[length:100%_100%] hover:text-primary-content bg-gradient-to-t from-primary to-primary transition-all ease-in-out duration-300'>
+                  class='text-base bg-no-repeat underline md:text-2xl bg-[length:100%_0%] bg-[position:0_88%] decoration-4 decoration-transparent group-hover:decoration-primary hover:bg-[length:100%_100%] hover:text-primary-content bg-linear-to-t from-primary to-primary transition-all ease-in-out duration-300'>
                   📝ポートフォリオはこちら
                 </span>
               </span>
@@ -188,7 +188,7 @@
             </div>
           {/if}
           <div
-            class='transition-all ease-in-out max-w-screen-lg md:mx-20 duration-500 hover:z-30 hover:shadow-xl md:shadow-sm md:hover:shadow-xl md:hover:-translate-y-0.5'
+            class='transition-all ease-in-out max-w-screen-lg md:mx-20 duration-500 hover:z-30 hover:shadow-xl md:shadow-xs md:hover:shadow-xl md:hover:-translate-y-0.5'
             in:fly={{ delay: 500, duration: 300, x: index % 2 ? 100 : -100 }}
             out:fly={{ duration: 300, x: index % 2 ? -100 : 100 }}>
             <Post decoding={index < 5 ? 'auto' : 'async'} loading={index < 5 ? 'eager' : 'lazy'} {post} preview={true} />

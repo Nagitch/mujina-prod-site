@@ -122,7 +122,8 @@
 
       <h2 class='ml-4 font-medium text-base md:text-xl leading-8 md:leading-3'>経歴・案件一覧</h2>
       <h3 class='ml-4 font-medium text-base md:text-ml leading-8 md:leading-3'>副業 2021/4 - 現在</h3>
-      <div class='ml-6 my-4'>
+      <!-- svelte-ignore a11y_no_noninteractive_tabindex (Scrollable table regions need keyboard focus.) -->
+      <div class='ml-6 my-4 overflow-x-auto' tabindex='0' role='region' aria-label='経歴・案件一覧の表'>
         <table class='table-auto border-collapse border border-slate-500'>
           <thead>
             <tr>
@@ -172,7 +173,8 @@
         </table>
       </div>
       <h3 class='ml-4 font-medium text-base md:text-ml leading-8 md:leading-3'>システム開発会社C 2017/7 - 現在</h3>
-      <div class='ml-6'>
+      <!-- svelte-ignore a11y_no_noninteractive_tabindex (Scrollable table regions need keyboard focus.) -->
+      <div class='ml-6 overflow-x-auto' tabindex='0' role='region' aria-label='経歴・案件一覧の表'>
         <table class='border-collapse border border-slate-500'>
           <thead>
             <tr>
@@ -310,7 +312,8 @@
         </table>
       </div>
       <h3 class='ml-4 font-medium text-base md:text-ml leading-8 md:leading-3'>システム開発会社B 2015/05 - 2017/06</h3>
-      <div class='ml-6'>
+      <!-- svelte-ignore a11y_no_noninteractive_tabindex (Scrollable table regions need keyboard focus.) -->
+      <div class='ml-6 overflow-x-auto' tabindex='0' role='region' aria-label='経歴・案件一覧の表'>
         <table class='border-collapse border border-slate-500'>
           <thead>
             <tr>
@@ -338,7 +341,8 @@
         </table>
       </div>
       <h3 class='ml-4 font-medium text-base md:text-ml leading-8 md:leading-3'>システム開発会社A 2012/04 - 2015/04</h3>
-      <div class='ml-6'>
+      <!-- svelte-ignore a11y_no_noninteractive_tabindex (Scrollable table regions need keyboard focus.) -->
+      <div class='ml-6 overflow-x-auto' tabindex='0' role='region' aria-label='経歴・案件一覧の表'>
         <table class='border-collapse border border-slate-500'>
           <thead>
             <tr>
