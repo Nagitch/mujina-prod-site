@@ -6,8 +6,8 @@
   import Head from '$lib/components/head.svelte'
   import { posts as storedPosts } from '$lib/stores/posts'
   import { title as storedTitle } from '$lib/stores/title'
+  import { fly } from '$lib/utils/motion'
   import { onMount } from 'svelte'
-  import { fly } from 'svelte/transition'
 
   let allPosts: Urara.Post[]
   let loaded: boolean

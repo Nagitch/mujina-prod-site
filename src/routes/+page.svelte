@@ -7,10 +7,10 @@
   import Post from '$lib/components/post_card.svelte'
   import { posts as storedPosts } from '$lib/stores/posts'
   import { title as storedTitle } from '$lib/stores/title'
-  import { VFX } from '@vfx-js/core'
+  import { fly } from '$lib/utils/motion'
   import { onMount } from 'svelte'
-  import { fly } from 'svelte/transition'
 
+  let playing = false
   let allPosts: Urara.Post[]
   let loaded: boolean
   let [posts, tags, years]: [Urara.Post[], string[], number[]] = [[], [], []]
@@ -33,12 +33,44 @@
       if ($page.url.searchParams.get('tags'))
         tags = $page.url.searchParams.get('tags')?.split(',') ?? []
       loaded = true
-
-      const siteLandPageTitleDisplay = document.querySelector('#site-land-page-title-display')
-      if (siteLandPageTitleDisplay instanceof HTMLElement) {
-        const vfx = new VFX()
-        vfx.add(siteLandPageTitleDisplay, { overflow: 100, shader: 'rgbShift' })
+    }
+    let disposed = false
+    let vfx: import('@vfx-js/core').VFX | null = null
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const stop = () => {
+      vfx?.destroy()
+      vfx = null
+    }
+    const start = async () => {
+      if (disposed || motion.matches || document.hidden)
+        return
+      try {
+        const { VFX } = await import('@vfx-js/core')
+        if (disposed || motion.matches || document.hidden || vfx)
+          return
+        const element = document.getElementById('site-land-page-title-display')
+        if (element) {
+          vfx = VFX.init()
+          await vfx?.add(element, { overflow: 100, shader: 'rgbShift' })
+          if (disposed || motion.matches || document.hidden)
+            stop()
+        }
       }
+      catch { stop() }
+    }
+    const changed = () => {
+      stop()
+      void start()
+    }
+    const timer = setTimeout(start, 1500)
+    motion.addEventListener('change', changed)
+    document.addEventListener('visibilitychange', changed)
+    return () => {
+      disposed = true
+      clearTimeout(timer)
+      motion.removeEventListener('change', changed)
+      document.removeEventListener('visibilitychange', changed)
+      stop()
     }
   })
 </script>
@@ -109,14 +141,22 @@
           </div>
         </div>
         <div class='conatiner aspect-video my-5 pd-15'>
-          <iframe
-            allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-            allowfullscreen
-            frameborder='0'
-            height='100%'
-            src='https://www.youtube.com/embed/sdbYqEbr4-E?autoplay=1&mute=1&loop=1&playlist=sdbYqEbr4-E&disablekb=1'
-            title='YouTube video player'
-            width='100%'></iframe>
+          {#if playing}
+            <iframe
+              allow='autoplay; encrypted-media; picture-in-picture; fullscreen'
+              allowfullscreen
+              class='w-full h-full'
+              src='https://www.youtube-nocookie.com/embed/sdbYqEbr4-E?autoplay=1'
+              title='制作作品の紹介動画'></iframe>
+          {:else}
+            <button class='relative w-full h-full overflow-hidden rounded-box bg-neutral text-neutral-content' aria-label='制作作品の紹介動画を再生（YouTube）' on:click={() => (playing = true)}>
+              <img src='/assets/bg-header.webp' alt='' class='w-full h-full object-cover' />
+              <span class='absolute inset-0 flex flex-col items-center justify-center gap-4 bg-black/40 text-white'>
+                <span class='text-5xl' aria-hidden='true'>▶</span>
+                <span>制作作品の紹介動画を再生</span>
+              </span>
+            </button>
+          {/if}
         </div>
         <div class='ml-6 my-4'>
           <p>

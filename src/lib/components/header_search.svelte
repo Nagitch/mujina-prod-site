@@ -5,10 +5,14 @@
 
 <form
   action={headerConfig?.search?.provider === 'duckduckgo' ? '//duckduckgo.com/' : '//google.com/search'}
+  id='site-search-form'
+  role='search'
   class='flex-1'
   method='get'>
   <input
     class='transition-all w-full input input-ghost input-bordered xl:bg-base-100 xl:text-base-content h-12'
+    id='site-search'
+    aria-label='このサイトを検索'
     name='q'
     type='text' />
   <input

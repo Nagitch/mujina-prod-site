@@ -5,7 +5,7 @@
   import Action from '$lib/components/post_action.svelte'
   import Card from '$lib/components/post_card.svelte'
   import Toc from '$lib/components/post_toc.svelte'
-  import { fly } from 'svelte/transition'
+  import { fly } from '$lib/utils/motion'
 
   export let post: Urara.Post
 </script>

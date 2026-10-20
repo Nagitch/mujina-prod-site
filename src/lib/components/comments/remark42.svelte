@@ -41,6 +41,8 @@
       url: post.path,
     }
 
+    let timer: ReturnType<typeof setTimeout> | undefined
+    let attempts = 0
     const checkRemark42 = () => {
       if ((window as any).REMARK42) {
         remark42Instance = (window as any).REMARK42.createInstance({
@@ -48,12 +50,17 @@
           ...opt,
         })
       }
-      else {
-        setTimeout(checkRemark42, 100)
+      else if (++attempts < 100) {
+        timer = setTimeout(checkRemark42, 100)
       }
     }
 
     checkRemark42()
+    return () => {
+      clearTimeout(timer)
+      c.remove()
+      s.remove()
+    }
   })
 
   onDestroy(() => {

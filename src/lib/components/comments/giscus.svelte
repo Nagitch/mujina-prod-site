@@ -23,16 +23,22 @@
       'data-theme': config.theme ?? 'preferred_color_scheme',
       'src': config.src ?? 'https://giscus.app/client.js',
     }).forEach(([key, value]) => giscus.setAttribute(key, value))
-    setTimeout(() => {
-      const observer = new MutationObserver(() => {
-        document.getElementById('giscus-loading')!.remove()
-        observer.disconnect()
+    let observer: MutationObserver | undefined
+    const timer = setTimeout(() => {
+      observer = new MutationObserver(() => {
+        document.getElementById('giscus-loading')?.remove()
+        observer?.disconnect()
       })
       observer.observe(document.getElementById('giscus')!, {
         childList: true,
       })
       document.getElementById('giscus-container')!.appendChild(giscus)
     }, 1000)
+    return () => {
+      clearTimeout(timer)
+      observer?.disconnect()
+      giscus.remove()
+    }
   })
 </script>
 

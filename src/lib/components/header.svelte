@@ -1,34 +1,35 @@
 <script lang='ts'>
-  import { browser, dev } from '$app/environment'
+  import { browser } from '$app/environment'
   import Nav from '$lib/components/header_nav.svelte'
   import Search from '$lib/components/header_search.svelte'
   import { header as headerConfig, theme } from '$lib/config/general'
   import { site } from '$lib/config/site'
   import { title as storedTitle } from '$lib/stores/title'
-  import { hslToHex } from '$lib/utils/color'
-  import { fly } from 'svelte/transition'
+  import { fly } from '$lib/utils/motion'
+  import { tick } from 'svelte'
 
   export let path: string
-  let title: string
+  $: title = $storedTitle as string
+  let search: boolean = false
+  let themeOpen = false
+  let themeButton: HTMLButtonElement
+  let searchButton: HTMLButtonElement
+  async function toggleSearch(open: boolean) {
+    search = open
+    await tick()
+    if (open)
+      document.getElementById('site-search')?.focus()
+    else searchButton?.focus()
+  }
   let currentTheme: string
   let currentThemeColor: string
-  let search: boolean = false
   let pin: boolean = true
   let percent: number
   let [scrollY, lastY] = [0, 0]
 
-  storedTitle.subscribe(storedTitle => (title = storedTitle as string))
-
   $: if (browser && currentTheme) {
     document.documentElement.setAttribute('data-theme', currentTheme)
-    currentThemeColor = hslToHex(
-      ...(getComputedStyle(document.documentElement)
-        .getPropertyValue('--b1')
-        .slice(dev ? 1 : 0)
-        .replaceAll('%', '')
-        .split(' ')
-        .map(Number) as [number, number, number]),
-    )
+    currentThemeColor = `oklch(${getComputedStyle(document.documentElement).getPropertyValue('--b1').trim()})`
   }
 
   $: if (scrollY) {
@@ -41,7 +42,7 @@
   }
 
   if (browser) {
-    const preferredTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'night' : theme[0].name
+    const preferredTheme = 'mujinaprod'
     currentTheme = localStorage.getItem('theme') ?? theme.find(item => item.name === preferredTheme)?.name ?? theme[0].name
   }
 </script>
@@ -50,12 +51,22 @@
   <meta content={currentThemeColor} name='theme-color' />
 </svelte:head>
 
-<svelte:window bind:scrollY />
+<svelte:window bind:scrollY on:keydown={(event) => {
+  if (event.key === 'Escape') {
+    if (search)
+      void toggleSearch(false)
+    if (themeOpen) {
+      themeOpen = false
+      themeButton?.focus()
+    }
+  }
+}} />
 
 <header
   class="w-full transition-all duration-500 ease-in-out border-transparent fixed z-50 border-b-2 max-h-[4.125rem] {scrollY > 32 && 'backdrop-blur !border-base-content/10 bg-base-100/30 md:bg-base-200/30'}"
   class:-translate-y-32={!pin && scrollY > 0}
-  id='header'>
+  id='header'
+>
   {#if !search}
     <div class='navbar' in:fly={{ delay: 300, duration: 300, x: -50 }} out:fly={{ duration: 300, x: -50 }}>
       <div class='navbar-start'>
@@ -71,51 +82,33 @@
       </div>
       <div class='navbar-end'>
         {#if headerConfig.search}
-          <button aria-label='search' class='btn btn-ghost btn-square' on:click={() => (search = !search)} tabindex='0'>
+          <button bind:this={searchButton} aria-label='検索を開く' aria-expanded={search} aria-controls='site-search-form' class='btn btn-ghost btn-square' on:click={() => toggleSearch(!search)} tabindex='0'>
             <span class='i-heroicons-outline-search'></span>
           </button>
         {/if}
-        <!-- hide theme changer -->
-        <div class='hidden dropdown dropdown-end' id='change-theme'>
-          <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-          <!-- reference: https://github.com/saadeghi/daisyui/issues/1285 -->
-          <div class='btn btn-square btn-ghost' tabindex='0'>
+        <div class='relative' id='change-theme'>
+          <button bind:this={themeButton} class='btn btn-square btn-ghost' aria-label='テーマを選ぶ' aria-expanded={themeOpen} aria-controls='theme-options' on:click={() => (themeOpen = !themeOpen)}>
             <span class='i-heroicons-outline-color-swatch'></span>
-          </div>
-          <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-          <!-- reference: https://github.com/saadeghi/daisyui/issues/1285 -->
-          <ul
-            class='flex flex-nowrap bg-base-100 text-base-content gap-2 menu dropdown-content rounded-box p-2 shadow-2xl w-52 overflow-y-auto max-h-[21.5rem]'
-            class:hidden={!pin}
-            tabindex='0'>
-            {#each theme as { name, text }}
-              <button
-                class='btn btn-ghost w-full flex bg-base-100 p-2 transition-all group hover:bg-primary rounded-lg'
-                class:border-2={currentTheme === name}
-                class:border-primary={currentTheme === name}
-                data-theme={name}
-                on:click={() => {
+          </button>
+          {#if themeOpen}
+            <ul id='theme-options' class='absolute right-0 bg-base-100 text-base-content rounded-box p-2 shadow-2xl w-52 overflow-y-auto max-h-80'>
+              {#each theme as { name, text }}
+                <li><button class='btn btn-ghost w-full justify-start' aria-pressed={currentTheme === name} on:click={() => {
                   currentTheme = name
                   localStorage.setItem('theme', name)
-                }}>
-                <p class='text-base-content flex-1 text-left group-hover:text-primary-content transition-color'>
-                  {text ?? name}
-                </p>
-                <div class='grid grid-cols-4 gap-0.5 m-auto'>
-                  {#each ['bg-primary', 'bg-secondary', 'bg-accent', 'bg-neutral'] as bg}
-                    <div class={`${bg} w-1 h-4 rounded-btn`}></div>
-                  {/each}
-                </div>
-              </button>
-            {/each}
-          </ul>
+                  themeOpen = false
+                  themeButton.focus()
+                }}>{text ?? name}</button></li>
+              {/each}
+            </ul>
+          {/if}
         </div>
       </div>
     </div>
   {:else}
     <div class='navbar' in:fly={{ delay: 300, duration: 300, x: 50 }} out:fly={{ duration: 300, x: 50 }}>
       <Search />
-      <button aria-label='Close search' class='btn btn-square btn-ghost' on:click={() => (search = !search)} tabindex='0'>
+      <button aria-label='Close search' class='btn btn-square btn-ghost' on:click={() => toggleSearch(!search)} tabindex='0'>
         <span class='i-heroicons-outline-x'></span>
       </button>
     </div>
@@ -130,6 +123,7 @@
   class:opacity-100={scrollY}
   class:translate-y-24={!pin || scrollY === 0}
   id='totop'
+  tabindex={pin && scrollY > 0 ? 0 : -1}
   on:click={() => window.scrollTo(0, 0)}>
   <!-- https://daisyui.com/blog/how-to-update-daisyui-4/#3-all--focus-colors-are-removed -->
   <div
