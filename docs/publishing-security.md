@@ -18,7 +18,7 @@ for the exact PR commit. After merging, confirm a **production** deployment is
 READY for the merge commit, with the custom domains assigned. A failed preview
 or the project's generic “latest deployment” is not production status.
 Check `/`, `/blog/`, `/portfolio/`, direct article routes, images and
-`/feed.json`. PWA/offline acceptance is separate work in #53.
+`/feed.json`. PWA/offline behavior and recorded checks are in [offline verification](offline-verification.md).
 
 To roll back urgently, promote the previous known-good production deployment in
 this Vercel project, then revert the problematic merge through a checked PR.
@@ -29,7 +29,7 @@ if publishing must stop. No database migration is involved.
 
 - GitHub's repository API returned `has_pages: false` on 2026-10-20. The old
   workflow only wrote generated output to `gh-pages`, also causing failing
-  Vercel previews of that output. Remove the workflow and its write token;
+  Vercel previews of that output. The workflow and its write token were removed;
   preserve the historical branch. Do not re-enable Pages as a second publisher.
 - `netlify.toml` is inherited configuration. The Netlify adapter was removed in
   #50. No authenticated Netlify account inventory is available in this task, so
@@ -93,13 +93,7 @@ them when moving the repository. Use Settings → Code security and Settings →
 Actions → General. Do not infer a setting's status from absent configuration.
 Push protection is preventive; rotate any credential found exposed.
 
-Known dependency audit findings remain tracked in #56 and
-[dependency maintenance](dependency-maintenance.md). Enabling safeguards does
-not resolve those advisories or prove that every dependency is safe.
-The first security-update jobs ran after enablement, but reported
-`security_update_not_possible` for KaTeX and postcss-selector-parser because
-their parent dependency constraints exclude the fixed versions. Those jobs
-confirm execution, not successful remediation; continue handling them in #56.
+The four remaining findings from #50 were resolved by #56 with the Tailwind/daisyUI migration and parent-scoped, compatibility-tested overrides. The full audit reported zero findings; see [dependency maintenance](dependency-maintenance.md). Earlier security-update jobs reported `security_update_not_possible` because parent constraints excluded patched versions. That historical job result is not the current audit result. Safeguards and a clean audit do not prove that every dependency is safe.
 
 ## Public URLs and discovery (#52)
 

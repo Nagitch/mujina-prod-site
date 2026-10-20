@@ -42,3 +42,8 @@ export function sitemap(entries: { path: string, updated?: string }[]) {
   }
   return `<?xml version="1.0" encoding="utf-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${[...pages].sort(([a], [b]) => a.localeCompare(b)).map(([url, updated]) => `\n  <url><loc>${xml(url)}</loc>${updated ? `<lastmod>${xml(new Date(updated).toISOString())}</lastmod>` : ''}</url>`).join('')}\n</urlset>`
 }
+
+/** Stable blog filter links, including spaces and non-ASCII tags. */
+export function blogTagsPath(tags: string[]) {
+  return tags.length ? `/blog/?${new URLSearchParams({ tags: tags.join(',') })}` : '/blog/'
+}

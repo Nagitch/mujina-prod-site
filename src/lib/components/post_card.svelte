@@ -8,7 +8,7 @@
   import { post as postConfig } from '$lib/config/post'
   import { posts as storedPosts } from '$lib/stores/posts'
   import { title as storedTitle } from '$lib/stores/title'
-  import { pagePath } from '$lib/utils/urls'
+  import { blogTagsPath, pagePath } from '$lib/utils/urls'
 
   export let post: Urara.Post
   export let preview: boolean = false
@@ -113,7 +113,7 @@
       <div class='divider mt-4 mb-0'></div>
       <div>
         {#each post.tags as tag}
-          <a class='btn btn-ghost normal-case mr-2 btn-sm mt-2 p-category' href='/?tags={tag}'>
+          <a class='btn btn-ghost normal-case mr-2 btn-sm mt-2 p-category' href={blogTagsPath([tag])}>
             #{tag}
           </a>
         {/each}

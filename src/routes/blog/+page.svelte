@@ -1,5 +1,4 @@
 <script lang='ts'>
-  import { browser } from '$app/environment'
   import { goto } from '$app/navigation'
   import { page } from '$app/stores'
   import Footer from '$lib/components/footer.svelte'
@@ -9,6 +8,7 @@
   import { posts as storedPosts, tags as storedTags } from '$lib/stores/posts'
   import { title as storedTitle } from '$lib/stores/title'
   import { fly } from '$lib/utils/motion'
+  import { blogTagsPath } from '$lib/utils/urls'
   import { onMount } from 'svelte'
 
   let allPosts: Urara.Post[]
@@ -25,18 +25,13 @@
   $: if (posts.length > 1)
     years = [new Date(posts[0].published ?? posts[0].created).getFullYear()]
 
-  $: if (tags) {
-    posts = !tags ? allPosts : allPosts.filter(post => tags.every(tag => post.tags?.includes(tag)))
-    if (browser && window.location.pathname === '/')
-      goto(tags.length > 0 ? `?tags=${tags.toString()}` : `/`, { replaceState: true })
-  }
+  $: tags = loaded ? $page.url.searchParams.get('tags')?.split(',').filter(Boolean) ?? [] : []
+  $: posts = allPosts.filter(post => tags.every(tag => post.tags?.includes(tag)))
+
+  const selectTags = (selected: string[]) => goto(blogTagsPath(selected), { replaceState: true, noScroll: true, keepFocus: true })
 
   onMount(() => {
-    if (browser) {
-      if ($page.url.searchParams.get('tags'))
-        tags = $page.url.searchParams.get('tags')?.split(',') ?? []
-      loaded = true
-    }
+    loaded = true
   })
 </script>
 
@@ -62,7 +57,8 @@
             class:!btn-secondary={tags.includes(tag)}
             class:shadow-lg={tags.includes(tag)}
             id={tag}
-            on:click={() => (tags.includes(tag) ? (tags = tags.filter(tagName => tagName !== tag)) : (tags = [...tags, tag]))}>
+            aria-pressed={tags.includes(tag)}
+            on:click={() => selectTags(tags.includes(tag) ? tags.filter(tagName => tagName !== tag) : [...tags, tag])}>
             #{tag}
           </button>
         {/each}
@@ -83,7 +79,7 @@
                 '{tag}'{#if i + 1 < tags.length},{/if}
               {/each}]
             </h2>
-            <button class='btn btn-secondary' on:click={() => (tags = [])}>
+            <button class='btn btn-secondary' on:click={() => selectTags([])}>
               <span class='i-heroicons-outline-trash mr-2'></span>
               tags = []
             </button>

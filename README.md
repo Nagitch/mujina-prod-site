@@ -2,26 +2,104 @@
 
 Status: active
 
-Personal homepage, portfolio and blog at https://www.mujina-prod.com, based on
-Urara. The independent repository is `Nagitch/mujina-prod-site`; the workbench
-only pins its commit as a submodule.
+Homepage, portfolio and Japanese blog at <https://www.mujina-prod.com/>.
+This independent repository is `Nagitch/mujina-prod-site`. The workbench records
+its released commit as a submodule; it is not a build or deployment dependency.
 
-## Development and verification
+## Setup
 
-Use Node **24.x** (`nvm install && nvm use`) and **pnpm 10.34.7**, declared in
-`package.json`. Install that exact pnpm version if Corepack is unavailable.
+Use Node **24.x** (`nvm install && nvm use`) and **pnpm 10.34.7**, as declared in
+`.nvmrc` and `package.json`. If necessary, install that pnpm version with
+`npm install --global pnpm@10.34.7`. Then, from this repository:
 
 ```sh
 pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-Author Markdown, images and slides under `urara/`; authored Svelte routes remain
-under `src/routes/`. Generated files are recorded in `.urara-generated.json`.
-Cleanup removes only those files and refuses to overwrite or remove unowned or
-locally modified output. Do not commit the manifest or generated directories.
-If an old checkout has generated files without a manifest, use a fresh checkout
-or inspect and remove only those generated files before building.
+The development server prints its local URL. No production credentials are
+needed for local rendering or CI. Dependency install hooks are restricted by
+`pnpm-workspace.yaml`; review unknown hooks instead of approving everything.
+See [publishing and supply-chain operations](docs/publishing-security.md).
+
+## Structure
+
+| Location | Purpose |
+| --- | --- |
+| `urara/blog/<slug>/+page.svelte.md` | Authored articles and adjacent images |
+| `urara/assets/`, `urara/favicon.png`, `urara/robots.txt` | Shared public assets |
+| `urara/slides/<slug>/index.html` | Self-contained public slide exports and assets |
+| `src/routes/` | Authored Svelte pages and feed/sitemap endpoints |
+| `src/lib/config/` | Site, navigation, profile and feature configuration |
+| `src/lib/components/`, `src/app.css` | Components, Tailwind/daisyUI themes and typography |
+| `src/sw.ts`, `scripts/pwa-manifest.ts` | Worker and explicit offline inventory |
+| `scripts/content-files.mjs`, `urara.ts` | Content copying and safe cleanup |
+| `tests/`, `scripts/verify-*.mjs` | Regression and generated-output validation |
+
+SvelteKit/Svelte render pages; mdsvex compiles articles, Shiki highlights standard
+code fences, and vite-imagetools/Sharp generate article images. Vercel is the
+production publisher; static output is also built for local validation.
+Node adapter output can be tested with `pnpm start`.
+
+## Write an article
+
+Create `urara/blog/<stable-slug>/+page.svelte.md`, using an existing article as a
+reference. Set dates explicitly; the slug is part of the public URL and feed
+identity, so avoid renaming published articles without a migration plan.
+
+```md
+---
+title: 'Article title'
+created: 2026-10-20
+updated: 2026-10-20
+tags:
+  - 'Example'
+---
+
+## First section
+
+Article text.
+
+![Descriptive alternative text](./example.png)
+```
+
+Headings create the table of contents. Use standard fenced code blocks with a
+language name; the removed Twoslash extensions are not supported. Put images
+beside the article and use relative Markdown links. Check generated images,
+code, tables and heading links in the preview at desktop and mobile widths.
+
+Keep unfinished writing on a separate branch. `unlisted` removes an article
+from listings, feeds, sitemap and offline selection, but its direct URL can
+still be public. Flags and future dates are **not a privacy or publishing gate**:
+content copied into a production build may be reachable. Do not merge drafts
+into `main` before publication is intended. See [preserved drafts and content
+review](docs/content-maintenance.md).
+
+## Images and slides
+
+Shared images belong in `urara/assets/`; article images belong beside their
+Markdown. Preserve meaningful alternative text and verify resized AVIF output.
+For slides, place an HTML export plus its required relative assets under
+`urara/slides/<slug>/`. Verify `/slides/<slug>/` directly and add an intentional
+public link where appropriate. Public slide entry points are included in the
+sitemap. Slides, external media and YouTube are excluded from offline storage.
+
+## Generated files and recovery
+
+Edit `urara/` or authored Svelte sources, not generated Markdown copies in
+`src/routes/`, generated images in `src/static/`, or generated `static/` files.
+`.urara-generated.json` records ownership and content hashes. `pnpm clean`
+removes only recorded, unchanged generated files and refuses to overwrite or
+remove unowned or locally modified output. Never delete source directories as
+a cleanup shortcut.
+
+If interrupted generation leaves an ownership conflict, preserve the affected
+file and compare it to its source before removing only verified generated
+copies. For an old checkout without a manifest, use a fresh checkout as the
+safest recovery. Generated output, dependency directories and local settings
+are ignored and must not be committed.
+
+## Validation
 
 ```sh
 pnpm verify:install-policy
@@ -35,150 +113,43 @@ pnpm verify:build
 pnpm preview
 ```
 
-The regression suite covers cleanup ownership and watch shutdown. Build
-verification runs two complete builds, checks all tracked file contents, and
-checks core endpoints and every published post's generated route, then builds
-Vercel output and verifies its Node 24 function runtime. PR and main
-CI run the same commands. `pnpm build` logs the actual Node version.
+CI performs a frozen install and these checks. `verify:build` runs two static
+builds with tracked-source fingerprints, validates every public article/feed,
+XML/canonical URLs and stable feed IDs, decodes AVIF images, checks offline
+inventory and generated CSS, and verifies Node 24 Vercel output. It leaves the
+static `build/` available for preview. `pnpm build` runs one normal build.
 
-## Deployment
+Browser checks include direct article reload, all themes, keyboard navigation,
+mobile tables/code, reduced motion and click-to-play video. Follow the actual
+migration, offline, update and desktop-install checklist in
+[offline verification](docs/offline-verification.md). Other engines/physical
+mobile devices are not considered tested merely because unit tests pass.
 
-Vercel project `mujina-prod-site` uses this child repository directly, with Node
-24.x selected both in the project and `engines.node`. Its root is this repository
-root, not the parent workbench. Verify the preview for the exact PR commit before
-merging and inspect the resulting production deployment and core routes.
+## Publish and roll back
 
-Vercel is the canonical production publisher, from `main` to
-https://www.mujina-prod.com. GitHub Pages is disabled and its unused publisher
-has been removed. See [publishing and supply-chain operations](docs/publishing-security.md)
-for deployment verification, rollback, dependency script approvals, automated
-updates and repository security settings.
+1. Open a PR against `main`; verify the latest commit's Validate job and Vercel
+   preview, including primary routes and relevant browser behavior.
+2. Merge only the verified commit. Confirm the resulting **production**
+   deployment is READY for the merge SHA, with `www.mujina-prod.com` and the
+   apex redirect assigned. Check home, blog, portfolio, a direct article,
+   images, feeds, sitemap and worker.
+3. Update only the `mujina-prod-site` gitlink in a separate workbench PR after
+   production verification. Preserve unrelated workbench changes.
 
-See [dependency maintenance](docs/dependency-maintenance.md) for the updated
-framework groups, compatibility decisions, remaining audit findings and checks.
+For an urgent rollback, promote the previous known-good deployment in the same
+Vercel project, verify aliases/routes, then revert the responsible merge in a
+validated PR and update the workbench reference. There is no database migration.
+Detailed project identity, legacy targets, security settings and Search Console
+limitations are recorded in [publishing operations](docs/publishing-security.md).
 
-## Upstream Urara documentation and attribution
+## Maintenance and attribution
 
-<br />
-<div align="center">
-<a href="https://github.com/importantimport/urara">
-<img src="https://github.com/importantimport/urara/raw/main/urara/hello-world/urara.webp" alt="urara" /></a>
-</div>
-<br />
+- [Dependency decisions and audit evidence](docs/dependency-maintenance.md)
+- [Offline behavior and verification](docs/offline-verification.md)
+- [Draft preservation, links and deferred factual review](docs/content-maintenance.md)
 
-<p align="center">
-<a href="https://fff.js.org"><img src="https://img.shields.io/badge/%F0%9F%8C%9F%20F%20F%20F-1.2-yellow?style=flat" alt="fff" /></a>
-<img src="https://img.shields.io/github/languages/top/importantimport/urara?color=%23ff3e00" alt="Language" />
-<a href="https://github.com/importantimport/urara/blob/main/COPYING"><img src="https://img.shields.io/github/license/importantimport/urara?color=%23fff" alt="License" /></a>
-<img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Fimportantimport%2Furara.svg?type=shield" alt="FOSSA Status" />
-</p>
-<p align="center">
-<a href="https://urara-demo.netlify.app">🚀 Demo</a>
-/
-<a href="https://urara-docs.netlify.app">📝 Documentation</a>
-/
-<a href="https://github.com/importantimport/urara/discussions">💬 Discussions</a>
-</p>
-<p align="center">
-<span>English</span>
-|
-<a href="https://github.com/importantimport/urara/blob/main/README.zh.md">正體中文</a>
-</p>
-
-## 🎉 Try it now!
-
-### Local
-
-```bash
-npx degit importantimport/urara my-blog && cd my-blog # create a new project in my-blog
-pnpm i # if u don't have pnpm installed, run: npm i -g pnpm
-```
-
-### Remote
-
-[![Open in StackBlitz](https://img.shields.io/badge/-Open%20in%20StackBlitz-1374ef?style=for-the-badge&logo=Amp)](https://stackblitz.com/github/importantimport/urara) [![Use this template](https://img.shields.io/badge/-Use%20this%20Template-181717?style=for-the-badge&logo=GitHub)](https://github.com/importantimport/urara/generate) [![Deploy with Vercel](https://img.shields.io/badge/-Deploy%20with%20Vercel-1374ef?style=for-the-badge&logo=Vercel)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fimportantimport%2Furara&env=URARA_SITE_URL&envDescription=Site%20URL.&envLink=https%3A%2F%2Fexample.com&project-name=urara-blog&repository-name=urara-blog) [![Deploy to Netlify](https://img.shields.io/badge/-Deploy%20to%20Netlify-15847d?style=for-the-badge&logo=Netlify&logoColor=white)](https://app.netlify.com/start/deploy?repository=https%3A%2F%2Fgithub.com%2Fimportantimport%2Furara#URARA_SITE_URL=https://example.com&CUSTOM_LOGO=https://github.com/importantimport/urara/raw/main/urara/assets/any@512.png)
-
-## ⚡️ Usage
-
-### Developing
-
-Start a development server:
-
-```bash
-pnpm dev
-```
-
-### Building
-
-Create a production version of ur blog:
-
-```bash
-pnpm build
-```
-
-u can preview the built app with `pnpm preview`.
-
-### Documentation
-
-For full documentation, visit [urara-docs.netlify.app](https://urara-docs.netlify.app).
-
-### Give this project a star
-
-tyvm! ur ⭐ will give me more motivation to improve this project.
-
-## ✨ Features
-
-- Out of the box **Atom feed** (WebSub), **Sitemap**, **PWA** (Web app manifest & ServiceWorker) support.
-- Present beautiful interface designs and animations with daisyUI, of course.
-- Good [IndieWeb](https://indieweb.org/) Compatibility - Multi-kind posts with [microformats2](https://microformats.org/) markup content, Showcasing [Webmentions](https://indieweb.org/Webmention) via [webmentions.io](https://webmentions.io) API.
-- Don't worry about the article and image directories - just put them under a folder and they'll be [copied automatically at build time](https://github.com/importantimport/urara/blob/main/urara.ts).
-- [Comment Components](https://github.com/importantimport/urara/tree/main/src/lib/components/comments): Webmentions, Giscus, Utterances... u can use more than one.
-
-## 📦️ Pre-packed
-
-### TailwindCSS & PostCSS Plugins
-
-- [daisyUI](https://github.com/saadeghi/daisyui) - The most popular, free and open-source Tailwind CSS component library.
-- [Tailwind CSS Typography](https://github.com/tailwindlabs/tailwindcss-typography) - Beautiful typographic defaults for HTML you don't control.
-- [Autoprefixer](https://github.com/postcss/autoprefixer) - Parse CSS and add vendor prefixes to rules by Can I Use.
-- [CSSNANO](https://github.com/cssnano/cssnano) - A modular minifier, built on top of the PostCSS ecosystem.
-
-### Markdown preprocessor & Syntax highlighter
-
-- [MDsveX](https://github.com/pngwn/MDsveX) - A markdown preprocessor for Svelte.
-- [Shiki Twoslash](https://github.com/shikijs/twoslash) - A beautiful Syntax Highlighter.
-
-### Vite Plugins
-
-- [UnoCSS](https://github.com/unocss/unocss) - The instant on-demand atomic CSS engine.
-- [VitePWA](https://github.com/antfu/vite-plugin-pwa) - Zero-config PWA for Vite.
-
-## 🚀 Sites
-
-- [./kwaa.dev](https://kwaa.dev) - [kwaa/blog](https://github.com/kwaa/blog)
-- [Seviche.cc](https://seviche.cc) - [Sevichecc/Urara-Blog](https://github.com/Sevichecc/Urara-Blog)
-- [./khatta.sh](https://blog.shameerkashif.me) - [hash3liZer/khatta](https://github.com/hash3liZer/khatta)
-
-and more...
-
-- [urara-blog - Discussions](https://github.com/importantimport/urara/discussions/2)
-- [urara-blog - Topics](https://github.com/topics/urara-blog)
-
-are u using Urara? add the `urara-blog` topic on ur repo!
-
-## 👥 Contributing
-
-If u're interested in contributing to Urara, pls read [contributing docs](.github/CONTRIBUTING.md) before submitting a pull request.
-
-## 📝 License
-
-This work is free, it comes without any warranty. You can redistribute it and/or modify it under the
-terms of the Do What The Fuck You Want To Public License, Version 2,
-as published by Sam Hocevar. See the [COPYING](https://github.com/importantimport/urara/blob/main/COPYING) file for more details.
-
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fimportantimport%2Furara.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fimportantimport%2Furara?ref=badge_large)
-
-special thanks / inspired from:
-
-- [@michaeloliverx - Generate Posts List](https://github.com/pngwn/MDsveX/issues/294#issuecomment-907029639)
-- icon made by [Kpouri](https://github.com/kpouri)
+Built on [Urara](https://github.com/importantimport/urara), originally authored
+by 藍+85CD and contributors. Upstream attribution in the site footer and the
+original [WTFPL license](COPYING) are retained. Site-specific maintenance is
+managed in this repository; upstream documentation remains available in the
+Urara repository.
