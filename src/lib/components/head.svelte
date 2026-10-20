@@ -3,6 +3,7 @@
   import OpenGraph from '$lib/components/head_opengraph.svelte'
   import { head } from '$lib/config/general'
   import { site } from '$lib/config/site'
+  import { canonicalPage } from '$lib/utils/urls'
 
   // An explicit default makes this Svelte prop optional.
   // eslint-disable-next-line no-undef-init
@@ -14,7 +15,7 @@
 <svelte:head>
   <meta content={site.author?.name} name='author' />
   {#if post}
-    <link href={site.protocol + site.domain + post.path} rel='canonical' />
+    <link href={canonicalPage(post.path)} rel='canonical' />
     {#if post.type === 'article'}
       <title>{post.title} | {site.title}</title>
     {:else if post.type === 'note'}
@@ -27,10 +28,10 @@
     <meta content={site.keywords?.join(', ')} name='keywords' />
     {#if page}
       <title>{page.title ?? page.path.slice(1)} | {site.title}</title>
-      <link href={site.protocol + site.domain + page.path} rel='canonical' />
+      <link href={canonicalPage(page.path)} rel='canonical' />
     {:else}
       <title>{site.subtitle ? `${site.title} - ${site.subtitle}` : site.title}</title>
-      <link href={site.protocol + site.domain} rel='canonical' />
+      <link href={canonicalPage()} rel='canonical' />
     {/if}
   {/if}
   {#if head.custom}

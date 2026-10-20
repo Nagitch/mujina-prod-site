@@ -8,6 +8,7 @@
   import { post as postConfig } from '$lib/config/post'
   import { posts as storedPosts } from '$lib/stores/posts'
   import { title as storedTitle } from '$lib/stores/title'
+  import { pagePath } from '$lib/utils/urls'
 
   export let post: Urara.Post
   export let preview: boolean = false
@@ -91,7 +92,7 @@
           <h2
             class='bg-[length:100%_0%] bg-[position:0_88%] underline decoration-4 decoration-transparent group-hover:decoration-primary hover:bg-[length:100%_100%] hover:text-primary-content bg-gradient-to-t from-primary to-primary bg-no-repeat transition-all ease-in-out duration-300 card-title text-3xl mr-auto'
             itemprop='name headline'>
-            <a class='u-url p-name' href={post.path} itemprop='url'>{post.title ?? post.path.slice(1)}</a>
+            <a class='u-url p-name' href={pagePath(post.path)} itemprop='url'>{post.title ?? post.path.slice(1)}</a>
           </h2>
         {:else}
           <h1 class='card-title text-3xl mb-8 p-name' itemprop='name headline'>{post.title ?? post.path.slice(1)}</h1>

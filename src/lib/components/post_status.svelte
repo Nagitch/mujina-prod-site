@@ -1,5 +1,6 @@
 <script lang='ts'>
   import { site } from '$lib/config/site'
+  import { pagePath } from '$lib/utils/urls'
 
   export let post: Urara.Post
   export let preview: boolean = false
@@ -21,7 +22,7 @@
     {site.author.name}
   </a>
   <span class='opacity-50' class:hidden={preview}>/</span>
-  <a class='u-url u-uid swap group/time' href={post.path}>
+  <a class='u-url u-uid swap group/time' href={pagePath(post.path)}>
     <time
       class='font-semibold opacity-75 duration-500 ease-in-out mr-auto group-hover/time:opacity-0 dt-published'
       datetime={jsonPublished}

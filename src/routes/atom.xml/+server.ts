@@ -3,51 +3,41 @@ import { feed } from '$lib/config/general'
 import { favicon } from '$lib/config/icon'
 import { site } from '$lib/config/site'
 import { genPosts } from '$lib/server/posts'
-
 import { genTags } from '$lib/utils/posts'
+import { absoluteUrl, atomId, canonicalPage, cdata, xml } from '$lib/utils/urls'
+
+function categories(tags: string[] = []) {
+  return tags.map(tag => `<category term="${xml(tag)}" scheme="${xml(`${canonicalPage()}?tags=${encodeURIComponent(tag)}`)}"/>`).join('')
+}
 
 function render(posts = genPosts({ filterUnlisted: true, postHtml: true, postLimit: feed.limit })): string {
-  return `<?xml version='1.0' encoding='utf-8'?>
+  return `<?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <id>${site.protocol + site.domain}/</id>
-  <title><![CDATA[${site.title}]]></title>${site.subtitle ? `\n  <subtitle><![CDATA[${site.subtitle}]]></subtitle>` : ''}${
-    favicon ? `\n  <icon>${favicon.src}</icon>` : ''
-  }
-  <link href="${site.protocol + site.domain}" />
-  <link href="${site.protocol + site.domain}/atom.xml" rel="self" type="application/atom+xml" />${
-    feed.hubs?.map(hub => `\n  <link href="${hub}" rel="hub"/>`).join('') ?? ''
-  }
+  <id>${xml(atomId())}</id>
+  <title>${cdata(site.title)}</title>
+  ${site.subtitle ? `<subtitle>${cdata(site.subtitle)}</subtitle>` : ''}
+  ${favicon ? `<icon>${xml(absoluteUrl(favicon.src))}</icon>` : ''}
+  <link href="${xml(canonicalPage())}"/>
+  <link href="${xml(absoluteUrl('/atom.xml'))}" rel="self" type="application/atom+xml"/>
+  ${feed.hubs?.map(hub => `<link href="${xml(hub)}" rel="hub"/>`).join('') ?? ''}
   <updated>${new Date().toJSON()}</updated>
-  <author>
-    <name><![CDATA[${site.author.name}]]></name>
-  </author>${genTags(posts)
-    .map(tag => `\n  <category term="${tag}" scheme="${site.protocol + site.domain}/?tags=${encodeURI(tag)}" />`)
-    .join('')}${posts
-    .map(
-      post => `\n  <entry>
-    <title type="html"><![CDATA[${post.title}]]></title>
-    <link href="${site.protocol + site.domain + post.path}" />
-    <id>${site.protocol + site.domain + post.path}</id>
+  <author><name>${cdata(site.author.name ?? '')}</name></author>
+  ${categories(genTags(posts))}
+  ${posts.map(post => `<entry>
+    <title type="html">${cdata(post.title ?? '')}</title>
+    <link href="${xml(canonicalPage(post.path))}"/>
+    <id>${xml(atomId(post.path))}</id>
     <published>${new Date(post.published ?? post.created).toJSON()}</published>
-    <updated>${new Date(post.updated ?? post.published ?? post.created).toJSON()}</updated>${
-      post.summary ? `\n    <summary type="html"><![CDATA[${post.summary.toString()}]]></summary>` : ''
-    }
-    <content type="html">
-      <![CDATA[${post.html}]]>
-    </content>${post.tags
-      ?.map(tag => `\n    <category term="${tag}" scheme="${site.protocol + site.domain}/?tags=${encodeURI(tag)}" />`)
-      .join('')}
-  </entry>`,
-    )
-    .join('')}
-</feed>`.trim()
+    <updated>${new Date(post.updated ?? post.published ?? post.created).toJSON()}</updated>
+    ${post.summary ? `<summary type="html">${cdata(post.summary.toString())}</summary>` : ''}
+    <content type="html">${cdata(post.html ?? '')}</content>
+    ${categories(post.tags)}
+  </entry>`).join('')}
+</feed>`
 }
 
 export const prerender = true
 export const trailingSlash = 'never'
-export const GET: RequestHandler = async () =>
-  new Response(render(), {
-    headers: {
-      'content-type': 'application/atom+xml; charset=utf-8',
-    },
-  })
+export const GET: RequestHandler = () => new Response(render(), {
+  headers: { 'content-type': 'application/atom+xml; charset=utf-8' },
+})

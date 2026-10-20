@@ -1,4 +1,5 @@
 import type { SiteConfig } from '$lib/types/site'
+import { SITE_ORIGIN } from '$lib/utils/urls'
 
 export const site: SiteConfig = {
   author: {
@@ -8,12 +9,12 @@ export const site: SiteConfig = {
     status: '🙂',
   },
   description: 'Mujina Production - Nagitch\'s carrer blanding site',
-  domain: import.meta.env.URARA_SITE_DOMAIN ?? 'mujina-prod.com',
+  domain: new URL(SITE_ORIGIN).hostname,
   header: {
     logo: '/assets/any@192.png',
   },
   lang: 'ja-JP',
-  protocol: import.meta.env.URARA_SITE_PROTOCOL ?? (import.meta.env.DEV ? 'http://' : 'https://'),
+  protocol: `${new URL(SITE_ORIGIN).protocol}//`,
   subtitle: 'Mujina Production by Nagitch',
   themeColor: '#091540',
   // domain: import.meta.env.a ?? 'localhost:5173',
