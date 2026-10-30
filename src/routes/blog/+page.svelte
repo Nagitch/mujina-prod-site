@@ -1,15 +1,19 @@
 <script lang='ts'>
   import { goto } from '$app/navigation'
-  import { page } from '$app/stores'
-  import Footer from '$lib/components/footer.svelte'
-  import Head from '$lib/components/head.svelte'
-  import Profile from '$lib/components/index_profile.svelte'
-  import Post from '$lib/components/post_card.svelte'
-  import { posts as storedPosts, tags as storedTags } from '$lib/stores/posts'
-  import { title as storedTitle } from '$lib/stores/title'
-  import { fly } from '$lib/utils/motion'
-  import { blogTagsPath } from '$lib/utils/urls'
+  import { page } from '$app/state'
   import { onMount } from 'svelte'
+  import { toStore } from 'svelte/store'
+  import Footer from '#lib/components/footer.svelte'
+  import Head from '#lib/components/head.svelte'
+  import Profile from '#lib/components/index_profile.svelte'
+  import Post from '#lib/components/post_card.svelte'
+  import { posts as storedPosts, tags as storedTags } from '#lib/stores/posts.ts'
+  import { title as storedTitle } from '#lib/stores/title.ts'
+  import { fly } from '#lib/utils/motion.ts'
+  import { blogTagsPath } from '#lib/utils/urls.ts'
+
+  // Bridge rune state to the existing legacy reactive tag filter.
+  const pageUrl = toStore(() => page.url)
 
   let allPosts: Urara.Post[]
   let allTags: string[]
@@ -25,10 +29,10 @@
   $: if (posts.length > 1)
     years = [new Date(posts[0].published ?? posts[0].created).getFullYear()]
 
-  $: tags = loaded ? $page.url.searchParams.get('tags')?.split(',').filter(Boolean) ?? [] : []
+  $: tags = loaded ? $pageUrl.searchParams.get('tags')?.split(',').filter(Boolean) ?? [] : []
   $: posts = allPosts.filter(post => tags.every(tag => post.tags?.includes(tag)))
 
-  const selectTags = (selected: string[]) => goto(blogTagsPath(selected), { replaceState: true, noScroll: true, keepFocus: true })
+  const selectTags = (selected: string[]) => goto(blogTagsPath(selected), { replace: true, reset: false })
 
   onMount(() => {
     loaded = true

@@ -1,5 +1,5 @@
-import { typeOfPost } from '$lib/utils/posts'
 import { render } from 'svelte/server'
+import { typeOfPost } from '#lib/utils/posts.ts'
 
 interface GenPostsOptions {
   /** hide posts with 'unlisted' flag */

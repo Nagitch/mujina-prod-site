@@ -1,12 +1,12 @@
 <script lang='ts'>
   import type { LayoutData } from './$types'
-  import { browser, dev } from '$app/environment'
-  import Head from '$lib/components/head_static.svelte'
-  import Header from '$lib/components/header.svelte'
-  import Transition from '$lib/components/transition.svelte'
-  import { posts, tags } from '$lib/stores/posts'
-  import { genTags } from '$lib/utils/posts'
+  import { browser, dev } from '$app/env'
   import { onMount } from 'svelte'
+  import Head from '#lib/components/head_static.svelte'
+  import Header from '#lib/components/header.svelte'
+  import Transition from '#lib/components/transition.svelte'
+  import { posts, tags } from '#lib/stores/posts.ts'
+  import { genTags } from '#lib/utils/posts.ts'
 
   import 'uno.css'
 
@@ -48,7 +48,7 @@
     navigator.serviceWorker.addEventListener('controllerchange', controllerChanged)
     navigator.serviceWorker.addEventListener('message', message)
     const cleanups: (() => void)[] = []
-    navigator.serviceWorker.register('/sw.js', { scope: '/', updateViaCache: 'none' }).then((registration) => {
+    navigator.serviceWorker.register('/sw.js', { type: 'module', scope: '/', updateViaCache: 'none' }).then((registration) => {
       if (disposed)
         return
       const ready = () => {

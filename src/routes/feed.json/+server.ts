@@ -1,11 +1,11 @@
 import type { RequestHandler } from './$types'
-import { feed } from '$lib/config/general'
-import { any, favicon } from '$lib/config/icon'
-import { site } from '$lib/config/site'
-import { genPosts } from '$lib/server/posts'
-import { absoluteUrl, canonicalPage } from '$lib/utils/urls'
-
 import { json } from '@sveltejs/kit'
+import { feed } from '#lib/config/general.ts'
+import { any, favicon } from '#lib/config/icon.ts'
+import { site } from '#lib/config/site.ts'
+import { genPosts } from '#lib/server/posts.ts'
+
+import { absoluteUrl, canonicalPage } from '#lib/utils/urls.ts'
 
 function render(posts = genPosts({ filterUnlisted: true, postHtml: true, postLimit: feed.limit })) {
   return {

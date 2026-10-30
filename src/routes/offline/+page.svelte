@@ -1,5 +1,5 @@
 <script lang='ts'>
-  import Head from '$lib/components/head.svelte'
+  import Head from '#lib/components/head.svelte'
 </script>
 
 <Head page={{ title: 'オフライン', path: '/offline/' }} />

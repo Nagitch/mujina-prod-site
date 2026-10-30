@@ -1,5 +1,5 @@
 <script lang='ts'>
-  import { fly } from '$lib/utils/motion'
+  import { fly } from '#lib/utils/motion.ts'
 
   export let path: string = ''
 </script>

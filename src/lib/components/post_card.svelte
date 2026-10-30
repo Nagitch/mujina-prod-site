@@ -1,14 +1,14 @@
 <script lang='ts'>
-  import { browser } from '$app/environment'
-  import Comment from '$lib/components/post_comment.svelte'
-  import Pagination from '$lib/components/post_pagination.svelte'
-  import Reply from '$lib/components/post_reply.svelte'
-  import Status from '$lib/components/post_status.svelte'
-  import Image from '$lib/components/prose/img.svelte'
-  import { post as postConfig } from '$lib/config/post'
-  import { posts as storedPosts } from '$lib/stores/posts'
-  import { title as storedTitle } from '$lib/stores/title'
-  import { blogTagsPath, pagePath } from '$lib/utils/urls'
+  import { browser } from '$app/env'
+  import Comment from '#lib/components/post_comment.svelte'
+  import Pagination from '#lib/components/post_pagination.svelte'
+  import Reply from '#lib/components/post_reply.svelte'
+  import Status from '#lib/components/post_status.svelte'
+  import Image from '#lib/components/prose/img.svelte'
+  import { post as postConfig } from '#lib/config/post.ts'
+  import { posts as storedPosts } from '#lib/stores/posts.ts'
+  import { title as storedTitle } from '#lib/stores/title.ts'
+  import { blogTagsPath, pagePath } from '#lib/utils/urls.ts'
 
   export let post: Urara.Post
   export let preview: boolean = false

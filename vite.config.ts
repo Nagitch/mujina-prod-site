@@ -1,13 +1,34 @@
+import process from 'node:process'
+import adapterNode from '@sveltejs/adapter-node'
+import adapterStatic from '@sveltejs/adapter-static'
+import adapterVercel from '@sveltejs/adapter-vercel'
 import { sveltekit } from '@sveltejs/kit/vite'
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
+
 import tailwindcss from '@tailwindcss/vite'
-import { SvelteKitPWA as pwa } from '@vite-pwa/sveltekit'
+import { mdsvex } from 'mdsvex'
 import unoCSS from 'unocss/vite'
 import { defineConfig } from 'vite'
 import { imagetools } from 'vite-imagetools'
 
-import { offlineManifest } from './scripts/pwa-manifest'
+import mdsvexConfig from './mdsvex.config.js'
+import { withPwa } from './scripts/pwa-adapter.ts'
 
-import unoConfig from './uno.config'
+import unoConfig from './uno.config.ts'
+
+const adapters = {
+  vercel: adapterVercel(),
+  node: adapterNode(),
+  static: adapterStatic({
+    assets: 'build',
+    fallback: undefined,
+    pages: 'build',
+  }),
+}
+
+const adapterName = process.env.ADAPTER?.toLowerCase()
+if (adapterName && !Object.hasOwn(adapters, adapterName))
+  throw new Error(`Unknown ADAPTER: ${adapterName}`)
 
 export default defineConfig({
   envPrefix: 'URARA_',
@@ -15,21 +36,22 @@ export default defineConfig({
     tailwindcss(),
     unoCSS(unoConfig),
     imagetools(),
-    sveltekit(),
-    pwa({
-      manifest: false,
-      strategies: 'injectManifest',
-      srcDir: 'src',
-      filename: 'sw.ts',
-      injectRegister: false,
-      registerType: 'prompt',
-      scope: '/',
-      kit: { trailingSlash: 'always' },
-      injectManifest: {
-        globPatterns: ['client/**/*.{js,css,html,svg,ico,png,jpg,jpeg,webp,avif,webmanifest}', 'prerendered/**/*.{html,json,webmanifest}'],
-        globIgnores: ['**/slides/**', '**/sw*', '**/workbox-*'],
-        manifestTransforms: [offlineManifest],
+    sveltekit({
+      extensions: ['.svelte', ...(mdsvexConfig.extensions ?? [])],
+      preprocess: [mdsvex(mdsvexConfig), vitePreprocess()],
+      paths: { relative: false },
+      files: { serviceWorker: 'src/sw.ts' },
+      serviceWorker: { register: false },
+      adapter: withPwa(adapterName
+        ? adapters[adapterName as keyof typeof adapters]
+        : process.env.VERCEL ? adapters.vercel : adapters.static),
+      csp: {
+        directives: {
+          'style-src': ['self', 'unsafe-inline', 'https://giscus.app'],
+        },
+        mode: 'auto',
       },
+      prerender: { handleMissingId: 'warn' },
     }),
   ],
   // avoid vfx-js issue with vite https://github.com/fand/react-vfx/issues/72

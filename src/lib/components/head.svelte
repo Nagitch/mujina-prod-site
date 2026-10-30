@@ -1,9 +1,9 @@
 <script lang='ts'>
-  import { dev } from '$app/environment'
-  import OpenGraph from '$lib/components/head_opengraph.svelte'
-  import { head } from '$lib/config/general'
-  import { site } from '$lib/config/site'
-  import { canonicalPage } from '$lib/utils/urls'
+  import { dev } from '$app/env'
+  import OpenGraph from '#lib/components/head_opengraph.svelte'
+  import { head } from '#lib/config/general.ts'
+  import { site } from '#lib/config/site.ts'
+  import { canonicalPage } from '#lib/utils/urls.ts'
 
   // An explicit default makes this Svelte prop optional.
   // eslint-disable-next-line no-undef-init

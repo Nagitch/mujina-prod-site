@@ -1,5 +1,5 @@
-import type { SiteConfig } from '$lib/types/site'
-import { SITE_ORIGIN } from '$lib/utils/urls'
+import type { SiteConfig } from '#lib/types/site.ts'
+import { SITE_ORIGIN } from '#lib/utils/urls.ts'
 
 export const site: SiteConfig = {
   author: {

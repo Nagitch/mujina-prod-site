@@ -31,9 +31,9 @@ Re-run `pnpm audit`, `pnpm test`, `pnpm check`, `pnpm lint`, `pnpm verify:instal
 
 ## Retained compatibility decisions from #50
 
-The earlier refresh reduced 123 audit findings to the four addressed above. It moved Svelte 4 to 5.57.2, Vite 5 to 7.3.7, the Svelte Vite plugin to 6, mdsvex to 0.12.8, and svelte-check to 4.7.7. Keep SvelteKit 2.70.3, TypeScript 5.9.3 and compatible adapters: the PWA integration's peer contract supports Kit 1/2. Kit 3/Vite 8 requires a separate compatibility review.
+The earlier refresh reduced 123 audit findings to the four addressed above. It moved Svelte 4 to 5.57.2, Vite 5 to 7.3.7, the Svelte Vite plugin to 6, mdsvex to 0.12.8, and svelte-check to 4.7.7. That refresh retained SvelteKit 2.70.3 and TypeScript 5.9.3 because the former PWA integration supported only Kit 1/2. The Kit 3 migration below replaces that integration.
 
-Server-side article rendering uses `svelte/server` in `$lib/server/posts.ts`; browser helpers must not import compiled articles or server rendering. Shiki 4.5 handles standard language fences; unused Twoslash/fence metadata extensions were removed. Image tooling uses Sharp 0.35.5, `as=img` metadata and the `w` resize directive; build verification decodes generated AVIF images. Set-like frontmatter arrays are deduplicated after remark-fff 1.x.
+Server-side article rendering uses `svelte/server` in `#lib/server/posts.ts`; browser helpers must not import compiled articles or server rendering. Shiki 4.5 handles standard language fences; unused Twoslash/fence metadata extensions were removed. Image tooling uses Sharp 0.35.5, `as=img` metadata and the `w` resize directive; build verification decodes generated AVIF images. Set-like frontmatter arrays are deduplicated after remark-fff 1.x.
 
 ESLint 10 and the Antfu preset retain supported Svelte legacy props and the project's existing module conventions. Unused dependencies and automatic/Netlify adapters were removed. Vercel uses its explicit adapter; static and documented Node output remain supported. Historical Netlify configuration is not an actively supported deployment target. Node 24 and pnpm 10.34.7 remain pinned, with install hooks restricted by `pnpm-workspace.yaml`.
 
@@ -50,3 +50,32 @@ the project's pinned pnpm 10.34.7; it does not select the application Node
 version. Full SHA pins, `contents: read`, and `persist-credentials: false` remain
 in place. Final full pnpm audit and GitHub open Dependabot alert inventory both
 reported zero findings on 2026-10-20.
+
+## SvelteKit 3 migration (#71 / #72)
+
+The original #72 preview at `5bccb14` failed while importing `parseSync` from Vite 7.3.7. The original #71 preview at `2f0ba57` failed with TS5107 because `moduleResolution: Node` selects deprecated Node10 resolution. Both failures were confirmed in Vercel build logs; they are preview failures, not evidence of a production outage.
+
+Use Kit 3.0.0, TypeScript 6.0.3 (the same update as #71), Vite >=8.0.12, the Svelte Vite plugin 7, and Kit 3 adapters (Node 6, static 4, Vercel 7). Node 24 and Svelte 5.57.2 already satisfy the [official migration requirements](https://svelte.dev/docs/kit/migrating-to-sveltekit-3). Regenerate `pnpm-lock.yaml` with pnpm 10.34.7 rather than combining the competing #71/#72 lockfile patches. If this combined migration is merged, #71 and #72 are superseded; neither is closed by this change.
+
+Configuration now lives in `sveltekit({...})` in `vite.config.ts`, with former `kit` options flattened. The mdsvex pipeline, root-relative paths, CSP, prerender warning policy, and adapter selection (`ADAPTER` first, then Vercel detection, otherwise static) are retained. Native `#lib/*` package imports have explicit extensions. `$app/env` replaces `$app/environment`, and `$app/state` replaces removed stores; the legacy blog filter bridges `page.url` with Svelte's `toStore` so query changes stay reactive. Navigation options use Kit 3's `replace` and `reset` names.
+
+The app extends `$app/tsconfig`, includes `$app/types`, and checks its worker in a separate project. The Node CLI uses Bundler resolution and explicitly includes Node types; `strict: false` preserves its pre-TypeScript-6 default, while the application retains `strict: true`.
+
+`@vite-pwa/sveltekit` 1.1.0 neither declares Kit 3 support nor generates `/sw.js` under Kit 3's environment build pipeline. It and `vite-plugin-pwa` are replaced by a small adapter wrapper: Kit compiles the worker, Workbox injects the existing `offlineManifest` after prerendering and before the selected adapter copies assets. `/sw.js`, scope `/`, manual registration, public-page-only caching, update consent, multi-tab protection and exact legacy-cache cleanup are preserved. Registration specifies `type: module` for Kit 3's module worker. A successful Vite build alone is not sufficient evidence that the PWA output exists.
+
+Validation commands (Node 24, pnpm 10.34.7):
+
+```sh
+corepack pnpm install --frozen-lockfile
+corepack pnpm verify:install-policy
+corepack pnpm test
+corepack pnpm urara:build
+corepack pnpm check
+corepack pnpm clean
+corepack pnpm lint
+corepack pnpm verify:build
+ADAPTER=node corepack pnpm build
+VERCEL=1 corepack pnpm build
+```
+
+Local evidence: frozen installation, install-hook policy checks, lint, all 17 existing tests and app/worker type checks passed. Static, Node and fresh-worktree Vercel builds succeeded. Node served `/sw.js`, `/manifest.webmanifest` and `/offline/` with HTTP 200. Vercel Build Output v3, Node 24 functions and injected `/sw.js` were inspected. Static output passed published routes, XML/feed identity, SSR article HTML, Shiki, AVIF decoding, offline inventory (58 files), and all 13 theme CSS checks. The `verify:build` command did not complete: the second build rejected `src/static/assets/any@180.png` as unowned after the ownership manifest was emptied. This remains an unresolved validation failure; do not treat a successful individual build as a replacement for that check. Kit also warns that UnoCSS uses unsupported `transformIndexHtml` hooks; the generated-style assertions passed. Browser offline/update behavior remains unverified because the local Playwright Chromium executable is unavailable. A newly deployed Vercel preview must still be verified before merging.
