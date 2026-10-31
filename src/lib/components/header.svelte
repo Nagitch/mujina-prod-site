@@ -1,12 +1,12 @@
 <script lang='ts'>
-  import { browser } from '$app/environment'
-  import Nav from '$lib/components/header_nav.svelte'
-  import Search from '$lib/components/header_search.svelte'
-  import { header as headerConfig, theme } from '$lib/config/general'
-  import { site } from '$lib/config/site'
-  import { title as storedTitle } from '$lib/stores/title'
-  import { fly } from '$lib/utils/motion'
+  import { browser } from '$app/env'
   import { tick } from 'svelte'
+  import Nav from '#lib/components/header_nav.svelte'
+  import Search from '#lib/components/header_search.svelte'
+  import { header as headerConfig, theme } from '#lib/config/general.ts'
+  import { site } from '#lib/config/site.ts'
+  import { title as storedTitle } from '#lib/stores/title.ts'
+  import { fly } from '#lib/utils/motion.ts'
 
   export let path: string
   $: title = $storedTitle as string

@@ -1,8 +1,8 @@
 <script lang='ts'>
-  import type { GiscusConfig } from '$lib/types/post'
+  import type { GiscusConfig } from '#lib/types/post.ts'
 
-  import { site } from '$lib/config/site'
   import { onMount } from 'svelte'
+  import { site } from '#lib/config/site.ts'
 
   export let config: GiscusConfig
 

@@ -1,7 +1,7 @@
 <script lang='ts'>
-  import type { CommentConfig } from '$lib/types/post'
+  import type { CommentConfig } from '#lib/types/post.ts'
 
-  import { toSnake } from '$lib/utils/case'
+  import { toSnake } from '#lib/utils/case.ts'
 
   export let post: Urara.Post
   export let config: CommentConfig

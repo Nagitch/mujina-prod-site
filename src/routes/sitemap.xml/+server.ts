@@ -1,6 +1,6 @@
 import type { RequestHandler } from './$types'
-import { genPosts } from '$lib/server/posts'
-import { sitemap } from '$lib/utils/urls'
+import { genPosts } from '#lib/server/posts.ts'
+import { sitemap } from '#lib/utils/urls.ts'
 
 const pageRoutes = Object.keys(import.meta.glob('/src/routes/**/+page.svelte', { eager: true }))
   .map(path => path.replace('/src/routes', '').replace(/\/\+page\.svelte$/, '') || '/')

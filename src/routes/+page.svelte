@@ -1,14 +1,14 @@
 <script lang='ts'>
-  import { browser } from '$app/environment'
+  import { browser } from '$app/env'
   import { goto } from '$app/navigation'
-  import { page } from '$app/stores'
-  import Footer from '$lib/components/footer.svelte'
-  import Head from '$lib/components/head.svelte'
-  import Post from '$lib/components/post_card.svelte'
-  import { posts as storedPosts } from '$lib/stores/posts'
-  import { title as storedTitle } from '$lib/stores/title'
-  import { fly } from '$lib/utils/motion'
+  import { page } from '$app/state'
   import { onMount } from 'svelte'
+  import Footer from '#lib/components/footer.svelte'
+  import Head from '#lib/components/head.svelte'
+  import Post from '#lib/components/post_card.svelte'
+  import { posts as storedPosts } from '#lib/stores/posts.ts'
+  import { title as storedTitle } from '#lib/stores/title.ts'
+  import { fly } from '#lib/utils/motion.ts'
 
   let playing = false
   let allPosts: Urara.Post[]
@@ -25,13 +25,13 @@
   $: if (tags) {
     posts = !tags ? allPosts : allPosts.filter(post => tags.every(tag => post.tags?.includes(tag)))
     if (browser && window.location.pathname === '/')
-      goto(tags.length > 0 ? `?tags=${tags.toString()}` : `/`, { replaceState: true })
+      goto(tags.length > 0 ? `?tags=${tags.toString()}` : `/`, { replace: true })
   }
 
   onMount(() => {
     if (browser) {
-      if ($page.url.searchParams.get('tags'))
-        tags = $page.url.searchParams.get('tags')?.split(',') ?? []
+      if (page.url.searchParams.get('tags'))
+        tags = page.url.searchParams.get('tags')?.split(',') ?? []
       loaded = true
     }
     let disposed = false

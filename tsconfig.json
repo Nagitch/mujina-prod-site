@@ -1,8 +1,11 @@
 {
-  "extends": "./.svelte-kit/tsconfig.json",
+  "extends": "$app/tsconfig",
   "compilerOptions": {
     "resolveJsonModule": true,
-    "types": ["vite/client", "vite-plugin-pwa/client"],
+    "types": [
+      "$app/types",
+      "vite/client"
+    ],
     "allowJs": true,
     "checkJs": true,
     "strict": true,
@@ -10,5 +13,16 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": false,
     "skipLibCheck": true
-  }
+  },
+  "include": [
+    "src",
+    "scripts/pwa-manifest.ts",
+    "scripts/pwa-adapter.ts"
+  ],
+  "exclude": [
+    "src/sw.ts",
+    "node_modules",
+    "build",
+    ".vercel"
+  ]
 }

@@ -1,7 +1,7 @@
 <script lang='ts'>
-  import { any, maskable } from '$lib/config/icon'
-  import { site } from '$lib/config/site'
-  import { absoluteUrl, canonicalPage } from '$lib/utils/urls'
+  import { any, maskable } from '#lib/config/icon.ts'
+  import { site } from '#lib/config/site.ts'
+  import { absoluteUrl, canonicalPage } from '#lib/utils/urls.ts'
 
   export let post: undefined | Urara.Post
   export let page: undefined | Urara.Page

@@ -1,8 +1,8 @@
 <script lang='ts'>
-  import type { WebmentionConfig } from '$lib/types/post'
+  import type { WebmentionConfig } from '#lib/types/post.ts'
 
-  import { canonicalPage, LEGACY_ORIGIN } from '$lib/utils/urls'
   import { onMount } from 'svelte'
+  import { canonicalPage, LEGACY_ORIGIN } from '#lib/utils/urls.ts'
 
   export let config: WebmentionConfig
   export let post: Urara.Post

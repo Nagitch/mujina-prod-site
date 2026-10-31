@@ -1,6 +1,6 @@
 <script lang='ts'>
-  import { footer as footerConfig } from '$lib/config/general'
-  import { site } from '$lib/config/site'
+  import { footer as footerConfig } from '#lib/config/general.ts'
+  import { site } from '#lib/config/site.ts'
 
   let className: string = ''
   export { className as class }

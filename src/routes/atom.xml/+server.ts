@@ -1,10 +1,10 @@
 import type { RequestHandler } from './$types'
-import { feed } from '$lib/config/general'
-import { favicon } from '$lib/config/icon'
-import { site } from '$lib/config/site'
-import { genPosts } from '$lib/server/posts'
-import { genTags } from '$lib/utils/posts'
-import { absoluteUrl, atomId, canonicalPage, cdata, xml } from '$lib/utils/urls'
+import { feed } from '#lib/config/general.ts'
+import { favicon } from '#lib/config/icon.ts'
+import { site } from '#lib/config/site.ts'
+import { genPosts } from '#lib/server/posts.ts'
+import { genTags } from '#lib/utils/posts.ts'
+import { absoluteUrl, atomId, canonicalPage, cdata, xml } from '#lib/utils/urls.ts'
 
 function categories(tags: string[] = []) {
   return tags.map(tag => `<category term="${xml(tag)}" scheme="${xml(`${canonicalPage()}?tags=${encodeURIComponent(tag)}`)}"/>`).join('')

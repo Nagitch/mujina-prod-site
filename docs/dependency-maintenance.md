@@ -31,9 +31,9 @@ Re-run `pnpm audit`, `pnpm test`, `pnpm check`, `pnpm lint`, `pnpm verify:instal
 
 ## Retained compatibility decisions from #50
 
-The earlier refresh reduced 123 audit findings to the four addressed above. It moved Svelte 4 to 5.57.2, Vite 5 to 7.3.7, the Svelte Vite plugin to 6, mdsvex to 0.12.8, and svelte-check to 4.7.7. Keep SvelteKit 2.70.3, TypeScript 5.9.3 and compatible adapters: the PWA integration's peer contract supports Kit 1/2. Kit 3/Vite 8 requires a separate compatibility review.
+The earlier refresh reduced 123 audit findings to the four addressed above. It moved Svelte 4 to 5.57.2, Vite 5 to 7.3.7, the Svelte Vite plugin to 6, mdsvex to 0.12.8, and svelte-check to 4.7.7. That refresh retained SvelteKit 2.70.3 and TypeScript 5.9.3 because the former PWA integration supported only Kit 1/2. The Kit 3 migration below replaces that integration.
 
-Server-side article rendering uses `svelte/server` in `$lib/server/posts.ts`; browser helpers must not import compiled articles or server rendering. Shiki 4.5 handles standard language fences; unused Twoslash/fence metadata extensions were removed. Image tooling uses Sharp 0.35.5, `as=img` metadata and the `w` resize directive; build verification decodes generated AVIF images. Set-like frontmatter arrays are deduplicated after remark-fff 1.x.
+Server-side article rendering uses `svelte/server` in `#lib/server/posts.ts`; browser helpers must not import compiled articles or server rendering. Shiki 4.5 handles standard language fences; unused Twoslash/fence metadata extensions were removed. Image tooling uses Sharp 0.35.5, `as=img` metadata and the `w` resize directive; build verification decodes generated AVIF images. Set-like frontmatter arrays are deduplicated after remark-fff 1.x.
 
 ESLint 10 and the Antfu preset retain supported Svelte legacy props and the project's existing module conventions. Unused dependencies and automatic/Netlify adapters were removed. Vercel uses its explicit adapter; static and documented Node output remain supported. Historical Netlify configuration is not an actively supported deployment target. Node 24 and pnpm 10.34.7 remain pinned, with install hooks restricted by `pnpm-workspace.yaml`.
 
@@ -50,3 +50,48 @@ the project's pinned pnpm 10.34.7; it does not select the application Node
 version. Full SHA pins, `contents: read`, and `persist-credentials: false` remain
 in place. Final full pnpm audit and GitHub open Dependabot alert inventory both
 reported zero findings on 2026-10-20.
+
+## SvelteKit 3 migration (#71 / #72)
+
+The original #72 preview at `5bccb14` failed while importing `parseSync` from Vite 7.3.7. The original #71 preview at `2f0ba57` failed with TS5107 because `moduleResolution: Node` selects deprecated Node10 resolution. Both failures were confirmed in Vercel build logs; they are preview failures, not evidence of a production outage.
+
+Use Kit 3.0.0, TypeScript 6.0.3 (the same update as #71), Vite >=8.0.12, the Svelte Vite plugin 7, and Kit 3 adapters (Node 6, static 4, Vercel 7). Node 24 and Svelte 5.57.2 already satisfy the [official migration requirements](https://svelte.dev/docs/kit/migrating-to-sveltekit-3). Regenerate `pnpm-lock.yaml` with pnpm 10.34.7 rather than combining the competing #71/#72 lockfile patches. If this combined migration is merged, #71 and #72 are superseded; neither is closed by this change.
+
+Configuration now lives in `sveltekit({...})` in `vite.config.ts`, with former `kit` options flattened. The mdsvex pipeline, root-relative paths, CSP, prerender warning policy, and adapter selection (`ADAPTER` first, then Vercel detection, otherwise static) are retained. Native `#lib/*` package imports have explicit extensions. `$app/env` replaces `$app/environment`, and `$app/state` replaces removed stores; the legacy blog filter bridges `page.url` with Svelte's `toStore` so query changes stay reactive. Navigation options use Kit 3's `replace` and `reset` names.
+
+The app extends `$app/tsconfig`, includes `$app/types`, and checks its worker in a separate project. The Node CLI uses Bundler resolution and explicitly includes Node types; `strict: false` preserves its pre-TypeScript-6 default, while the application retains `strict: true`.
+
+`@vite-pwa/sveltekit` 1.1.0 neither declares Kit 3 support nor generates `/sw.js` under Kit 3's environment build pipeline. It and `vite-plugin-pwa` are replaced by a small adapter wrapper: Kit compiles the worker, Workbox injects the existing `offlineManifest` after prerendering and before the selected adapter copies assets. `/sw.js`, scope `/`, manual registration, public-page-only caching, update consent, multi-tab protection and exact legacy-cache cleanup are preserved. Registration specifies `type: module` for Kit 3's module worker. A successful Vite build alone is not sufficient evidence that the PWA output exists.
+
+Validation commands (Node 24, pnpm 10.34.7):
+
+```sh
+corepack pnpm install --frozen-lockfile
+corepack pnpm verify:install-policy
+corepack pnpm test
+corepack pnpm urara:build
+corepack pnpm check
+corepack pnpm clean
+corepack pnpm lint
+corepack pnpm verify:build
+ADAPTER=node corepack pnpm build
+VERCEL=1 corepack pnpm build
+```
+
+The initial local run of `verify:build` rejected `src/static/assets/any@180.png` as unowned during its second build. Review on 2026-10-31 used a fresh checkout of `3856c4c`, Node 24.22.1 and pnpm 10.34.7: the complete `verify:build` command passed both static builds, tracked-source preservation and Vercel output checks. The earlier failure was not reproduced; its cause was not established, and no ownership safeguards were weakened.
+
+The same checkout passed frozen installation, install-hook policy checks, all 17 tests, app/worker type checks and lint. Output checks passed public routes, XML/feed identity, SSR article HTML, Shiki, AVIF decoding, the 58-file offline inventory and all 13 theme CSS assertions. A separate Node-adapter build served home, blog, portfolio, an article, `/sw.js`, `/manifest.webmanifest`, `/offline/`, both feeds and sitemap with HTTP 200. Vercel Build Output v3 and Node 24 functions passed the build verifier.
+
+Chromium on macOS verified the blog tag filter (6 posts to 1 Rust post and back), offline article reload with both article images, home/blog/portfolio offline navigation, unknown/slide URL fallback, waiting updates, multi-tab blocking and consent-based reload retaining the article URL. No browser runtime errors were recorded. A separate context also migrated the existing Kit 2 classic worker to Kit 3 without clearing storage, retaining the article and unrelated cache while removing the exact legacy cache. These checks used isolated localhost origins; see [offline verification](offline-verification.md) for scope.
+
+The [Validate run for `3856c4c`](https://github.com/Nagitch/mujina-prod-site/actions/runs/41146355492) succeeded. Its [Vercel preview](https://mujina-prod-site-inarz2uk9-mujina-prod.vercel.app) was READY for that exact SHA, and a direct article request returned HTTP 200. Subsequent commits still require their own CI and preview checks. Kit continues to warn that UnoCSS uses unsupported `transformIndexHtml` hooks; generated-style assertions passed. Other browser engines and physical mobile devices remain unverified.
+
+### Review audit (2026-10-31)
+
+The full audit found six advisories (two moderate, four low) in build dependencies. A targeted lockfile update, within the existing parent ranges, moves `fast-uri` 3.1.8 to 3.1.9 and `serialize-javascript` 7.1.2 to 7.1.4. This resolves the four fast-uri advisories ([scheme decoding](https://github.com/advisories/GHSA-w74x-v6f9-j3xg), [path equivalence](https://github.com/advisories/GHSA-xhq7-xmqj-769h), [host canonicalization](https://github.com/advisories/GHSA-wjr9-j795-jxcr), [relative scheme injection](https://github.com/advisories/GHSA-333x-w4r6-6crp)) and the [function serialization advisory](https://github.com/advisories/GHSA-m5mm-p8h7-m29v). No new override or direct dependency is needed.
+
+`tests/dependency-security.test.mjs` resolves the actual Workbox → AJV → fast-uri and Workbox → terser plugin → serialize-javascript dependencies. It checks malformed-host rejection, the trailing-script function-source case and normal serialization behavior. Both tests fail against the old locked versions and pass after the update; the suite now has 19 tests.
+
+With the updated lockfile, frozen installation, install-hook policy checks, all 19 tests, app/worker type checks, lint and the complete `verify:build` passed. The local Chromium tag/offline/update scenarios above were rerun successfully against the regenerated output, with no recorded runtime errors.
+
+The final full audit still exits nonzero with **one low advisory**, [deepmerge prototype poisoning](https://github.com/advisories/GHSA-gcqx-w48m-w2h4), via `@sveltejs/vite-plugin-svelte` 7.3.1 → deepmerge 4.3.1. The registry and advisory list no patched release as of this review. Inspection of the plugin's `src/utils/options.js` found use in merging build/plugin configuration from defaults and repository-controlled configuration; no request-data path was identified in this site, and deepmerge was absent from the inspected Node/Vercel runtime output. This limits the identified exposure but does not fix the dependency advisory. No audit finding is ignored. Recheck when deepmerge publishes a fix or the Svelte plugin replaces it.

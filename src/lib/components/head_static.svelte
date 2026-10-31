@@ -1,7 +1,7 @@
 <script lang='ts'>
-  import Icon from '$lib/components/head_icon.svelte'
-  import { head } from '$lib/config/general'
-  import { post } from '$lib/config/post'
+  import Icon from '#lib/components/head_icon.svelte'
+  import { head } from '#lib/config/general.ts'
+  import { post } from '#lib/config/post.ts'
 </script>
 
 <svelte:head>

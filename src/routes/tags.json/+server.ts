@@ -1,8 +1,8 @@
 import type { RequestHandler } from './$types'
-import { genPosts } from '$lib/server/posts'
-import { genTags } from '$lib/utils/posts'
-
 import { json } from '@sveltejs/kit'
+import { genPosts } from '#lib/server/posts.ts'
+
+import { genTags } from '#lib/utils/posts.ts'
 
 export const prerender = true
 export const trailingSlash = 'never'
