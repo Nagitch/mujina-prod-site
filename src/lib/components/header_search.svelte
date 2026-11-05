@@ -1,6 +1,6 @@
 <script lang='ts'>
-  import { header as headerConfig } from '$lib/config/general'
-  import { site } from '$lib/config/site'
+  import { header as headerConfig } from '#lib/config/general.ts'
+  import { site } from '#lib/config/site.ts'
 </script>
 
 <form

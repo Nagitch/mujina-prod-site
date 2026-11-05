@@ -1,6 +1,6 @@
-import type { Handle } from '@sveltejs/kit'
+import type { Handle } from '@sveltejs/kit/hooks'
 
-import { site } from '$lib/config/site'
+import { site } from '#lib/config/site.ts'
 
 export const handle: Handle = async ({ event, resolve }) =>
   await resolve(event, {

@@ -1,6 +1,6 @@
 # Offline behavior and verification
 
-The worker is always registered at `/sw.js` with scope `/`. SvelteKit compiles `src/sw.ts` and Workbox injects the inventory selected by `scripts/pwa-manifest.ts`. See the [SvelteKit PWA integration](https://vite-pwa-org.netlify.app/frameworks/sveltekit) and [Workbox precaching lifecycle](https://developer.chrome.com/docs/workbox/modules/workbox-precaching).
+The worker is always registered at `/sw.js` with scope `/`. SvelteKit compiles `src/sw.ts`; `scripts/pwa-adapter.ts` injects the inventory selected by `scripts/pwa-manifest.ts` after prerendering and before the selected adapter copies assets. The app registers a module worker manually. See [SvelteKit service workers](https://svelte.dev/docs/kit/service-workers) and [Workbox precaching lifecycle](https://developer.chrome.com/docs/workbox/modules/workbox-precaching).
 
 ## Storage and updates
 
@@ -29,6 +29,15 @@ For a browser run, serve a static build on localhost, open home/blog/an article 
 - Search is configuration-disabled on this site; its input/close-focus handling is maintained, but no external search submission is claimed.
 - Desktop installation: Brave installed the local PWA and launched it in a separate app window while the server was stopped. The test-only application was subsequently uninstalled, retaining browser data.
 - Brave reduced-motion emulation: no VFX canvas, scroll behavior auto, and effectively zero CSS transition duration. Restored the browser emulation afterward. A warm-worker network sample measured 61.4 kB transfer / 1,092 kB resources; this is not a cold first-load measurement. A later cold-cache observation is recorded below. Other engines and physical mobile devices remain unverified.
+
+## Kit 3 review (2026-10-31)
+
+- A fresh checkout of `3856c4c` passed the complete `verify:build`, including both static builds and Vercel output validation. The earlier local ownership-check failure was not reproduced; its cause remains unknown.
+- Chromium on macOS, isolated localhost origin: the blog's Rust tag changed the list from six posts to one and back. No browser runtime errors were recorded during the browser checks.
+- With network access disabled in the browser: direct article reload retained its body, highlighted code and both decoded images; home, blog and portfolio rendered; unknown and excluded slide URLs showed the offline guide.
+- A changed worker waited for consent. Applying with two tabs showed the close-other-tabs message; after closing the second tab, applying reloaded the same article and removed the notice.
+- A separate Chromium context first installed the current `main` Kit 2 classic worker, then received the Kit 3 output on the same local origin. Its existing update UI applied the new worker, retained the article URL and body, and reloaded offline. The Kit 3 entry was precached, the exact seeded legacy cache was removed, and an unrelated cache remained.
+- This evidence covers local Chromium. Other engines, physical mobile devices and installation as a desktop app were not rechecked for Kit 3.
 
 ## Supplemental cold-cache observation
 

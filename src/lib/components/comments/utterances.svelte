@@ -1,5 +1,5 @@
 <script lang='ts'>
-  import type { UtterancesConfig } from '$lib/types/post'
+  import type { UtterancesConfig } from '#lib/types/post.ts'
 
   import { onMount } from 'svelte'
 

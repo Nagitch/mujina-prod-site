@@ -1,14 +1,14 @@
 <script context='module' lang='ts'>
-  import Image from '$lib/components/prose/img.svelte'
-  import table from '$lib/components/prose/table.svelte'
+  import Image from '#lib/components/prose/img.svelte'
+  import table from '#lib/components/prose/table.svelte'
 
   export { Image as img, table }
 </script>
 
 <script lang='ts'>
-  import Container from '$lib/components/post_container.svelte'
-  import { typeOfPost } from '$lib/utils/posts'
   import { setContext } from 'svelte'
+  import Container from '#lib/components/post_container.svelte'
+  import { typeOfPost } from '#lib/utils/posts.ts'
   // auto-generated
   export let path
   export let slug

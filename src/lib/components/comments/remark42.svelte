@@ -1,5 +1,5 @@
 <script lang='ts'>
-  import type { Remark42Config } from '$lib/types/post'
+  import type { Remark42Config } from '#lib/types/post.ts'
 
   import { onDestroy, onMount } from 'svelte'
 

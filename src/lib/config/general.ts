@@ -1,4 +1,4 @@
-import type { DateConfig, FeedConfig, FooterConfig, HeadConfig, HeaderConfig, ThemeConfig } from '$lib/types/general'
+import type { DateConfig, FeedConfig, FooterConfig, HeadConfig, HeaderConfig, ThemeConfig } from '#lib/types/general.ts'
 
 export const theme: ThemeConfig = [
   {

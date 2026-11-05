@@ -1,11 +1,11 @@
 <script lang='ts'>
-  import { browser } from '$app/environment'
-  import Footer from '$lib/components/footer.svelte'
-  import Head from '$lib/components/head.svelte'
-  import Action from '$lib/components/post_action.svelte'
-  import Card from '$lib/components/post_card.svelte'
-  import Toc from '$lib/components/post_toc.svelte'
-  import { fly } from '$lib/utils/motion'
+  import { browser } from '$app/env'
+  import Footer from '#lib/components/footer.svelte'
+  import Head from '#lib/components/head.svelte'
+  import Action from '#lib/components/post_action.svelte'
+  import Card from '#lib/components/post_card.svelte'
+  import Toc from '#lib/components/post_toc.svelte'
+  import { fly } from '#lib/utils/motion.ts'
 
   export let post: Urara.Post
 </script>

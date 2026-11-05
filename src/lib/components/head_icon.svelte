@@ -1,5 +1,5 @@
 <script lang='ts'>
-  import { any, favicon } from '$lib/config/icon'
+  import { any, favicon } from '#lib/config/icon.ts'
 </script>
 
 <svelte:head>

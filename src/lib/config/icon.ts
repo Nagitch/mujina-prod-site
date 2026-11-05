@@ -1,4 +1,4 @@
-import type { Icon } from '$lib/types/icon'
+import type { Icon } from '#lib/types/icon.ts'
 
 export const favicon: Icon = {
   sizes: '48x48',

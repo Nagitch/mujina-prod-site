@@ -1,6 +1,6 @@
 <script lang='ts'>
-  import { site } from '$lib/config/site'
-  import { pagePath } from '$lib/utils/urls'
+  import { site } from '#lib/config/site.ts'
+  import { pagePath } from '#lib/utils/urls.ts'
 
   export let post: Urara.Post
   export let preview: boolean = false

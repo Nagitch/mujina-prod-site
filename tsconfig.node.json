@@ -2,10 +2,16 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
-    "moduleResolution": "Node",
+    "moduleResolution": "Bundler",
+    "types": [
+      "node"
+    ],
+    "strict": false,
     "declaration": false,
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true
   },
-  "include": ["urara.ts"]
+  "include": [
+    "urara.ts"
+  ]
 }

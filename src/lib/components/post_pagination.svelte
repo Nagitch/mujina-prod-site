@@ -1,6 +1,6 @@
 <script lang='ts'>
-  import Image from '$lib/components/prose/img.svelte'
-  import { pagePath } from '$lib/utils/urls'
+  import Image from '#lib/components/prose/img.svelte'
+  import { pagePath } from '#lib/utils/urls.ts'
 
   export let prev: undefined | Urara.Post
   export let next: undefined | Urara.Post
