@@ -16,7 +16,7 @@
     "#lib/*": "./src/lib/*"
   },
   "engines": {
-    "node": "24.x"
+    "node": "26.x"
   },
   "scripts": {
     "build": "node --version && run-s tsc urara:build kit:build clean",

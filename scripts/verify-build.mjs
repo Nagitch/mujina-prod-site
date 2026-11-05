@@ -53,6 +53,6 @@ const runtimeFiles = functionFiles.filter(file => file.endsWith('.vc-config.json
 assert.ok(runtimeFiles.length > 0, 'Missing Vercel fallback function')
 for (const file of runtimeFiles) {
   const runtime = JSON.parse(await fs.readFile(`.vercel/output/functions/${file}`, 'utf8'))
-  assert.equal(runtime.runtime, 'nodejs24.x')
+  assert.equal(runtime.runtime, 'nodejs26.x')
 }
-console.info('Vercel output uses Node 24 and preserves tracked source.')
+console.info('Vercel output uses Node 26 and preserves tracked source.')

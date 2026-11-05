@@ -11,7 +11,7 @@ export default antfu({
   test: false, // This repository uses node:test, not Vitest.
   typescript: true,
   unocss: true,
-  rules: { 'antfu/no-top-level-await': 'off' }, // Node 24 ESM CLI scripts await filesystem work.
+  rules: { 'antfu/no-top-level-await': 'off' }, // Node ESM CLI scripts await filesystem work.
 }, {
   files: ['pnpm-workspace.yaml'],
   rules: {
