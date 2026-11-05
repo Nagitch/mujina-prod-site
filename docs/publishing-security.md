@@ -6,8 +6,9 @@ Owner: `Nagitch` / MUJINA. The canonical site is <https://www.mujina-prod.com>;
 the apex domain redirects to it. Vercel project `mujina-prod-site`
 (`prj_plZl6I2wOCrQQ8w9deriYm3kjxfC`, team `team_v1tCFsk0dHcDoIres7nH6mRs`)
 connects directly to `Nagitch/mujina-prod-site`, production branch `main`,
-repository root, SvelteKit, Node 24.x. The workbench only records the released
-commit; it neither builds nor publishes this site.
+repository root, SvelteKit, Node 26.x as selected by `engines.node` in
+`package.json`. The workbench only records the released commit; it neither
+builds nor publishes this site.
 
 `vercel.json` requires a frozen installation with the package manager pinned in
 `package.json`. The pnpm policy and lockfile travel with this repository.
@@ -42,7 +43,7 @@ if publishing must stop. No database migration is involved.
 
 ## Installation policy
 
-Use pnpm **10.34.7** and Node **24.x**. The former `pnpm.allowedBuildScripts`
+Use pnpm **10.34.7** and Node **26.x**. The former `pnpm.allowedBuildScripts`
 field did not enforce approvals under pnpm 9 and has been removed.
 The product-local `pnpm-workspace.yaml` includes no sibling packages.
 

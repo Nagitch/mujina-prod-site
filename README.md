@@ -8,7 +8,7 @@ its released commit as a submodule; it is not a build or deployment dependency.
 
 ## Setup
 
-Use Node **24.x** (`nvm install && nvm use`) and **pnpm 10.34.7**, as declared in
+Use Node **26.x** (`nvm install && nvm use`) and **pnpm 10.34.7**, as declared in
 `.nvmrc` and `package.json`. If necessary, install that pnpm version with
 `npm install --global pnpm@10.34.7`. Then, from this repository:
 
@@ -116,7 +116,7 @@ pnpm preview
 CI performs a frozen install and these checks. `verify:build` runs two static
 builds with tracked-source fingerprints, validates every public article/feed,
 XML/canonical URLs and stable feed IDs, decodes AVIF images, checks offline
-inventory and generated CSS, and verifies Node 24 Vercel output. It leaves the
+inventory and generated CSS, and verifies Node 26 Vercel output. It leaves the
 static `build/` available for preview. `pnpm build` runs one normal build.
 
 Browser checks include direct article reload, all themes, keyboard navigation,
